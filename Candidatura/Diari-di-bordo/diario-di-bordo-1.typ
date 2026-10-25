@@ -45,3 +45,4 @@ Attività svolte dal gruppo nel periodo di riferimento:
 *Dubbi per il Committente / Proponente:*
 - È preferibile mantenere i casi d'uso ad alto livello o dettagliare già i sotto-scenari alternativi?
 - Dubbi sulla figura dell'analista e le sue mansioni, nella fattispecie in merito al ruolo che esso svolge a seguito del RTB.
+- Per quanto riguarda la Continuous Deployment (pubblicazione della documentazione visibile agli stakeholders) è accettabile che sia guidata? Ovvero che ad ogni fine sprint l'amministratore carica manualmente i documenti aggiornati sul cruscotto.
