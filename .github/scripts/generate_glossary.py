@@ -16,7 +16,8 @@ PATTERN = re.compile(
 )
 
 HEADER = '''#import "/Template/tmp-glossario.typ": conf
-#show: conf'''
+#show: conf
+'''
 
 
 def extract_glossary():
