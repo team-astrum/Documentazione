@@ -15,7 +15,7 @@ PATTERN = re.compile(
     re.DOTALL,
 )
 
-EADER = '''#import "/Template/tmp-glossario.typ": conf, termine
+HEADER = '''#import "/Template/tmp-glossario.typ": conf, termine
 #show: conf
 
 '''
