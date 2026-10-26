@@ -37,7 +37,6 @@ Attività svolte dal gruppo nel periodo di riferimento:
 - Incontro e scrittura verbale con C6 - Var Group S.p.A.
 - Lettera di presentazione.
 - Stesura del way of working.
-- Avvio dello sviluppo del Proof of Concept (PoC) in TypeScript.
 
 *Difficoltà riscontrate:*
 - Nessuna difficoltà critica rilevante in questo sprint.
