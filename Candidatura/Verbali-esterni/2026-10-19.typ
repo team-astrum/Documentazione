@@ -11,11 +11,11 @@
   assenti: (),
   responsabile: "Filippo De Guio",
   redattore: "De Col Matteo",
-  verificatore: "Filippo De Guio",
+  verificatore: "Corrado Bacco",
   changelog: (
-    (ver: "1.1.0", data: "2026-10-20", autore: "De Col Matteo", ruolo: "Redattore", desc: "Correzione errori minori."),
-    (ver: "1.0.0", data: "2026-10-19", autore: "De Col Matteo", ruolo: "Redattore", desc: "Creazione e stesura verbale.")
-
+    (ver: "1.0.0", data: "2026-10-20", autore: "Filippo De Guio", ruolo: "Responsabile", desc: "Approvazione del documento."),
+    (ver: "0.0.2", data: "2026-10-20", autore: "De Col Matteo", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Correzione errori minori."),
+    (ver: "0.0.1", data: "2026-10-19", autore: "De Col Matteo", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Creazione e stesura verbale.")
   )
 )
 

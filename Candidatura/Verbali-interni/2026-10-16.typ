@@ -9,10 +9,12 @@
   azienda: none,
   presenti: ("Thomas Morettin ", "Gianluca Bacco ", "Corrado Bacco", "Gianluca Brotto ", "Matteo De Col", "Filippo De Guio", "Samuele Gobbi"),
   assenti: (),
+  responsabile: "Filippo De Guio",
   redattore: "Gianluca Bacco",
   verificatore: "Corrado Bacco",
   changelog: (
-    (ver: "1.0.0", data: "2026-10-16", autore: "Gianluca Bacco", ruolo: "Redattore", desc: "Creazione verbale."),
+    (ver: "1.0.0", data: "2026-10-16", autore: "Filippo De Guio", ruolo: "Responsabile", desc: "Approvazione verbale."),
+    (ver: "0.0.1", data: "2026-10-16", autore: "Gianluca Bacco", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Creazione verbale."),
   )
 )
 

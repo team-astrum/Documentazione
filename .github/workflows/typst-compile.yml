@@ -3,6 +3,8 @@ name: Compila PDF
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -25,8 +27,9 @@ jobs:
             typst compile --root . --font-path Template/Fonts --ignore-system-fonts "$f" "$out"
           done < <(find . -name '*.typ' -not -path './.*' -not -path './Template/*' -not -name '_*' -print0)
 
-      # Salva i PDF generati come artefatto per la seconda action
+      # Sulle PR basta verificare che la compilazione riesca: nessun artefatto da pubblicare
       - name: Salva artefatto PDF
+        if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: pdf-documents

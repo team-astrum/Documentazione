@@ -2,13 +2,16 @@
 
 #show: conf.with(
   titolo: "Valutazione capitolati",
-  status: "In bozza", // Oppure "Approvato"
+  status: "Approvato", // Oppure "Approvato"
   utilizzo: "Interno", // Oppure "Esterno"
-  redazione: ("Gianluca Bacco",),
-  verifica: ("Nome Cognome",),
-  approvazione: "Nome Cognome",
+  redazione: ("Gianluca Bacco", "Corrado Bacco"),
+  verifica: ("Thomas Morettin", "Gianluca Brotto"),
+  approvazione: "Filippo De Guio",
   changelog: (
-    (ver: "0.1.0", data: "26/10/2026", autore: "Nome Cognome", ruolo: "Redattore", desc: "Stesura iniziale del documento"),
+    (ver: "1.0.0", data: "2026-10-26", autore: "Filippo De Guio", ruolo: "Responsabile", desc: "Approvazione del documento."),
+    (ver: "0.2.0", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Brotto", desc: "Stesura finale del documento."),
+    (ver: "0.1.0", data: "2026-10-26", autore: "Gianluca Bacco", ruolo: "Redattore", verificatore:"Gianluca Brotto", desc: "Stesura iniziale del documento."),
+    (ver: "0.0.1", data: "2026-10-26", autore: "Gianluca Bacco", ruolo: "Redattore", verificatore:"Thomas Morettin", desc: "Stesura della bozza inziale di documento.")
   )
 )
 

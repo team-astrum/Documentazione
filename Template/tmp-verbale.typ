@@ -139,10 +139,8 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
         // Solo se verbale di tipo esterno con azienda mentore
         ..(if azienda != none { ([*Azienda:*], [#azienda]) } else { () }),
         [*Partecipanti:*], [#presenti.join(", ")],
-        [*Assenti:*], [
-          // Se presenti assenti
-          #(if assenti.len() == 0 { "" } else { assenti.join(", ") })
-        ],
+        // Solo se assenti presenti
+        ..(if assenti.len() > 0 { ([*Assenti:*], [#assenti.join(", ")]) } else { () }),
         [*Responsabile:*], [#responsabile]
       )
     ]
@@ -155,7 +153,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
   if changelog.len() > 0 {
     heading(numbering: none, outlined: false)[Registro delle modifiche]
     table(
-      columns: (150pt, 1fr),
+      columns: (175pt, 1fr),
       stroke: 0.5pt + deco-line,
       
       table.header(
@@ -168,7 +166,10 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
           *v#entry.ver* \
           #text(size: 10pt, fill: txt-gray)[
             #entry.data \
-            #entry.autore (#entry.ruolo)
+            #entry.autore (#entry.ruolo) \
+            #if "verificatore" in entry and entry.verificatore != none [
+              #entry.verificatore (Verifica)
+            ]
           ]
         ],
         entry.desc

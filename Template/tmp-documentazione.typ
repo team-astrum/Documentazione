@@ -150,7 +150,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
   if changelog.len() > 0 {
     heading(numbering: none, outlined: false)[Registro delle modifiche]
     table(
-      columns: (150pt, 1fr),
+      columns: (175pt, 1fr),
       stroke: 0.5pt + deco-line,
       
       table.header(
@@ -163,7 +163,11 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
           *v#entry.ver* \
           #text(size: 10pt, fill: txt-gray)[
             #entry.data \
-            #entry.autore (#entry.ruolo)
+            #v(0.05cm)
+            #entry.autore (#entry.ruolo) \
+            #if "verificatore" in entry and entry.verificatore != none [
+              #entry.verificatore (Verifica)
+            ]
           ]
         ],
         entry.desc
