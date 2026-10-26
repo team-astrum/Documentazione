@@ -25,7 +25,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
     breakable: false,
     inset: 10pt,
     radius: 4pt,
-    stroke: (left: 2pt + light-accent, rest: 0.5pt + deco-line),
+    stroke: (0.5pt + deco-line),
     above: 0.8em,
     below: 0.8em,
   )[
@@ -33,7 +33,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
     #show heading: it => block(
       above: 0pt,
       below: 0.5em,
-      text(fill: dark-accent, weight: "bold", size: 1.1em, it.body),
+      text(fill: dark-accent, weight: "bold", size: 12pt, it.body),
     )
     #heading(level: 2)[#nome-cap]
     #definizione

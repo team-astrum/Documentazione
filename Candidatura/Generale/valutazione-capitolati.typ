@@ -25,7 +25,7 @@ Il presente documento ha lo scopo di evidenziare le valutazioni, da parte del gr
 = Valutazione dei capitolati
 Per ciascun capitolato verranno riportati di seguito: una breve descrizione, la valutazione del gruppo e le motivazioni per cui il gruppo ha scelto di procedere o meno con la candidatura per tale capitolato.
 
-Il #G("gruppo", def: "l'insieme di persone che compongono il team di sviluppo") ha scelto di candidarsi per il capitolato C0. Questa scelta è avvenuta attraverso una votazione in cui ogni membro ha espresso le proprie preferenze in merito ai capitolati proposti.
+Il #G("gruppo", def: "L'insieme di persone che compongono il team di sviluppo") ha scelto di candidarsi per il capitolato C0. Questa scelta è avvenuta attraverso una votazione in cui ogni membro ha espresso le proprie preferenze in merito ai capitolati proposti.
 
 Nonostante questo capitolato non fosse la preferenza iniziale assoluta di tutti i membri, si è optato per esso a seguito di un’attenta analisi delle preferenze complessive e della disponibilità dei progetti. In base alla graduatoria interna definita dal gruppo, sono stati considerati anche altri capitolati come “seconde e terze scelte” in caso di indisponibilità della prima opzione.
 
