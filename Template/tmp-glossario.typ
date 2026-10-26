@@ -33,7 +33,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
     #show heading: it => block(
       above: 0pt,
       below: 0.5em,
-      text(fill: dark-accent, weight: "bold", size: 12pt, it.body),
+      text(fill: dark-accent, weight: "bold", size: 13pt, it.body),
     )
     #heading(level: 2)[#nome-cap]
     #definizione

@@ -18,7 +18,7 @@ jobs:
       - uses: typst-community/setup-typst@v3
       
       - name: Genera il glossario
-        run: python3 .github/scripts/generate_glossary.py
+        run: python3 .github/scripts/generate-glossario.py
 
       - name: Compila i documenti Typst
         run: |
