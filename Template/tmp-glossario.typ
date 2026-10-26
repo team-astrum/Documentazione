@@ -14,6 +14,32 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 #let light-accent = rgb("#2563EB")
 #let txt-gray = rgb("#626973")
 
+// Voce del glossario: termine (sotto-capitolo) + definizione in un riquadro
+#let termine(nome, definizione) = {
+  // Prima lettera maiuscola, resto invariato
+  let cl = nome.clusters()
+  let nome-cap = upper(cl.first()) + cl.slice(1).join()
+
+  block(
+    width: 100%,
+    breakable: false,
+    inset: 10pt,
+    radius: 4pt,
+    stroke: (left: 2pt + light-accent, rest: 0.5pt + deco-line),
+    above: 0.8em,
+    below: 0.8em,
+  )[
+    // Resta un heading di livello 2, quindi compare nell'indice
+    #show heading: it => block(
+      above: 0pt,
+      below: 0.5em,
+      text(fill: dark-accent, weight: "bold", size: 1.1em, it.body),
+    )
+    #heading(level: 2)[#nome-cap]
+    #definizione
+  ]
+}
+
 #let conf(
   body
 ) = {

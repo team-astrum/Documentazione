@@ -15,10 +15,10 @@ PATTERN = re.compile(
     re.DOTALL,
 )
 
-HEADER = '''#import "/Template/tmp-glossario.typ": conf
+EADER = '''#import "/Template/tmp-glossario.typ": conf, termine
 #show: conf
-'''
 
+'''
 
 def extract_glossary():
     """Ritorna {termine_minuscolo: (termine, definizione)}.
@@ -42,7 +42,6 @@ def initial(term):
 
 
 def generate(glossary):
-    # Raggruppa per lettera: le lettere senza termini non compaiono
     groups = {}
     for term, definition in glossary.values():
         groups.setdefault(initial(term), []).append((term, definition))
@@ -52,7 +51,7 @@ def generate(glossary):
         out.append(f"= {'\\#' if letter == '#' else letter}\n\n")
         for term, definition in sorted(groups[letter], key=lambda x: x[0].lower()):
             # term e definition sono già corpi di stringhe Typst valide
-            out.append(f'== #("{term}")\n\n#("{definition}")\n\n')
+            out.append(f'#termine("{term}", "{definition}")\n\n')
 
     OUTPUT.write_text("".join(out), encoding="utf-8")
     print(f"glossario.typ generato: {len(glossary)} termini, {len(groups)} lettere")
