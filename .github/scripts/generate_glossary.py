@@ -1,7 +1,12 @@
 import re
+import unicodedata
 from pathlib import Path
 
-STR = r'"((?:[^"\\]|\\.)*)"'   # corpo di una stringa Typst (con escape)
+ROOT = Path(__file__).resolve().parents[2]   # radice della repo
+OUTPUT = ROOT / "glossario.typ"
+
+# Corpo di una stringa Typst (gestisce le virgolette escapate)
+STR = r'"((?:[^"\\]|\\.)*)"'
 PATTERN = re.compile(
     r'#G\(\s*' + STR +
     r'\s*,\s*def:\s*' + STR +
@@ -10,46 +15,47 @@ PATTERN = re.compile(
     re.DOTALL,
 )
 
+HEADER = '''#import "/Template/tmp-glossario.typ": conf
+#show: conf'''
+
+
 def extract_glossary():
+    """Ritorna {termine_minuscolo: (termine, definizione)}.
+    Se lo stesso termine compare più volte vince l'ultima definizione letta."""
     glossary = {}
-    for path in sorted(Path(".").rglob("*.typ")):
-        if path.name == "glossario.typ" or any(p.startswith(".") for p in path.parts):
+    for path in sorted(ROOT.rglob("*.typ")):
+        rel = path.relative_to(ROOT)
+        if rel.name == OUTPUT.name or any(p.startswith(".") for p in rel.parts):
             continue
         text = path.read_text(encoding="utf-8")
-        for term, definition, impl in PATTERN.findall(text):
-            key = term.strip().lower()
-            if key in glossary:
-                print(f"  Duplicato '{term}' in {path} (sovrascritto)")
-            glossary[key] = {
-                "term": term.strip(),
-                "def": definition.strip(),
-                "impl": impl.strip(),
-            }
+        for term, definition, _impl in PATTERN.findall(text):
+            term, definition = term.strip(), definition.strip()
+            glossary[term.lower()] = (term, definition)
     return glossary
 
-HEADER = '''#import "/Template/tmp-glossario.typ": conf
-#show: conf.with(
-)
-'''
+
+def initial(term):
+    """Lettera iniziale maiuscola, senza accenti (È -> E). Se non è una lettera: '#'."""
+    first = unicodedata.normalize("NFD", term)[0].upper()
+    return first if first.isalpha() else "#"
+
 
 def generate(glossary):
-    out = [HEADER]
-    for _, d in sorted(glossary.items()):
-        # d["..."] è già il corpo di una stringa Typst valida: nessun escape aggiuntivo
-        out.append(f'''
-#block(width: 100%, inset: 10pt, radius: 6pt, fill: rgb("#f8f9fa"), stroke: 1pt + rgb("#e9ecef"))[
-  #text(weight: "bold", size: 1.2em)[#("{d["term"]}")]
-  #v(4pt)
-  *Definizione:* #("{d["def"]}")
-''')
-        if d["impl"]:
-            out.append(f'''  #v(2pt)
-  *Implementazione:* #("{d["impl"]}")
-''')
-        out.append("]\n#v(8pt)\n")
+    # Raggruppa per lettera: le lettere senza termini non compaiono
+    groups = {}
+    for term, definition in glossary.values():
+        groups.setdefault(initial(term), []).append((term, definition))
 
-    Path("glossario.typ").write_text("".join(out), encoding="utf-8")
-    print(f" glossario.typ generato con {len(glossary)} termini")
+    out = [HEADER]
+    for letter in sorted(groups, key=lambda l: (l == "#", l)):
+        out.append(f"= {'\\#' if letter == '#' else letter}\n\n")
+        for term, definition in sorted(groups[letter], key=lambda x: x[0].lower()):
+            # term e definition sono già corpi di stringhe Typst valide
+            out.append(f'== #("{term}")\n\n#("{definition}")\n\n')
+
+    OUTPUT.write_text("".join(out), encoding="utf-8")
+    print(f"glossario.typ generato: {len(glossary)} termini, {len(groups)} lettere")
+
 
 if __name__ == "__main__":
     generate(extract_glossary())
