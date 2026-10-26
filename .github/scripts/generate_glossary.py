@@ -27,7 +27,7 @@ def extract_glossary():
             }
     return glossary
 
-HEADER = '''#import "../../Template/tmp-glossario.typ": conf
+HEADER = '''#import "/Template/tmp-glossario.typ": conf
 #show: conf.with(
 )
 '''
