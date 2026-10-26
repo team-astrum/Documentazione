@@ -1,4 +1,4 @@
-#import "../../Template/tmp-documentazione.typ": conf, usecase
+#import "../../Template/tmp-documentazione.typ": conf, usecase, G
 
 #show: conf.with(
   titolo: "Way of Working",

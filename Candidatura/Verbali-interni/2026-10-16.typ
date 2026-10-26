@@ -1,4 +1,4 @@
-#import "../../Template/tmp-verbale.typ": conf, decisioni
+#import "../../Template/tmp-verbale.typ": conf, decisioni, G
 
 #show: conf.with(
   tipo: "Interno", 

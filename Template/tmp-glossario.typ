@@ -28,13 +28,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
     above: 0.8em,
     below: 0.8em,
   )[
-    // Resta un heading di livello 2, quindi compare nell'indice
-    #show heading: it => block(
-      above: 0pt,
-      below: 0.5em,
-      text(fill: dark-accent, weight: "bold", size: 1.2em, it.body),
-    )
-    #heading(level: 2)[#nome-cap]
+    == #nome-cap
     #definizione
   ]
 }

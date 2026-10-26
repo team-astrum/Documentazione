@@ -1,5 +1,4 @@
-#import "../../Template/tmp-documentazione.typ": conf, usecase
-#import "../../Template/g-func.typ": G
+#import "../../Template/tmp-documentazione.typ": conf, usecase, G
 
 #show: conf.with(
   titolo: "Valutazione capitolati",

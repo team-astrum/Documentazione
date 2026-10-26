@@ -1,7 +1,9 @@
 /* MODELLO PER VERBALI DI RIUNIONE
-Il seguente modello può essere incorporato nelle presentazioni tramite comando: #import "../../Template/tmp-verbale.typ": conf, decisioni
+Il seguente modello può essere incorporato nelle presentazioni tramite comando: #import "../../Template/tmp-verbale.typ": conf, decisioni, G
 Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 */
+
+#import "g-func.typ": G
 
 // Set parametri di stile
 #let font = "Inter"

@@ -1,7 +1,9 @@
 /* MODELLO PER DOCUMENTAZIONE DI PROGETTO
-Il seguente modello può essere incorporato nelle presentazioni tramite comando: #import "../../Template/tmp-documentazione.typ": conf, usecase
+Il seguente modello può essere incorporato nelle presentazioni tramite comando: #import "../../Template/tmp-documentazione.typ": conf, usecase, G
 Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 */
+
+#import "g-func.typ": G
 
 // Set parametri di stile
 #let font = "Inter"
