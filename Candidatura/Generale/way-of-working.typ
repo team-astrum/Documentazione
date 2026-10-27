@@ -8,6 +8,7 @@
   verifica: ("Gianluca Bacco", "Matteo De Col"),
   approvazione: "Filippo De Guio",
   changelog: (
+      (ver: "0.1.0", data: "2026-10-27", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta sezione: Gestione e Organizzazione dei Ruoli"),
      (ver: "0.0.3", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Correzioni"),
     (ver: "0.0.2", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Miglioramento impaginazione del documento"),
     (ver: "0.0.1", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Stesura della bozza inziale di documento."),
@@ -56,6 +57,56 @@ L’obiettivo di questa sezione è definire l’insieme di strumenti e configura
   L'indirizzo *astrum.unipd\@gmail.com* costituisce l'unico punto di contatto ufficiale del team con il committente e la proponente. La posta elettronica viene utilizzata per le comunicazioni formali, l'invio e la ricezione di documenti, la condivisione di informazioni rilevanti e la gestione delle comunicazioni che richiedono una tracciabilità maggiore rispetto ai messaggi informali. La presenza di un unico indirizzo di riferimento consente di centralizzare le comunicazioni esterne, garantire uniformità nelle risposte e ridurre il rischio di dispersione delle informazioni.
 
   Per i colloqui esplorativi e gli Sprint Review periodici con i referenti aziendali vengono utilizzate piattaforme di videoconferenza quali Zoom, Google Meet o Microsoft Teams. Questi strumenti permettono di instaurare un confronto diretto con gli interlocutori esterni, raccogliere requisiti e aspettative, presentare i risultati raggiunti e ricevere feedback sul lavoro svolto. Gli incontri rappresentano inoltre un'importante occasione per verificare la coerenza delle attività con gli obiettivi concordati e definire eventuali modifiche o priorità per gli sprint successivi.
+
+
+= Gestione e Organizzazione dei Ruoli
+== Ruoli e Responsabilità
+Per ogni ruolo previsto vengono definite le specifiche responsabilità:
+
+- *Responsabile*:
+  - Guida il team, assicurando l’allineamento alle tempistiche e al metodo di lavoro stabilito.
+  - Gestisce tutte le relazioni e comunicazioni con l'azienda Proponente e i Committenti. 
+  - Redige i Diari di Bordo settimanali.
+  - Approva ufficialmente la documentazione prodotta prima del rilascio formale. 
+  - Pianifica le attività all'inizio di ogni sprint e assegna i relativi task ai membri.
+
+- *Amministratore*:
+  - Gestisce e mantiene l’ambiente di lavoro (repository, strumenti di comunicazione, issue tracking system). 
+  - Implementa e fa manutenzione delle automazioni di progetto, come le pipeline di Continuous Integration/Continuous Deployment (CI/CD) e la compilazione automatica dei documenti. 
+  - Risolve tempestivamente i problemi tecnici e i malfunzionamenti legati agli strumenti in uso al team. 
+  - Aggiorna i documenti e le informazioni all’interno del sito web.
+  - Redige i verbali delle riunioni interne ed esterne. 
+
+- *Analista*:
+  - Interagisce con il Proponente per individuare, studiare e comprendere i bisogni del progetto. 
+  - Classifica i requisiti software ( ad esempio in funzionali / non funzionali)  e assegna le priorità di sviluppo in accordo con gli stakeholder.
+  - Elabora il modello concettuale del sistema, identificando gli attori coinvolti e redige i diagrammi dei casi d'uso (Use Case Diagram). 
+  - Redige il documento di Analisi dei Requisiti. 
+
+- *Progettista*:
+  - Produce l’architettura software sulla base dei requisiti prodotti dagli analisti.
+  - Seleziona lo stack tecnologico e i pattern architetturali più adatti per soddisfare i requisiti. 
+  - Produce i diagrammi UML necessari.
+
+- *Verificatore*:
+  - Controlla che ogni attività di progetto sia svolta in conformità alle Norme di Progetto stabilite. 
+  - Verifica la correttezza formale, ortografia e semantica della documentazione prodotta prima della sua approvazione. 
+  - Controlla il codice prodotto dai programmatori, segnalando refusi, bug e violazioni di stile. 
+
+- *Programmatore*:
+  - Implementa il codice rispettando l'architettura definita dal Progettista.
+  - Crea i test unitari specifici per le unità di codice sviluppate al fine di assicurare il corretto funzionamento.
+
+== Politica di Rotazione
+
+Il gruppo adotta un’organizzazione del lavoro iterativa e incrementale, articolata in periodi di sviluppo denominati sprint, ciascuno della durata fissa di due settimane. Al fine di assicurare che ogni membro acquisisca esperienza in tutti 
+gli ambiti del progetto, il gruppo applica una politica di rotazione dei ruoli. 
+
+La rotazione avviene all’inizio di ogni sprint, quindi ogni due settimane: in tale occasione il Responsabile assegna a ciascun membro il ruolo che ricoprirà nello sprint successivo. Tale cadenza permette a ogni membro di svolgere un ruolo per un periodo sufficientemente lungo da comprenderne a fondo le attività, riducendo i tempi di chiarimento e le difficoltà di apprendimento. L’assegnazione tiene conto sia della natura del lavoro previsto per lo sprint, sia dei ruoli già ricoperti da ciascun membro, in modo da garantire che ognuno svolga tutti i ruoli previsti almeno una volta nel corso dell’intero progetto.
+
+Al termine di ogni sprint, il membro uscente da un ruolo redige un resoconto delle attività svolte e, nella fase iniziale dello sprint successivo, fornisce supporto al subentrante per chiarire eventuali dubbi e rendere l’inserimento al nuovo ruolo il più veloce possibile. 
+
+
 
 
 
