@@ -24,7 +24,9 @@ jobs:
 
       # Installazione tool di sistema
       - name: Installa pdfinfo
-        run: sudo apt-get install -y poppler-utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
 
       # Esecuzione script Python per il glossario
       - name: Genera il glossario
