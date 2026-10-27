@@ -5,7 +5,7 @@
   status: "In bozza",
   utilizzo: "Esterno",
   redazione: ("Thomas Morettin",),
-  verifica: (),
+  verifica: ("Matteo De Col", "Corrado Bacco"),
   approvazione: none,
   changelog: (
     (ver: "0.1.3", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Modifica ai termini incongruenti di PoC a glossario."),
