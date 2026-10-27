@@ -1,4 +1,4 @@
-name: Compila PDF
+name: Compila, pubblica i PDF e genera manifest
 
 on:
   push:
@@ -11,29 +11,62 @@ permissions:
   contents: read
 
 jobs:
-  build-pdf:
+  build:
     runs-on: ubuntu-latest
     steps:
+      # Checkout del repository
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Setup dell'ambiente Typst
       - uses: typst-community/setup-typst@v3
-      
+
+      # Installazione tool di sistema
+      - name: Installa pdfinfo
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      # Esecuzione script Python per il glossario
       - name: Genera il glossario
         run: python3 .github/scripts/generate-glossario.py
 
-      - name: Compila i documenti Typst
-        run: |
-          while IFS= read -r -d '' f; do
-            out="_site/${f#./}"
-            out="${out%.typ}.pdf"
-            mkdir -p "$(dirname "$out")"
-            echo "Compilo $f -> $out"
-            typst compile --root . --font-path Template/Fonts --ignore-system-fonts "$f" "$out"
-          done < <(find . -name '*.typ' -not -path './.*' -not -path './Template/*' -not -name '_*' -print0)
+      # Compilazione Typst e generazione del manifest.json
+      - name: Compila i documenti e genera il manifest
+        run: python3 .github/scripts/build-manifest.py
 
-      # Sulle PR basta verificare che la compilazione riesca: nessun artefatto da pubblicare
+      # Configurazione GitHub Pages
+      - name: Configura GitHub Pages
+        uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
+
+      # Prepara l'artefatto per il deploy su GitHub Pages
+      - name: Carica artefatto Pages
+        uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+
+      # Crea l'archivio scaricabile con tutti i PDF
       - name: Salva artefatto PDF
         if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: pdf-documents
           path: _site/
+
+  deploy:
+    needs: build
+    # Il job di deploy viene saltato completamente durante le Pull Request
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
