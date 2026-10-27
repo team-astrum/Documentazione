@@ -8,6 +8,7 @@
   verifica: (),
   approvazione: none,
   changelog: (
+    (ver: "0.1.2", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Inserimento della regola per conflitto di interessi."),
     (ver: "0.1.1", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Piccola modifica nella definizione a glossario di PoC."),
     (ver: "0.1.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Completamento parziale del documento."),
     (ver: "0.0.1", data: "2026-10-26", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Redazione primaria del documento."),
@@ -104,6 +105,7 @@ Come sopra riportato, si precisa che non esiste un criterio di rotazione dei ruo
 Tutti i ruoli ruotano con cadenza *bisettimanale*, al termine di ciascuno sprint, per stretta decisione del responsabile corrente.\
 Le idee alla base della suddivisione dei ruoli rimangono sempre (come da regolamento universitario):
 - suddivisione equa dei ruoli, in modo tale che ciascun membro del gruppo abbia la possibilità di svolgere tutti i ruoli con all'incirca lo stesso quantitativo di ore dei propri compagni;
+- la rotazione deve tenere obbligatoriamente conto del possibile conflitto di interessi tra le figure, vale a dire che un verificatore non può svolgere la propria attività su materiale redatto da sé stesso in sprint precedenti;
 - il responsabile ruota agilmente, ad ogni sprint, secondo il seguente ordine dei membri (modificabile a discrezione del gruppo in caso di superamento del monte ore personale o per possibile inficiamento della regola precedente):
  1. _Corrado Bacco_ (2148615);
  2. _Gianluca Bacco_ (2111937);
