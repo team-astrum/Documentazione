@@ -8,11 +8,12 @@
   verifica: ("Matteo De Col", "Corrado Bacco"),
   approvazione: none,
   changelog: (
-    (ver: "0.1.3", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Modifica ai termini incongruenti di PoC a glossario."),
-    (ver: "0.1.2", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Inserimento della regola per conflitto di interessi."),
-    (ver: "0.1.1", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Piccola modifica nella definizione a glossario di PoC."),
-    (ver: "0.1.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Completamento parziale del documento."),
-    (ver: "0.0.1", data: "2026-10-26", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Redazione primaria del documento."),
+    (ver: "0.1.4", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Piccole correzioni su termini e ripetizioni."),
+    (ver: "0.1.3", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Modifica ai termini incongruenti di PoC a glossario."),
+    (ver: "0.1.2", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Inserimento della regola per conflitto di interessi."),
+    (ver: "0.1.1", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Piccola modifica nella definizione a glossario di PoC."),
+    (ver: "0.1.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Completamento parziale del documento."),
+    (ver: "0.0.1", data: "2026-10-26", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Redazione primaria del documento."),
   )
 )
 
@@ -49,14 +50,15 @@ Si riporta un'analisi dei ruoli sui quali il gruppo ruoterà a cadenza *bisettim
 
 == Responsabile
 Il _responsabile_ assume il ruolo di Project Manager. È la figura di riferimento nei rapporti esterni con i committenti e il proponente aziendale.
-Egli è l'unica figura costantemente presente all'interno degli sprint, in quanto ha il compito di presiedere le riunioni interne ed esterne, definire scadenze relativamente all'avanzamento di progetto e redigere, al termine di ogni sprint, il consuntivo di periodo.
+Egli è l'unica figura costantemente presente all'interno degli sprint, in quanto ha il compito di presiedere le riunioni interne ed esterne, definire scadenze relativamente all'avanzamento di progetto e redigere, al termine di ogni sprint, il consuntivo di periodo.\
+Inoltre, questa figura ha il compito di presiedere le riunioni di review dello sprint con cadenza *settimanale*.
 
 == Amministratore
 L'_amministratore_ è il garante dell'infrastruttura tecnologica e procedurale del gruppo, che in _Astrum_ si traduce nella gestione della totale organizzazione GitHub.
 Questa figura risulta fondamentale in determinati sprint poiché assicura l'efficienza del #G("Way of Working", def: "Best practices per organizzare al meglio le attività di progetto. Il tutto viene fatto pertanto in modo professionale e con modalità concordate all'interno del gruppo.") e monitora lo stato di efficienza dell'organizzazione GitHub o strumenti ad essa collegati.
 
 == Analista
-L'_analista_ è la figura di Requirements Engineer. Ha il compito di comprendere, comprendere e formalizzare il dominio applicativo del progetto.
+L'_analista_ è la figura di Requirements Engineer. Ha il compito di comprendere e formalizzare il dominio applicativo del progetto.
 Ha il compito di comprendere le richieste del proponente aziendale.\
 Si è optato per pianificare questa figura sia all'inizio del lavoro che nella fase conseguente al superamento della milestone #G("RTB (Requirements & Technology Baseline)") per eventuali modifiche richieste dai committenti.
 
@@ -128,7 +130,7 @@ Questo periodo si articola dalla data *2026-12-26* fino alla data *2027-02-19*. 
 Le ore produttive totali al termine di ciascuno sprint saranno notevolmente ridotte, mantenendo comunque un flusso di lavoro stabile.
 
 == S8 - S12, carico lavorativo alto
-Questo periodo si articola dalla data *2027-02-20* fino alla data *2027-04-16*. L'obiettivo di questi sprint è quello di aumentare drasticamente il quantitativo di lavoro rispetto a tutti gli sprint precedenti (all'incirca _+33%_ rispetto alla prima fase e _+167%_ rispetto alla seconda fase), per permettere un avanzamento solido nello sviluppo del #G("MVP") e portare un lavoro significativo all'ultima revisione di avanzamento #G("PB (Product Baseline)", def: "Milestone di progetto, coincidente con la seconda e ultima revisione di avanzamento. In questa fase il team presenta l'insieme approvato di specifiche che descrivono nel dettaglio il design definitivo di un prodotto, comprese le sue caratteristiche fisiche e funzionali tramite la progettazione di un MVP.").\
+Questo periodo si articola dalla data *2027-02-20* fino alla data *2027-04-16*. L'obiettivo di questi sprint è quello di aumentare il quantitativo di lavoro rispetto a tutti gli sprint precedenti (all'incirca _+33%_ rispetto alla prima fase e _+167%_ rispetto alla seconda fase), per permettere un avanzamento solido nello sviluppo del #G("MVP") e portare un lavoro significativo all'ultima revisione di avanzamento #G("PB (Product Baseline)", def: "Milestone di progetto, coincidente con la seconda e ultima revisione di avanzamento. In questa fase il team presenta l'insieme approvato di specifiche che descrivono nel dettaglio il design definitivo di un prodotto, comprese le sue caratteristiche fisiche e funzionali tramite la progettazione di un MVP.").\
 All'interno di questa fase le figure di programmatore e verificatore portano il quantitativo di ore produttive ad un aumento sostanziale.
 
 = Analisi dei rischi e mitigazione <rischi>
