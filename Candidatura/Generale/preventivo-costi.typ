@@ -8,7 +8,8 @@
   verifica: (),
   approvazione: none,
   changelog: (
-    (ver: "0.1.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Redazione primaria del documento."),
+    (ver: "0.1.1", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Piccola modifica nella definizione a glossario di PoC."),
+    (ver: "0.1.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Completamento parziale del documento."),
     (ver: "0.0.1", data: "2026-10-26", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Redazione primaria del documento."),
   )
 )
@@ -62,7 +63,7 @@ Il _progettista_ è la figura operativa che traduce i requisiti analizzati dall'
 All'interno di questo progetto la figura viene richiamata all'interno di molteplici sprint.
 
 == Programmatore
-Il _programmatore_ è la figura operativa maggiormente presente negli sprint di programmazione del #G("MVP (Minimum Viable Product)", def: "Versione più semplice e basilare di un nuovo prodotto software, dotata esclusivamente delle funzionalità essenziali necessarie a soddisfare i primi stakeholders e a testa un'idea sul mercato."), fermo restando che viene presa in considerazione anche per la fase antecedente la RTB per la creazione del #G("PoC (Proof fo Concept)", def: "Rappresenta una piccola sperimentazione usata per dimostrare che un'idea, o nel caso di _Astrum_ un progetto, può essere realizzata concretamente.").\
+Il _programmatore_ è la figura operativa maggiormente presente negli sprint di programmazione del #G("MVP (Minimum Viable Product)", def: "Versione più semplice e basilare di un nuovo prodotto software, dotata esclusivamente delle funzionalità essenziali necessarie a soddisfare i primi stakeholders e a testa un'idea sul mercato."), fermo restando che viene presa in considerazione anche per la fase antecedente la RTB per la creazione del #G("PoC (Proof fo Concept)", def: "Rappresenta una piccola sperimentazione usata per dimostrare che un'idea, o nel caso di Astrum un progetto, può essere realizzata concretamente.").\
 Il compito di questa figura è quindi quello di scrittura del codice sorgente.
 
 == Verificatore
