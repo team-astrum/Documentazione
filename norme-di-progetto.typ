@@ -1,4 +1,4 @@
-#import "../../Template/tmp-documentazione.typ": conf, usecase, G
+#import "Template/tmp-documentazione.typ": conf, usecase, G
 
 #show: conf.with(
   titolo: "Norme di Progetto",
