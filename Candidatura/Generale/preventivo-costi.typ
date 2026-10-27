@@ -8,6 +8,7 @@
   verifica: (),
   approvazione: none,
   changelog: (
+    (ver: "0.1.3", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Modifica ai termini incongruenti di PoC a glossario."),
     (ver: "0.1.2", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Inserimento della regola per conflitto di interessi."),
     (ver: "0.1.1", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Piccola modifica nella definizione a glossario di PoC."),
     (ver: "0.1.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Completamento parziale del documento."),
@@ -64,7 +65,7 @@ Il _progettista_ è la figura operativa che traduce i requisiti analizzati dall'
 All'interno di questo progetto la figura viene richiamata all'interno di molteplici sprint.
 
 == Programmatore
-Il _programmatore_ è la figura operativa maggiormente presente negli sprint di programmazione del #G("MVP (Minimum Viable Product)", def: "Versione più semplice e basilare di un nuovo prodotto software, dotata esclusivamente delle funzionalità essenziali necessarie a soddisfare i primi stakeholders e a testa un'idea sul mercato."), fermo restando che viene presa in considerazione anche per la fase antecedente la RTB per la creazione del #G("PoC (Proof fo Concept)", def: "Rappresenta una piccola sperimentazione usata per dimostrare che un'idea, o nel caso di Astrum un progetto, può essere realizzata concretamente.").\
+Il _programmatore_ è la figura operativa maggiormente presente negli sprint di programmazione del #G("MVP (Minimum Viable Product)", def: "Versione più semplice e basilare di un nuovo prodotto software, dotata esclusivamente delle funzionalità essenziali necessarie a soddisfare i primi stakeholders e a testa un'idea sul mercato."), fermo restando che viene presa in considerazione anche per la fase antecedente la RTB per la creazione del #G("PoC (Proof of Concept)", def: "Rappresenta una piccola sperimentazione usata per dimostrare che un'idea, o nel caso di Astrum un progetto, può essere realizzata concretamente.").\
 Il compito di questa figura è quindi quello di scrittura del codice sorgente.
 
 == Verificatore
@@ -119,7 +120,7 @@ Le idee alla base della suddivisione dei ruoli rimangono sempre (come da regolam
 Durante la stesura del seguente preventivo si è tenuto conto, all'unanimità, che il periodo di svolgimento del progetto deve presentare dei periodi di avanzamento a carico variabile; ciò significa che gli sprint non consumeranno lo stesso quantitativo di ore produttive, ma ne viene fatta una suddivisione nei sottocapitoli seguenti.
 
 == S1 - S4, carico lavorativo medio
-Questo periodo si articola dalla data *2026-11-04* fino alla data *2026-12-23* (per ragioni di riposo del team lo sprint termina 2 giorni prima rispetto alla consueta durata *bisettimanale*). In questa fase il carico lavorativo si attesta ad un livello intermedio, con un dispiegamento di ore produttive consono alla realizzazione dei documenti e del #G("PoC", def: "Proof of Concept") per la milestone di avanzamento #G("RTB (Requirements & Technology Baseline)").\
+Questo periodo si articola dalla data *2026-11-04* fino alla data *2026-12-23* (per ragioni di riposo del team lo sprint termina 2 giorni prima rispetto alla consueta durata *bisettimanale*). In questa fase il carico lavorativo si attesta ad un livello intermedio, con un dispiegamento di ore produttive consono alla realizzazione dei documenti e del #G("PoC (Proof of Concept)") per la milestone di avanzamento #G("RTB (Requirements & Technology Baseline)").\
 Lo sprint S1 ha la durata di 1 settimana, per allineare il regolare termine degli sprint successivi alla giornata di venerdì, antecedente il periodo del weekend.
 
 == S5 - S8, carico lavorativo ridotto
