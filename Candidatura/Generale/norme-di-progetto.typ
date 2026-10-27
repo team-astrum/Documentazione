@@ -1,17 +1,18 @@
 #import "../../Template/tmp-documentazione.typ": conf, usecase, G
 
 #show: conf.with(
-  titolo: "Way of Working",
+  titolo: "Norme di Progetto",
   status: "In bozza", // Oppure "Approvato"
   utilizzo: "Interno", // Oppure "Esterno"
   redazione: ("Corrado Bacco", "Samuele Gobbi","Gianluca Brotto", "Thomas Morettin"),
   verifica: ("Gianluca Bacco", "Matteo De Col"),
   approvazione: "Filippo De Guio",
   changelog: (
+      (ver: "0.2.0", data: "2026-10-27", autore: "Samuele Gobbi", ruolo: "Redattore", verificatore:"Corrado Bacco", desc: "Aggiunta sezione: Gestione documentale e Versionamento"),
       (ver: "0.1.0", data: "2026-10-27", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta sezione: Gestione e Organizzazione dei Ruoli"),
-     (ver: "0.0.3", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Correzioni"),
-    (ver: "0.0.2", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Miglioramento impaginazione del documento"),
-    (ver: "0.0.1", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Stesura della bozza inziale di documento."),
+      (ver: "0.0.3", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Correzioni"),
+      (ver: "0.0.2", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Miglioramento impaginazione del documento"),
+      (ver: "0.0.1", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Stesura della bozza inziale di documento."),
   )
 )
 
@@ -39,7 +40,6 @@ Questo documento ha lo scopo di definire in forma univoca il metodo di lavoro, l
 == Stato del progetto
 Al momento il capitolato non è assegnato. Il documento disciplina l’assetto organizzativo e documentale iniziale: collaborazione, convenzioni per la stesura dei documenti e pubblicazione dei deliverable. Le sezioni relative a prodotto, pianificazione dettagliata e processi qualitativi, verifica e validazione saranno integrate nelle successive versioni, in relazione al capitolato che ci aggiudicheremo. 
 
-== Glossario
 = Infrastruttura di supporto
 == Obiettivo
 L’obiettivo di questa sezione è definire l’insieme di strumenti e configurazioni adottate dal gruppo a supporto della collaborazione e comunicazione, dell’organizzazione e l’integrazione tecnica del progetto. Nonostante ci si trovi in una fase preliminare, il team ha scelto di predisporre fin da subito un ambiente strutturato che garantisca tracciabilità, trasparenza e continuità operativa per l’intera durata del progetto.
@@ -58,6 +58,48 @@ L’obiettivo di questa sezione è definire l’insieme di strumenti e configura
 
   Per i colloqui esplorativi e gli Sprint Review periodici con i referenti aziendali vengono utilizzate piattaforme di videoconferenza quali Zoom, Google Meet o Microsoft Teams. Questi strumenti permettono di instaurare un confronto diretto con gli interlocutori esterni, raccogliere requisiti e aspettative, presentare i risultati raggiunti e ricevere feedback sul lavoro svolto. Gli incontri rappresentano inoltre un'importante occasione per verificare la coerenza delle attività con gli obiettivi concordati e definire eventuali modifiche o priorità per gli sprint successivi.
 
+= Gestione documentale e Versionamento
+  La documentazione è essenziale per garantire la tracciabilità e la coerenza di ogni azione o decisione presa dal team. Questa sezione descrive nel dettaglio le regole, le convenzioni e il sistema di versionamento adottati dal gruppo per la sua gestione. Trovandosi nelle fasi iniziali del progetto, questa sezione potrà essere soggetta a successivi aggiornamenti per integrare nuove metodologie e strumenti che il gruppo deciderà di adottare.
+== Redazione documenti
+  I documenti vengono redatti in #G("Typst", def: "Sistema di composizione tipografica open-source e linguaggio di markup progettato principalmente come alternativa moderna, semplice e veloce a LaTeX per la scrittura di testi scientifici, accademici, tesi di laurea e relazioni tecniche.") (.typ) e distribuiti in formato PDF (.pdf). Questi due formati sono stati scelti poiché:
+  - Typst garantisce una stesura standardizzata e omogenea mediante l’utilizzo dei #G("Template", def: "Modello predefinito o struttura riutilizzabile dotata di un layout già pronto, in cui sono presenti spazi vuoti predisposti per essere riempiti con contenuti specifici."), inoltre il carattere programmatico del linguaggio permette di definire regole di formattazione nei documenti che aiutano ad automatizzare alcune procedure di scrittura.
+  - Il formato PDF è ampiamente supportato da pressoché ogni dispositivo e di facile utilizzo.
+  In particolare, i file .typ sono codice sorgente, modificabile e tracciabile, mentre i file .pdf sono la documentazione approvata, distribuita e ufficiale.
+== Convenzioni di Nomenclatura
+  - *Nome file*: Le cartelle della repository sono rinominate con iniziali del nome in lettera maiuscola; al contrario i file hanno nome che inizia con la lettera minuscola.
+  - *Documenti*: Sia i verbali interni che esterni hanno come nome la data di quando è avvenuto l’incontro descritto al loro interno (es. “2026-10-11.typ”). I documenti che non sono verbali invece hanno nome tutto in minuscolo. Il carattere separatore per cartelle e documenti è “-” (ad esempio “valutazione-capitolati.typ”).
+  - *Formato Date*: il formato è conforme allo standard ISO 8601 (YYYY-MM-DD).
+== Fasi di vita di un documento
+  - *Redazione*: costituisce la fase di scrittura del documento, gestita da uno o più redattori. Il processo di stesura è di tipo incrementale: per ogni modifica rilevante viene effettuata una commit, garantendo così la tracciabilità delle modifiche tramite il sistema di versionamento.
+  - *Verifica*: a seguito di una commit è necessario effettuare la verifica del documento; questo compito è affidato ad una persona diversa dal redattore. Un documento risulta verificato quando tutte le modifiche nuove rispettano i seguenti requisiti:
+    - aderenza alle norme e agli standard di progetto;
+    - qualità formale, sintattica e lessicale;
+    - correttezza e accuratezza dei contenuti.
+  - *Approvazione*: i documenti del progetto necessitano di un ulteriore controllo qualità, successivo alla verifica, da parte del Responsabile di progetto. L’approvazione di un documento indica che tale documento soddisfa i requisiti di completezza e correttezza necessari e che di conseguenza è pronto per la pubblicazione.
+  - *Pubblicazione*: a seguito dell’esito positivo delle fasi di verifica e approvazione, il documento viene ufficialmente convertito e inserito nell’archivio PDF del sito web del gruppo tramite il sistema di automazione (#G("CI (Continuous Integration)", def: "Pratica di sviluppo software in cui i membri di un team uniscono le modifiche al codice in un repository centrale il più frequentemente possibile, tipicamente più volte al giorno.")/#G("CD (Continuous Delivery)", def: "Pratica di sviluppo software in cui il codice modificato viene compilato, testato e preparato automaticamente per il rilascio in produzione. Rappresenta l'estensione naturale della Continuous Integration (CI).")) descritto nei paragrafi successivi.
+== Struttura e tipologia dei documenti
+  I documenti seguono un tipo di struttura coerente e uniforme per garantire leggibilità:
+  - *#G("Frontespizio", def: "Pagina iniziale di un libro, di una tesi di laurea o di una pubblicazione, situata di norma all'inizio del volume, che contiene le informazioni essenziali per identificare l'opera.")*, con dati ufficiali;
+  - *#G("Changelog", def: "Registro cronologico che elenca tutte le modifiche apportate a un progetto software. Il suo scopo principale è informare in modo chiaro e trasparente gli utenti, gli sviluppatori e i clienti su cosa sia effettivamente cambiato nel prodotto, facilitando la tracciabilità delle novità e la risoluzione di eventuali problemi.")*;
+  - *Indice contenuti*;
+  - *Corpo del documento*, suddiviso in paragrafi e sottoparagrafi;
+  - *Sezione firme* (maggiori dettagli nel sottoparagrafo successivo).
+  Inoltre, il gruppo dispone di template scritti in Typst per garantire la replicabilità degli elementi comuni a tutti i documenti.
+  La struttura descritta è valida per l'intera documentazione, sebbene alcuni campi dati interni possano variare leggermente in base alla tipologia di appartenenza. Si possono quindi individuare tre categorie fondamentali:
+=== Verbali 
+  Questi documenti si occupano di descrivere accuratamente lo svolgimento di un incontro che può essere interno al gruppo oppure esterno con un’azienda. Sia i verbali interni che esterni vengono approvati ufficialmente dal responsabile di progetto ma riportano solo la firma del verificatore e, in caso di verbale esterno, anche la firma del referente aziendale. 
+=== Documenti Generici 
+  Sono documenti di varia natura (come il documento di valutazione capitolati, lettera di presentazione o questo delle norme di progetto). Questa tipologia di documenti presenta nella sezione firme unicamente la firma del responsabile che ne ha approvato la pubblicazione.
+=== Glossario
+ Raccolta in ordine alfabetico dei termini tecnici di progetto accompagnati dalla rispettiva definizione. I termini presenti nel Glossario sono contrassegnati nei vari documenti tramite la lettera (G) in pedice, la quale funge da collegamento ipertestuale verso la definizione corrispondente nel Glossario stesso. La lettera (G) viene applicata unicamente alla prima occorrenza di ciascun termine di glossario all'interno del singolo documento, al fine di garantire la leggibilità del testo ed evitare ridondanze visive.
+ Data la sua natura soggetta a continuo aggiornamento, il Glossario segue un processo di manutenzione incrementale e non richiede l'approvazione individuale da parte del Responsabile di Progetto ad ogni singolo inserimento.
+
+== Regole di Versionamento Documenti
+I documenti vengono versionati seguendo lo standard di #G("Semantic Versioning", def: "Standard di versionamento in cui i numeri di versione indicano il livello di stabilità e le modifiche apportate al software."), dove la versione viene descritta da 3 numeri distinti con valenza definita dal seguente formato MAJOR.MINOR.PATCH, in particolare:
+- *MAJOR*: indica lo stato di stabilità e approvazione del documento. Un valore inferiore a 1 (es. 0.y.z) indica un documento ancora instabile, in fase di redazione o verifica e soggetto a modifiche; un valore pari o superiore a 1 (es. 1.y.z) identifica un documento ufficialmente approvato dal Responsabile di Progetto e ritenuto conforme agli standard definiti in precedenza. 
+- *MINOR*: viene incrementata a seguito dell'inserimento di nuovi contenuti o di modifiche sostanziali alla struttura e alle sezioni del documento (ad esempio l'aggiunta di nuovi paragrafi o capitoli).
+- *PATCH*: viene incrementata in caso di interventi minori, quali la correzione di refusi, errori di battitura o piccole modifiche formali che non alterano la struttura o il contenuto informativo del documento.
+Come definito dallo standard di semantic versioning, se viene incrementato un numero di versione è necessario che i numeri posti alla sua destra vengano tutti azzerati, come ad esempio un passaggio da 0.2.1 a 0.3.0 porta all’azzeramento del numero posto all’estrema destra.
 
 = Gestione e Organizzazione dei Ruoli
 == Ruoli e Responsabilità
