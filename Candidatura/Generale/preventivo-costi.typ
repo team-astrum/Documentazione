@@ -1,0 +1,134 @@
+#import "../../Template/tmp-documentazione.typ": conf, G, deco-line
+
+#show: conf.with(
+  titolo: "Preventivo costi",
+  status: "In bozza",
+  utilizzo: "Esterno",
+  redazione: ("Thomas Morettin",),
+  verifica: (),
+  approvazione: none,
+  changelog: (
+    (ver: "0.1.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Redazione primaria del documento."),
+    (ver: "0.0.1", data: "2026-10-26", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Redazione primaria del documento."),
+  )
+)
+
+#let format-titles(cell) = {
+  cell.content = if calc.even(cell.x) {
+      set text(weight: "bold", size: 1.1em)
+      set align(right)
+      cell.content
+    } else {
+      set text(weight: "light")
+      cell.content
+    }
+  cell
+}
+
+= Scopo del documento
+Il seguente documento presenta il preventivo costi del gruppo _Astrum_, volto a finalizzare gli estremi della candidatura per il capitolato C0 - AIRA dell'azienda proponente Sanmarco Informatica S.p.A.. \
+Questo documento viene redatto in conformità con il regolamento del progetto didattico presentato dai committenti Prof. Tullio Vardanega e Prof. Riccardo Cardin, per il corso di Ingegneria del Software. \
+Nello specifico il documento è punto di riferimento per le attività di progetto, utile sia al gruppo di lavoro che agli #G("stakeholders", def: "Gruppo o organizzazione che ha un interesse o una responsabilità nei risultati di un'attività, o come nel seguente caso di un progetto.") per monitorare la suddivisione del carico lavorativo e la giustificazione dietro i costi esposti.
+
+= Dati generali
+Prima di approfondire le diverse tematiche inerenti al preventivo costi, si vogliono esporre i dati utili alla comprensione di tutte le scelte da qui riportate:
+- *7* studenti facenti parte del gruppo _Astrum_;
+- *95* ore preventivate per ciascun componente del gruppo, in grado di coprire ritardi o carico di lavoro aggiuntivo;
+- *665* ore complessive di lavoro per tutto il gruppo;
+- *2026-11-04* data di inizio lavori, conseguente all'aggiudicazione del capitolato;
+- *2027-04-16* data di fine lavori preventivata a seguito di ragionamenti circa:
+  - progettazione per mezzo di strumenti nuovi a tutto il gruppo;
+  - mitigazione dei rischi legati ai macroargomenti da trattare (@rischi);
+  - revisione della documentazione a seguito della milestone #G("RTB (Requirements & Technology Baseline)", def: "Milestone di progetto, coincidente con la prima revisione di avanzamento. In questa fase il team presenta la definizione dei requisiti e dimostra il PoC (Proof of Concept). L'obiettivo è quindi quello di validare le scelte tecnologiche e l'integrazione iniziale dei componenti prima di procedere con l'architettura finale.").
+
+= Analisi dei ruoli
+Si riporta un'analisi dei ruoli sui quali il gruppo ruoterà a cadenza *bisettimanale*, con analisi da parte del Responsabile di quali sono le figure più idonee alla fase in itinere e la conseguente contabilizzazione delle ore, seguendo rigorosamente la definizione di ciascun task all'interno dello sprint.
+
+== Responsabile
+Il _responsabile_ assume il ruolo di Project Manager. È la figura di riferimento nei rapporti esterni con i committenti e il proponente aziendale.
+Egli è l'unica figura costantemente presente all'interno degli sprint, in quanto ha il compito di presiedere le riunioni interne ed esterne, definire scadenze relativamente all'avanzamento di progetto e redigere, al termine di ogni sprint, il consuntivo di periodo.
+
+== Amministratore
+L'_amministratore_ è il garante dell'infrastruttura tecnologica e procedurale del gruppo, che in _Astrum_ si traduce nella gestione della totale organizzazione GitHub.
+Questa figura risulta fondamentale in determinati sprint poiché assicura l'efficienza del #G("Way of Working", def: "Best practices per organizzare al meglio le attività di progetto. Il tutto viene fatto pertanto in modo professionale e con modalità concordate all'interno del gruppo.") e monitora lo stato di efficienza dell'organizzazione GitHub o strumenti ad essa collegati.
+
+== Analista
+L'_analista_ è la figura di Requirements Engineer. Ha il compito di comprendere, comprendere e formalizzare il dominio applicativo del progetto.
+Ha il compito di comprendere le richieste del proponente aziendale.\
+Si è optato per pianificare questa figura sia all'inizio del lavoro che nella fase conseguente al superamento della milestone #G("RTB (Requirements & Technology Baseline)") per eventuali modifiche richieste dai committenti.
+
+== Progettista
+Il _progettista_ è la figura operativa che traduce i requisiti analizzati dall'analista in soluzioni tecniche realizzabili, solide e scalabili. Ha quindi il compito di selezionare le tecnologie, i #G("framework", def: "Architettura logica di supporto che fornisce una struttura di base per sviluppare software o gestire processi.") e i #G("design pattern", def: "Soluzione progettuale generale, riutilizzabile e già collaudata a un problema ricorrente che si presenta durante lo sviluppo di codice. Non si parla di codice \"preconfezionato\", ma bensì di un modello logico (linea guida) che può essere adattata a diversi linguaggi e contesti") più adatti al progetto.\
+All'interno di questo progetto la figura viene richiamata all'interno di molteplici sprint.
+
+== Programmatore
+Il _programmatore_ è la figura operativa maggiormente presente negli sprint di programmazione del #G("MVP (Minimum Viable Product)", def: "Versione più semplice e basilare di un nuovo prodotto software, dotata esclusivamente delle funzionalità essenziali necessarie a soddisfare i primi stakeholders e a testa un'idea sul mercato."), fermo restando che viene presa in considerazione anche per la fase antecedente la RTB per la creazione del #G("PoC (Proof fo Concept)", def: "Rappresenta una piccola sperimentazione usata per dimostrare che un'idea, o nel caso di _Astrum_ un progetto, può essere realizzata concretamente.").\
+Il compito di questa figura è quindi quello di scrittura del codice sorgente.
+
+== Verificatore
+Il _verificatore_ è il ruolo di garante della qualità globale all'interno del progetto, operando sempre in regime di totale indipendenza (non verifica mai codice/documenti prodotti da sé stesso).\
+Questa figura è costantemente presente nel progetto, sia per la validazione dei documenti che per la validazione del codice sorgente tramite definizione di metriche e soglie di accettabilità.
+#pagebreak()
+
+= Ripartizione ore per ruolo
+Si riporta, all'interno del seguente capitolo la ripartizione oraria dei ruoli, con analisi del costo totale secondo le percentuali di riferimento:
+
+#figure(
+  table(
+    columns: (1fr, 50pt, 75pt, 100pt, 100pt),
+    inset: 10pt,
+    stroke: (0.5pt + deco-line),
+    align: (col, _) => if col == 0 { left } else { center },
+    table.header(
+      [*Ruolo*], [*%*], [*Ore totali*], [*Costo orario*], [*Costo totale*]
+    ),
+    [Responsabile], [8%], [55], [30€], [1.650€],
+    [Amministratore], [8%], [55], [20€], [1.100€],
+    [Analista], [11%], [70], [25€], [1.750€],
+    [Progettista], [15%], [100], [25€], [2.500€],
+    [Programmatore], [29%], [195], [15€], [2.925€],
+    [Verificatore], [29%], [190], [15€], [2.850€],
+    table.cell(align: right)[*TOTALE*], [*100%*], [*665*], [-], [*12.775€*]
+  ),
+  caption: "Ripartizione ore per ruolo"
+) <ore>
+
+== Metodologia di assegnazione e chiarimenti
+I ruoli sopra riportati sono assegnati, a ciascun membro del gruppo, all'inizio di ogni sprint da parte dell'amministratore, garantendo la massima flessibilità di azione sia per quanto riguarda la grandezza dei task da svolgere che per mantenere un monte ore finale congruo con le regole del progetto universitario.\
+La figura di responsabile, pertanto, si riserva la facoltà di rivedere le ore totali di ciascun ruolo (@ore) analizzandone l'effettiva utilità in previsione degli sprint futuri, garantendo così la possibilità di mitigare rischi legati al ritardo nella consegna del progetto (@rischi).\
+Tutte le decisioni saranno formalmente concordate collegialmente, tra il responsabile corrente e i restanti membri del gruppo, e documentate in modo da garantire la tracciabilità della suddivisione.
+
+== Criteri di rotazione dei ruoli
+Come sopra riportato, si precisa che non esiste un criterio di rotazione dei ruoli definito a posteriori dell'inizio del progetto.\
+Tutti i ruoli ruotano con cadenza *bisettimanale*, al termine di ciascuno sprint, per stretta decisione del responsabile corrente.\
+Le idee alla base della suddivisione dei ruoli rimangono sempre (come da regolamento universitario):
+- suddivisione equa dei ruoli, in modo tale che ciascun membro del gruppo abbia la possibilità di svolgere tutti i ruoli con all'incirca lo stesso quantitativo di ore dei propri compagni;
+- il responsabile ruota agilmente, ad ogni sprint, secondo il seguente ordine dei membri (modificabile a discrezione del gruppo in caso di superamento del monte ore personale o per possibile inficiamento della regola precedente):
+ 1. _Corrado Bacco_ (2148615);
+ 2. _Gianluca Bacco_ (2111937);
+ 3. _Gianluca Brotto_ (2148626);
+ 4. _Matteo De Col_ (2148619);
+ 5. _Filippo De Guio_ (2113177);
+ 6. _Samuele Gobbi_ (2148004);
+ 7. _Thomas Morettin_ (2111001).
+
+= Carico lavorativo per sprint
+Durante la stesura del seguente preventivo si è tenuto conto, all'unanimità, che il periodo di svolgimento del progetto deve presentare dei periodi di avanzamento a carico variabile; ciò significa che gli sprint non consumeranno lo stesso quantitativo di ore produttive, ma ne viene fatta una suddivisione nei sottocapitoli seguenti.
+
+== S1 - S4, carico lavorativo medio
+Questo periodo si articola dalla data *2026-11-04* fino alla data *2026-12-23* (per ragioni di riposo del team lo sprint termina 2 giorni prima rispetto alla consueta durata *bisettimanale*). In questa fase il carico lavorativo si attesta ad un livello intermedio, con un dispiegamento di ore produttive consono alla realizzazione dei documenti e del #G("PoC", def: "Proof of Concept") per la milestone di avanzamento #G("RTB (Requirements & Technology Baseline)").\
+Lo sprint S1 ha la durata di 1 settimana, per allineare il regolare termine degli sprint successivi alla giornata di venerdì, antecedente il periodo del weekend.
+
+== S5 - S8, carico lavorativo ridotto
+Questo periodo si articola dalla data *2026-12-26* fino alla data *2027-02-19*. L'obiettivo di questi sprint è quello di mantenere attivo il lavoro, rimanendo però ad un carico di lavoro ridotto (all'incirca _-50%_ di carico rispetto alla fase precedente) per permettere ai membri del gruppo di terminare la preparazione degli esami per la sessione invernale (2027-01-18 - 2027-02-20).\
+Le ore produttive totali al termine di ciascuno sprint saranno notevolmente ridotte, mantenendo comunque un flusso di lavoro stabile.
+
+== S8 - S12, carico lavorativo alto
+Questo periodo si articola dalla data *2027-02-20* fino alla data *2027-04-16*. L'obiettivo di questi sprint è quello di aumentare drasticamente il quantitativo di lavoro rispetto a tutti gli sprint precedenti (all'incirca _+33%_ rispetto alla prima fase e _+167%_ rispetto alla seconda fase), per permettere un avanzamento solido nello sviluppo del #G("MVP") e portare un lavoro significativo all'ultima revisione di avanzamento #G("PB (Product Baseline)", def: "Milestone di progetto, coincidente con la seconda e ultima revisione di avanzamento. In questa fase il team presenta l'insieme approvato di specifiche che descrivono nel dettaglio il design definitivo di un prodotto, comprese le sue caratteristiche fisiche e funzionali tramite la progettazione di un MVP.").\
+All'interno di questa fase le figure di programmatore e verificatore portano il quantitativo di ore produttive ad un aumento sostanziale.
+
+= Analisi dei rischi e mitigazione <rischi>
+
+= Conclusioni
+Alla luce di quanto riportato all'interno di questo documento il gruppo _Astrum_ sancisce la data di inizio lavori prevista per il *2026-11-04*, con termine per la data *2027-04-16*.\
+Considerate il monte ore totale previsto per studente, il periodo temporale di svolgimento dell'intero progetto e i costi per i singoli ruoli il preventivo per il capitolato C0 - AIRA dell'azienda proponente Sanmarco Informatica S.p.A. ammonta a *12.775€*.

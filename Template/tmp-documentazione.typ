@@ -56,6 +56,8 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
     block(below: 0.5cm, above: 0.5cm, it)
   }
 
+  set list(marker: ([•], [◦], [-]))    // Formattazione punti elenco
+
   set page(
     paper: "a4",
     numbering: "I",
