@@ -8,7 +8,8 @@
   verifica: ("Gianluca Bacco", "Matteo De Col"),
   approvazione: "Filippo De Guio",
   changelog: (
-      (ver: "0.2.0", data: "2026-10-27", autore: "Samuele Gobbi", ruolo: "Redattore", verificatore:"Corrado Bacco", desc: "Aggiunta sezione: Gestione documentale e Versionamento"),
+      (ver: "0.3.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta sezione: Gestione dei repository e sito web \"cruscotto\"."),
+      (ver: "0.2.0", data: "2026-10-27", autore: "Samuele Gobbi", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Aggiunta sezione: Gestione documentale e Versionamento"),
       (ver: "0.1.0", data: "2026-10-27", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta sezione: Gestione e Organizzazione dei Ruoli"),
       (ver: "0.0.3", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Correzioni"),
       (ver: "0.0.2", data: "2026-10-26", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Miglioramento impaginazione del documento"),
@@ -114,7 +115,7 @@ Per ogni ruolo previsto vengono definite le specifiche responsabilità:
 
 - *Amministratore*:
   - Gestisce e mantiene l’ambiente di lavoro (repository, strumenti di comunicazione, issue tracking system). 
-  - Implementa e fa manutenzione delle automazioni di progetto, come le pipeline di Continuous Integration/Continuous Deployment (CI/CD) e la compilazione automatica dei documenti. 
+  - Implementa e fa manutenzione delle automazioni di progetto, come le pipeline di #G("CI (Continuous Integration)")/#G("Continuous Delivery") (CI/CD) e la compilazione automatica dei documenti. 
   - Risolve tempestivamente i problemi tecnici e i malfunzionamenti legati agli strumenti in uso al team. 
   - Aggiorna i documenti e le informazioni all’interno del sito web.
   - Redige i verbali delle riunioni interne ed esterne. 
@@ -148,8 +149,27 @@ La rotazione avviene all’inizio di ogni sprint, quindi ogni due settimane: in 
 
 Al termine di ogni sprint, il membro uscente da un ruolo redige un resoconto delle attività svolte e, nella fase iniziale dello sprint successivo, fornisce supporto al subentrante per chiarire eventuali dubbi e rendere l’inserimento al nuovo ruolo il più veloce possibile. 
 
+= Gestione dei repository e sito web "cruscotto"
+Nel seguente capitolo si riportano le scelte progettuali circa la gestione dei repository all'interno dell'organizzazione e com'è strutturato il sito web "cruscotto" (#link("https://team-astrum.github.io")[team-astrum.github.io]).
 
+== Ambiente di lavoro
+Il tracciamento delle modifiche e il versionamento del codice sono gestiti tramite #G("Git", def: "Applicazione software per il controllo di versione distribuito utilizzabile da interfaccia a riga di comando."), appoggiandosi alla piattaforma cloud GitHub. 
+Il gruppo ha creato un’organizzazione sulla piattaforma #G("GitHub", def: "Piattaforma online basata sul cloud e sul sistema di controllo di versione Git; permette agli sviluppatori di archiviare, gestire, condividere e collaborare alla scrittura di codice sorgente.") per avere una gestione centralizzata di tutte le risorse.
+L’infrastruttura è stata concepita applicando il principio di separazione delle responsabilità (Separation of Concerns), in quanto il lavoro viene suddiviso nei seguenti repository principali, ai quali se ne aggiungeranno di nuovi in base all’avanzamento del progetto:
+- *Documentazione*, dedicato alla stesura, revisione e archiviazione di documenti di progetto; per la redazione dei file sorgenti si è scelto #G("Typst"), un linguaggio di markup moderno e flessibile, superando i limiti del tradizionale Latex; all’interno del repository, inoltre, si è deciso di ospitare i template, sempre in linguaggio #G("Typst"), per una redazione uniforme di tutti gli artefatti (verbali interni/esterni, documentazione interna/esterna, carta intestata e diapositive per i “diari di bordo”);
+- *team-astrum.github.io*, dedicato all’hosting del sito web “cruscotto” tramite il servizio di #G("GitHub Pages", def: "Servizio gratuito offerto da GitHub che consente di pubblicare e ospitare siti web statici direttamente da un repository."); questo sito è fondamentale come punto di accesso pubblico per gli #G("stakeholders"), con visualizzazione grafica dello stato di avanzamento del progetto e link diretti ai documenti; per la sua gestione ordinaria si adotterà un flusso di lavoro basato su #G("PR (Pull Request)", def: "Operazione utilizzata nell'ambito dello sviluppo software per proporre modifiche al codice di progetto."), permettendo di convalidare le modifiche effettuate prima di effettuare la pubblicazione del sito web, senza invalidare le informazioni o la navigazione per gli #G("stakeholders");
+- *.github*, utilizzato principalmente per configurare l’aspetto dell’organizzazione sulla piattaforma #G("GitHub").
 
+== Automatismi di #G("CI (Continuous Integration)")
+Per minimizzare l’errore umano e ottimizzare le fasi di build e rilascio, il team si avvale delle #G("GitHub Actions", def: "Piattaforma di automazione nativa integrata su GitHub che consente di creare flussi di lavoro per compilare, testare, analizzare e distribuire codice direttamente all'interno del proprio repository.") per implementare pratiche di #G("CI (Continuous Integration)"). Nello specifico, per quanto riguarda il repository per la documentazione, è presente il seguente automatismo:
+- compilazione automatica dei documenti (“_typst-compile.yml_”): questo workflow, scritto in linguaggio #G("YAML", def: "Linguaggio di serializzazione dei dati leggibile dagli esseri umani, usato per file di configurazione, automazioni e strumenti DevOps.") si innesca all’apertura di una #G("PR (Pull Request)"); intercetta tutti i documenti in linguaggio #G("Typst"), fatta esclusione dei template di progetto, e li compila per verificarne l'integrità nel codice; l’automatismo permette di visualizzare eventuali errori in fase di compilazione; successivamente all'accettazione della #G("PR (Pull Request)") il file in linguaggio #G("Typst") viene compilato in formato PDF e viene rilasciato come artefatto all'interno delle #G("GitHub Pages") del repository; al momento della pubblicazione degli artefatti viene eseguito il file _generate-manifest.py_, scritto in linguaggio #G("Python", def: "Linguaggio di programmazione ad alto livello, interpretato, orientato agli oggetti e di uso generale."), che permette di generare un file _manifest.json_, scritto in formato #G("JSON (JavaScript Object Notation)", def: "Formato di testo leggero e aperto, utilizzato principalmente per lo scambio di dati tra applicazioni e server web."), per la serializzazione dei dati di tutti i documenti/verbali, fondamentali per attuare il ciclo di #G("CD (Continuous Delivery)") dei documenti all'interno del sito web "cruscotto" in modo automatizzato.
 
-
-
+== Sito web "cruscotto" e #G("CD (Continuous Delivery)") automatizzato
+Per la realizzazione della vetrina pubblica si è scelto di sviluppare una #G("Single Page Application", def: "Sito o applicazione web che carica un'unica pagina HTML iniziale e aggiorna dinamicamente i contenuti man mano che l'utente interagisce con essa, senza mai ricaricare interamente la pagina dal server.") utilizzando la libreria #G("React", def: "libreria JavaScript open-source creata da Meta per sviluppare interfacce utente dinamiche e modulari.") per la strutturazione dell'interfaccia (UI) e #G("Tailwind CSS", def: "") per il livello di presentazione e design.
+Il sito web è punto di riferimento per gli #G("stakeholders") di progetto, dandogli la possibilità di visualizzare tutte le informazioni a loro necessarie.\
+Come anticipato il sito web lavora con un processo di #G("CD (Continuous Delivery)") automatico, grazie alla lettura, ad ogni caricamento della #G("Single Page Application"), del file _manifest.json_.\
+Il sito, come citato precedentemente, è inserito all’interno del repository *team-astrum.github.io* (per la costruzione di un #G("URL (Uniform Resource Locator)", def: "Sequenza di caratteri che si digita nella barra degli indirizzi di un browser per identificare e raggiungere in modo univoco una risorsa su internet.") pulito) che si avvale dell’utilizzo di #G("GitHub Actions") per la compilazione e la pubblicazione dello stesso dopo le singole modifiche.\
+Per concludere, il sito web "cruscotto" è suddiviso nelle seguenti sezioni consultabili:
+- *#G("dashboard", def: "Interfaccia grafica che raccoglie, organizza e mostra i dati più importanti in modo sintetico e visivo.")* per visualizzare lo stato di avanzamento del progetto con relativi costi, integrata anche con la rendicontazione delle ore per ciascun membro e ruolo;
+- *documenti*, contenente tutti i documenti/verbali caricati automaticamente, tramite il processo sopra descritto, dal repository *Documentazione*; questa sezione comprende anche la visualizzazione di documenti generali come _glossario.pdf_ e _norme-di-progetto.pdf_, i quali non appartengono ad una milestone predefinita ma fanno parte nel progetto nel suo complesso;
+- *membri del team*, per dare visibilità agli artefici del complesso lavoro dietro al progetto universitario.
