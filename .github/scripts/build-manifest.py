@@ -4,7 +4,7 @@ import json, pathlib, re, subprocess, sys
 from datetime import datetime, timezone
 
 ROOT, OUT = pathlib.Path('.'), pathlib.Path('_site')    # Caricamento e ricerca dei file all'interno di GitHub Pages
-FONT = ['--font-path', 'Fonts', '--ignore-system-fonts']    # Caricamento del font prescelto "Inter"
+FONT = ['--font-path', 'Template/Fonts', '--ignore-system-fonts']    # Caricamento del font prescelto "Inter"
 MESI = {m: i for i, m in enumerate(
   ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio',
     'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'], 1)}
