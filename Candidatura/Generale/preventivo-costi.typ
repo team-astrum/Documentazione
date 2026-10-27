@@ -8,6 +8,7 @@
   verifica: ("Matteo De Col", "Corrado Bacco"),
   approvazione: none,
   changelog: (
+    (ver: "0.1.5", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Refuso con figura di responsabile al capitolo 4.1."),
     (ver: "0.1.4", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Piccole correzioni su termini e ripetizioni."),
     (ver: "0.1.3", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Modifica ai termini incongruenti di PoC a glossario."),
     (ver: "0.1.2", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Inserimento della regola per conflitto di interessi."),
@@ -99,7 +100,7 @@ Si riporta, all'interno del seguente capitolo la ripartizione oraria dei ruoli, 
 ) <ore>
 
 == Metodologia di assegnazione e chiarimenti
-I ruoli sopra riportati sono assegnati, a ciascun membro del gruppo, all'inizio di ogni sprint da parte dell'amministratore, garantendo la massima flessibilità di azione sia per quanto riguarda la grandezza dei task da svolgere che per mantenere un monte ore finale congruo con le regole del progetto universitario.\
+I ruoli sopra riportati sono assegnati, a ciascun membro del gruppo, all'inizio di ogni sprint da parte del responsabile, garantendo la massima flessibilità di azione sia per quanto riguarda la grandezza dei task da svolgere che per mantenere un monte ore finale congruo con le regole del progetto universitario.\
 La figura di responsabile, pertanto, si riserva la facoltà di rivedere le ore totali di ciascun ruolo (@ore) analizzandone l'effettiva utilità in previsione degli sprint futuri, garantendo così la possibilità di mitigare rischi legati al ritardo nella consegna del progetto (@rischi).\
 Tutte le decisioni saranno formalmente concordate collegialmente, tra il responsabile corrente e i restanti membri del gruppo, e documentate in modo da garantire la tracciabilità della suddivisione.
 
