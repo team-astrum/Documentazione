@@ -163,29 +163,48 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
   if changelog.len() > 0 {
     heading(numbering: none, outlined: false)[Registro delle modifiche]
     table(
-      columns: (175pt, 1fr),
+      columns: (auto, 1fr),
       stroke: 0.5pt + deco-line,
+      inset: (top: 8pt, bottom: 8pt),
       
+      // Intestazione
       table.header(
-        text(weight: "bold")[Versione],
-        text(weight: "bold")[Descrizione]
+        table.cell(align: center + horizon)[#text(weight: "bold")[Versione]],
+        table.cell(align: left + horizon)[#text(weight: "bold")[Dettagli]]
       ),
       
+      // Mappatura delle voci
       ..changelog.map(entry => (
-        [
-          *v#entry.ver* \
+        table.cell(
+          stroke: (bottom: none), // Rimuove la linea separatrice sotto
+          inset: (bottom: 4pt),
+          align: center + top
+        )[#text(weight: "bold")[v#entry.ver]],
+        table.cell(
+          stroke: (bottom: none),
+          inset: (bottom: 4pt),
+          align: left + top
+        )[#entry.desc],
+        
+        table.cell(
+          stroke: (top: none),
+          align: center + bottom
+        )[#text(size: 10pt, fill: txt-gray)[#entry.data]],
+        table.cell(
+          stroke: (top: none),
+          align: left + bottom
+        )[
           #text(size: 10pt, fill: txt-gray)[
-            #entry.data \
-            #entry.autore (#entry.ruolo) \
+            #entry.ruolo: #entry.autore
             #if "verificatore" in entry and entry.verificatore != none [
-              #entry.verificatore (Verifica)
+              #h(0.5em) #text(fill: deco-line)[|] #h(0.5em) 
+              Verificatore: #entry.verificatore
             ]
           ]
-        ],
-        entry.desc
-      )).flatten()    // Array unidimensionale
+        ]
+      )).flatten()
     )
-
+    
     pagebreak()
   }
 
