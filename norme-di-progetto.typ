@@ -8,6 +8,7 @@
   verifica: ("Gianluca Bacco", "Matteo De Col"),
   approvazione: "Filippo De Guio",
   changelog: (
+      (ver: "0.3.1", data: "2026-10-28", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Modifica in capitolo 4.1 su ruolo dell'amministratore e aggiunto appunto su data.js in capitolo 5.3."),
       (ver: "0.3.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta sezione: Gestione dei repository e sito web \"cruscotto\"."),
       (ver: "0.2.0", data: "2026-10-27", autore: "Samuele Gobbi", ruolo: "Redattore", verificatore:"Gianluca Bacco", desc: "Aggiunta sezione: Gestione documentale e Versionamento"),
       (ver: "0.1.0", data: "2026-10-27", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta sezione: Gestione e Organizzazione dei Ruoli"),
@@ -117,7 +118,7 @@ Per ogni ruolo previsto vengono definite le specifiche responsabilità:
   - Gestisce e mantiene l’ambiente di lavoro (repository, strumenti di comunicazione, issue tracking system). 
   - Implementa e fa manutenzione delle automazioni di progetto, come le pipeline di #G("CI (Continuous Integration)")/#G("Continuous Delivery") (CI/CD) e la compilazione automatica dei documenti. 
   - Risolve tempestivamente i problemi tecnici e i malfunzionamenti legati agli strumenti in uso al team. 
-  - Aggiorna i documenti e le informazioni all’interno del sito web.
+  - Aggiorna la rendicontazione delle ore all'interno del sito web, oltre ad eventuali informazioni.
   - Redige i verbali delle riunioni interne ed esterne. 
 
 - *Analista*:
@@ -168,6 +169,7 @@ Per minimizzare l’errore umano e ottimizzare le fasi di build e rilascio, il t
 Per la realizzazione della vetrina pubblica si è scelto di sviluppare una #G("Single Page Application", def: "Sito o applicazione web che carica un'unica pagina HTML iniziale e aggiorna dinamicamente i contenuti man mano che l'utente interagisce con essa, senza mai ricaricare interamente la pagina dal server.") utilizzando la libreria #G("React", def: "libreria JavaScript open-source creata da Meta per sviluppare interfacce utente dinamiche e modulari.") per la strutturazione dell'interfaccia (UI) e #G("Tailwind CSS", def: "") per il livello di presentazione e design.
 Il sito web è punto di riferimento per gli #G("stakeholders") di progetto, dandogli la possibilità di visualizzare tutte le informazioni a loro necessarie.\
 Come anticipato il sito web lavora con un processo di #G("CD (Continuous Delivery)") automatico, grazie alla lettura, ad ogni caricamento della #G("Single Page Application"), del file _manifest.json_.\
+Per quanto concerne l'aggiornamento della rendicontazione oraria dei vari componenti e ruoli è possibile effettuare le modifiche all'interno del file _data.js_, il quale gestisce tutti i dati visualizzati all'interno del sito web (sia statici che dinamici).
 Il sito, come citato precedentemente, è inserito all’interno del repository *team-astrum.github.io* (per la costruzione di un #G("URL (Uniform Resource Locator)", def: "Sequenza di caratteri che si digita nella barra degli indirizzi di un browser per identificare e raggiungere in modo univoco una risorsa su internet.") pulito) che si avvale dell’utilizzo di #G("GitHub Actions") per la compilazione e la pubblicazione dello stesso dopo le singole modifiche.\
 Per concludere, il sito web "cruscotto" è suddiviso nelle seguenti sezioni consultabili:
 - *#G("dashboard", def: "Interfaccia grafica che raccoglie, organizza e mostra i dati più importanti in modo sintetico e visivo.")* per visualizzare lo stato di avanzamento del progetto con relativi costi, integrata anche con la rendicontazione delle ore per ciascun membro e ruolo;
