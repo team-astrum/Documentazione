@@ -4,10 +4,11 @@
   titolo: "Preventivo costi",
   status: "In bozza",
   utilizzo: "Esterno",
-  redazione: ("Thomas Morettin",),
+  redazione: ("Thomas Morettin","Gianluca Brotto"),
   verifica: ("Matteo De Col", "Corrado Bacco"),
   approvazione: none,
   changelog: (
+    (ver: "0.2.0", data: "2026-10-28", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Aggiunta sezione Analisi dei rischi"),
     (ver: "0.1.5", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Refuso con figura di responsabile al capitolo 4.1."),
     (ver: "0.1.4", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Piccole correzioni su termini e ripetizioni."),
     (ver: "0.1.3", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Modifica ai termini incongruenti di PoC a glossario."),
@@ -135,6 +136,21 @@ Questo periodo si articola dalla data *2027-02-20* fino alla data *2027-04-16*. 
 All'interno di questa fase le figure di programmatore e verificatore portano il quantitativo di ore produttive ad un aumento sostanziale.
 
 = Analisi dei rischi e mitigazione <rischi>
+Durante la fase di pianificazione e stesura del preventivo, sono stati individuati alcuni rischi che potrebbero ostacolare lo sviluppo del progetto, portando a ritardi o problemi operativi interni.
+Per ognuno di essi sono state previste delle politiche di mitigazione, con l'obiettivo di risolverli tempestivamente o limitarne l'impatto sul rispetto del monte ore e delle scadenze previste.
+
+== Rallentamento delle attività
+Si prevede un rallentamento complessivo delle attività del team durante la sessione invernale, necessario per permettere ai membri di dedicarsi alla preparazione degli esami accademici. Inoltre, impegni personali imprevisti potrebbero limitare le risorse a disposizione, lasciando indietro attività importanti.
+Per risolvere il problema della sessione, il carico di lavoro è stato ripartito in modo da concentrare le attività nella fase iniziale e, in particolar modo, nel periodo post-sessione. Per evitare invece rallentamenti dovuti agli impegni personali, ogni membro indicherà in un calendario condiviso i propri periodi di indisponibilità. In questo modo, il Responsabile potrà assegnare le attività critiche a chi garantisce maggiore disponibilità, evitando blocchi operativi. Inoltre, eventuali imprevisti dovranno essere segnalati tempestivamente.
+
+== Pianificazione, stima dei tempi e rotazioni
+In fase di pianificazione, c'è il rischio che il Responsabile sottostimi il tempo necessario per lo svolgimento di un'attività, causando ritardi nella consegna dei task. A questo si aggiunge un rischio di rallentamento e disorientamento iniziale ogni volta che, a causa della rotazione bisettimanale, un membro assume un nuovo ruolo che non padroneggia ancora completamente. Per mitigare l'errore di stima, i task verranno scomposti in sotto-attività più piccole (più facili da valutare) e il Responsabile dovrà monitorare frequentemente l'avanzamento per riassegnare eventuali risorse. Per agevolare invece l'inserimento di una persona in un nuovo ruolo, è stato previsto che al termine di ogni sprint, il membro uscente da un ruolo redige un resoconto delle attività svolte e, nella fase iniziale dello sprint successivo, fornisce supporto al subentrante per chiarire eventuali dubbi e rendere l'inserimento al nuovo ruolo il più veloce possibile.
+
+== Studio delle tecnologie
+Lo studio delle tecnologie necessarie per il progetto potrebbe richiedere più tempo del previsto, ritardando l'avvio della progettazione e consumando diverse ore. Per mitigare questo rischio, il gruppo ha pianificato una fase di studio intensiva nei primi sprint. Al fine di gestire il tempo in modo efficiente, il team si dividerà in sotto-gruppi, ciascuno focalizzato sull'apprendimento di una specifica tecnologia, per poi ritrovarsi in incontri di allineamento dedicati alla condivisione delle conoscenze acquisite e alla risoluzione di dubbi collettivi. Inoltre, nelle fasi operative successive, il Responsabile assegnerà, ove possibile, le varie attività a chi ha precedentemente approfondito in modo specifico quel determinato ambito tecnico.
+
+== Criticità tecniche e supporto dell'azienda
+Nonostante l'analisi dei requisiti avvenga all'inizio del progetto, durante lo sviluppo vero e proprio il team potrebbe riscontrare problemi tecnici, dubbi o ostacoli imprevisti in grado di bloccare temporaneamente l'avanzamento del progetto. Per far fronte a questa eventualità, come garantito da Sanmarco Informatica durante l'incontro esterno, l'azienda ha assicurato la propria disponibilità per incontri periodici volti a verificare il regolare andamento del progetto. A questo supporto continuo si aggiunge la possibilità di instaurare canali di comunicazione più rapidi e diretti, i quali sarebbero fondamentali per ricevere chiarimenti tempestivi e gestire velocemente qualsiasi problema tecnico urgente.
 
 = Conclusioni
 Alla luce di quanto riportato all'interno di questo documento il gruppo _Astrum_ sancisce la data di inizio lavori prevista per il *2026-11-04*, con termine per la data *2027-04-16*.\
