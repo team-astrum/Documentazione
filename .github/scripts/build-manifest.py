@@ -27,7 +27,7 @@ def to_iso(s):
 def section_of(rel):
   """Scheda del sito, indexing automatico delle cartelle"""
   for part in rel.parts[1:-1]:    # Suddivisione del percorso
-    if part.lower().startswith('verbali'):    # Caso di verbali, cartelle separate
+    if part.lower().startswith(('verbali', 'diari')):    # Caso di verbali, cartelle separate
       return part.replace('-', ' ').replace('_', ' ').capitalize()
   return rel.parts[0] if len(rel.parts) > 1 else 'Altro'    # Caso di cartella non conforme
 
