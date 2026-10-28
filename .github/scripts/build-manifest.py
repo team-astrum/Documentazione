@@ -46,9 +46,6 @@ for src in sorted(ROOT.rglob('*.typ')):
     print(r.stderr, file=sys.stderr)
     sys.exit(1)
 
-  if any(part.lower().replace('_', '-') == 'diari-di-bordo' for part in rel.parts):   # Salta l'indicizzazione dei diari di bordo, ma vengono comunque compilati
-    continue
-
   # Metadati dichiarati dal template: estrazione del campo etichettato <info> e creazione manifest.json
   meta = {}
   q = run('typst', 'query', '--root', '.', *FONT, str(src), '<info>', '--field', 'value', '--one')
