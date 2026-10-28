@@ -46,7 +46,7 @@ L'incontro è stato indetto per sciogliere i seguenti dubbi tecnico-organizzativ
 - Non è richiesta un'accuratezza perfetta dall'Intelligenza Artificiale. L'interfaccia per la validazione umana dei dati è considerata una feature opzionale per l'output finale; tuttavia, i risultati automatici devono essere sufficientemente precisi di base.
 - Qualora il sistema individui più intenzioni all'interno del medesimo documento (es. ordine + reclamo), dovrà estrarne e registrarne solo una (la principale). La presenza di richieste secondarie andrà tracciata nei log per consentire all'utente di valutarle in un secondo momento.
 - In caso di errori di sistema, sarà sufficiente registrarli nei log affinché siano visualizzati nella dashboard amministrativa. Casistiche di errore inedite verranno discusse con l'azienda in seguito.
-- La metrica principale per valutare il successo del prodotto sarà la percentuale di elaborazioni andate a buon fine, con una soglia minima fissata al 70%. L'accuratezza formale dell'estrazione è considerata una metrica secondaria. Durante le fasi di sviluppo, il gruppo stesso garantirà la qualità testando empiricamente i dati estratti.
+- La metrica principale per valutare il successo del prodotto sarà la percentuale di elaborazioni andate a buon fine, con una soglia minima fissata al 80%. L'accuratezza formale dell'estrazione è considerata una metrica secondaria. Durante le fasi di sviluppo, il gruppo stesso garantirà la qualità testando empiricamente i dati estratti.
 
 == Organizzazione, Formazione e Testing
 - L'azienda stima per il progetto un effort complessivo di circa 1000 ore di sviluppo, pari a un mese di lavoro a tempo pieno per il team, che richiederà impegno personale.
