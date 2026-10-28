@@ -3,18 +3,20 @@ Il seguente repository contiene tutta la documentazione inerente al progetto del
 
 ## Contenuto del repository
 Il lavoro è suddiviso per milestone di progetto:
-* **Way of Woking** di gruppo, ovvero il regolamento (con miglioramento periodico) che guida le decisioni durante tutta la durata del progetto;
-* **Candidatura**, contenente:
-  * lettera di candidatura rivolta ai committenti;
-  * documenti di analisi dei capitolati presentati dalle aziende proponenti;
-  * preventivo costi/ripartizione ore per l'azienda proponente scelta dal gruppo;
-  * verbali interni/esterni scritti in fase di analisi e preparazione della candidatura;
-  * diario di bordo svoltosi in data 2026-10-26.
+- **Candidatura**, contenente:
+  - lettera di candidatura rivolta ai committenti;
+  - documenti di analisi dei capitolati presentati dalle aziende proponenti;
+  - preventivo costi/ripartizione ore per l'azienda proponente scelta dal gruppo;
+  - verbali interni/esterni scritti in fase di analisi e preparazione della candidatura;
+  - diari di bordo svoltisi in data 2026-10-28 e 2026-11-02.
  
 ## GitHub Actions
-Il seguente repository fa uso di 2 GitHub Actions:
-1. [typst-compile.yml](.github/workflows/typst-compile.yml) per la compilazione automatica di tutti i file, scritti in linguaggio Typst, in formato PDF;
-2. [typst-indexing.yml](.github/workflows/typst-indexing.yml) per la generazione di una pagina statica di indice dove è possibile avere una visione d'insieme di tutti gli artefatti creati dalla Action precedente; questa funzione è utile alla figura di amministratore per l'aggiornamento costante del sito web "cruscotto".
+Il seguente repository fa uso della seguente GitHub Action:
+- [typst-compile.yml](.github/workflows/typst-compile.yml) per svolgere le seguenti operazioni:
+   - compilare i documenti in linguaggio Typst a ciascun commit;
+   - eseguire il deploy degli artefatti (documenti in linguaggio Typst) in formato PDF;
+   - generare, tramite script Python, il file [manifest.json](https://team-astrum.github.io/Documentazione/manifest.json) contenente i metadati dei documenti;
+   - generare, tramite script Python, il file di glossario per automatizzarne e semplificarne la scrittura.
  
 ## Visualizzazione dei documenti
-Tutti i documenti compilati in formato PDF sono reperibili all'interno del sito web "cruscotto" del gruppo.
+Tutti i documenti compilati in formato PDF sono reperibili all'interno del [sito web "cruscotto"](https://team-astrum.github.io/) del gruppo _Astrum_.
