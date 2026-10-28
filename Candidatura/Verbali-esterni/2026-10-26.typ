@@ -44,7 +44,7 @@ L'incontro, svolto in modalità congiunta con altri gruppi, è stato indetto per
 
 == Dashboard FinOps e Monitoraggio Costi
 - Frequenza di Aggiornamento: La dashboard per il governo economico dell'IA dovrà garantire un aggiornamento delle metriche in tempo reale (o near real-time), riducendo al minimo la latenza.
-- Tracciamento dei Costi: Il sistema FinOps non dovrà limitarsi a calcolare il risparmio sui token di inferenza dei modelli generativi (es. Claude o GPT), ma dovrà tracciare in modo aggregato tutti i costi. Questo include l'obbligo di computare e decurtare anche i costi derivanti dall'utilizzo delle API di embedding (necessarie per il funzionamento della similarity search).
+- Tracciamento dei Costi: Il sistema FinOps non dovrà limitarsi a calcolare il risparmio sui token di inferenza dei modelli generativi, ma dovrà tracciare in modo aggregato tutti i costi. Questo include l'obbligo di computare e decurtare anche i costi derivanti dall'utilizzo delle API di embedding (necessarie per il funzionamento della similarity search).
 
 = Conclusioni
 L'incontro condiviso ha permesso di definire con maggiore accuratezza i confini implementativi del Layer di Cache e della Dashboard FinOps, sciogliendo i dubbi architetturali legati a LiteLLM e al calcolo dei costi. Il Gruppo Astrum ringrazia i referenti di Var Group per i chiarimenti forniti.
