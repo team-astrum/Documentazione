@@ -51,7 +51,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
       Università di Padova - A.A. 26 / 27 \
       
       *E-mail:* #link("mailto:astrum.unipd@gmail.com")[astrum.unipd\@gmail.com] \
-      *Sito web:* #link("team-astrum.github.io")[team-astrum.github.io]
+      *Sito web:* #link("https://team-astrum.github.io/")[team-astrum.github.io]
     ]
   ]
 

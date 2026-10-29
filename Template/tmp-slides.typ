@@ -121,8 +121,8 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
             *Data:* #data
           ],
           [
-            *E-mail:* #link("mailto:astrum.unipd@gmail.com") \
-            *Sito web:* #link("team-astrum.github.io")
+            *E-mail:* #link("mailto:astrum.unipd@gmail.com")[astrum.unipd\@gmail.com] \
+            *Sito web:* #link("https://team-astrum.github.io/")[team-astrum.github.io]
           ]
         )
       ]
