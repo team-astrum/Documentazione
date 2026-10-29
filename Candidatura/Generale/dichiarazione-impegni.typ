@@ -2,7 +2,7 @@
 
 #show: conf.with(
   titolo: "Dichiarazione Impegni",
-  status: "In bozza",
+  status: "Approvato",
   utilizzo: "Esterno",
   redazione: ("Thomas Morettin","Gianluca Brotto"),
   verifica: ("Matteo De Col", "Corrado Bacco"),
