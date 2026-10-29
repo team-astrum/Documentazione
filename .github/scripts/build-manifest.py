@@ -27,7 +27,7 @@ def to_iso(s):
 def section_of(rel):
   """Scheda del sito, indexing automatico delle cartelle"""
   for part in rel.parts[1:-1]:    # Suddivisione del percorso
-    if part.lower().startswith(('verbali', 'diari')):    # Caso di verbali, cartelle separate
+    if part.lower().startswith(('verbali', 'diari')):    # Caso di verbali e diari di bordo: cartelle separate
       return part.replace('-', ' ').replace('_', ' ').capitalize()
   return rel.parts[0] if len(rel.parts) > 1 else 'Altro'    # Caso di cartella non conforme
 
@@ -57,6 +57,7 @@ for src in sorted(ROOT.rglob('*.typ')):
   # Compilazione base per entry del manifest.json
   entry = {
     'file': f'/{rel.with_suffix(".pdf").as_posix()}',
+    'titolo': meta.get('titolo') or src.stem,
     'baseline': rel.parts[0] if len(rel.parts) > 1 else 'Altro',
     'sezione': section_of(rel),
     'versione': meta.get('versione') or '-',
@@ -64,16 +65,9 @@ for src in sorted(ROOT.rglob('*.typ')):
     'kind': meta.get('categoria'),
     'tipo': (meta.get('tipo') or '').lower() or None
   }
-  if meta.get('categoria') == 'verbale':
-    tipo = (meta.get('tipo') or '').lower()   # Interno o esterno
-    entry.update({
-      'titolo': f"Verbale {tipo} del {meta.get('data')}".replace('  ', ' ').strip(),   # Pulizia di errori calligrafici
-    })
-  else:
-    entry.update({
-      'titolo': meta.get('titolo') or src.stem,
-      'status': meta.get('status') or None,   # In bozza o approvato
-    })
+  if meta.get('categoria') == 'documento':
+    'status': meta.get('status') or None,   # In bozza o approvato
+  
   docs.append(entry)    # Inserimento entry appena creata
 
 # Output del programma: manifest.json
