@@ -27,7 +27,7 @@ def to_iso(s):
 def section_of(rel):
   """Scheda del sito, indexing automatico delle cartelle"""
   for part in rel.parts[1:-1]:    # Suddivisione del percorso
-    if part.lower().startswith('verbali'):    # Caso di verbali, cartelle separate
+    if part.lower().startswith(('verbali', 'diari')):    # Caso di verbali, cartelle separate
       return part.replace('-', ' ').replace('_', ' ').capitalize()
   return rel.parts[0] if len(rel.parts) > 1 else 'Altro'    # Caso di cartella non conforme
 
@@ -45,9 +45,6 @@ for src in sorted(ROOT.rglob('*.typ')):
   if r.returncode:
     print(r.stderr, file=sys.stderr)
     sys.exit(1)
-
-  if any(part.lower().replace('_', '-') == 'diari-di-bordo' for part in rel.parts):   # Salta l'indicizzazione dei diari di bordo, ma vengono comunque compilati
-    continue
 
   # Metadati dichiarati dal template: estrazione del campo etichettato <info> e creazione manifest.json
   meta = {}
