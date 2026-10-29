@@ -145,12 +145,11 @@ Per ogni ruolo previsto vengono definite le specifiche responsabilità:
 
 == Politica di Rotazione
 
-Il gruppo adotta un’organizzazione del lavoro iterativa e incrementale, articolata in periodi di sviluppo denominati sprint, ciascuno della durata fissa di due settimane. Al fine di assicurare che ogni membro acquisisca esperienza in tutti 
-gli ambiti del progetto, il gruppo applica una politica di rotazione dei ruoli. 
+Il gruppo adotta un'organizzazione basata sulla rotazione periodica dei ruoli, articolata in cicli operativi denominati sprint della durata fissa di due settimane. Tale approccio assicura che ogni membro acquisisca esperienza in tutti gli ambiti del progetto.
 
-La rotazione avviene all’inizio di ogni sprint, quindi ogni due settimane: in tale occasione il Responsabile assegna a ciascun membro il ruolo che ricoprirà nello sprint successivo. Tale cadenza permette a ogni membro di svolgere un ruolo per un periodo sufficientemente lungo da comprenderne a fondo le attività, riducendo i tempi di chiarimento e le difficoltà di apprendimento. L’assegnazione tiene conto sia della natura del lavoro previsto per lo sprint, sia dei ruoli già ricoperti da ciascun membro, in modo da garantire che ognuno svolga tutti i ruoli previsti almeno una volta nel corso dell’intero progetto.
+La rotazione avviene all'inizio di ogni sprint, quindi ogni due settimane: in tale occasione il Responsabile assegna a ciascun membro il ruolo che ricoprirà nello sprint successivo. Tale cadenza permette a ogni membro di svolgere un ruolo per un periodo sufficientemente lungo da comprenderne a fondo le attività, riducendo i tempi di chiarimento e le difficoltà di apprendimento. L'assegnazione tiene conto sia della natura del lavoro previsto per lo sprint, sia dei ruoli già ricoperti da ciascun membro, in modo da garantire che ognuno svolga tutti i ruoli previsti almeno una volta nel corso dell'intero progetto.
 
-Al termine di ogni sprint, il membro uscente da un ruolo comuica le attività svolte e, nella fase iniziale dello sprint successivo, fornisce supporto al subentrante per chiarire eventuali dubbi e rendere l’inserimento al nuovo ruolo il più veloce possibile. 
+Al termine di ogni sprint, il membro uscente da un ruolo comuica le attività svolte e, nella fase iniziale dello sprint successivo, fornisce supporto al subentrante per chiarire eventuali dubbi e rendere l'inserimento al nuovo ruolo il più veloce possibile. 
 
 = Gestione dei repository e sito web "cruscotto"
 Nel seguente capitolo si riportano le scelte progettuali circa la gestione dei repository all'interno dell'organizzazione e com'è strutturato il sito web "cruscotto" (#link("https://team-astrum.github.io")[team-astrum.github.io]).
