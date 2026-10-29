@@ -9,7 +9,7 @@
 
 Con la presente, il gruppo _Astrum_ comunica formalmente la propria candidatura per l'aggiudicazione del capitolato #link("https://www.math.unipd.it/~tullio/IS-1/2026/Progetto/C0-AIRA.pdf")[C0 - AIRA: AI Requests Automation] proposto dall'azienda Sanmarco Informatica S.p.A.
 
-Tutta la documentazione prodotta da _Astrum_ è consultabile sul #link("https://astrum-unipd.github.io/")[sito ufficiale] del
+Tutta la documentazione prodotta da _Astrum_ è consultabile sul #link("https://team-astrum.github.io/")[sito ufficiale] del
 gruppo; di seguito i documenti prodotti finora:
 - *Lettera di Presentazione*
 - #link("https://team-astrum.github.io/Documentazione/Candidatura/Generale/valutazione-capitolati.pdf")[*Valutazione Capitolati*]

@@ -140,6 +140,8 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
   )
 
   align(center + horizon)[
+    #text(size: 32pt, weight: "bold", fill: light-accent)[Noi siamo Astrum]
+    #v(2.5em)
     #grid(
       columns: (1fr, 1fr, 1fr, 1fr),
 
@@ -149,7 +151,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
       membro("Matteo De Col", "2148619", membri.at("Matteo De Col")),
     )
     
-    #v(3em)
+    #v(1em)
     #grid(
       columns: (1fr, 1fr, 1fr),
       
