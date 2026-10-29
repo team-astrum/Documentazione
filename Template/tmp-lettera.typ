@@ -16,6 +16,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 
 #let conf(
   // Variabili di template
+  titolo: none,
   data: none,
   oggetto: none,
   responsabile: none,
@@ -27,6 +28,12 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
   set text(font: font, size: 12pt, fill: txt-color)
   set par(justify: true)
   set list(marker: ([•], [◦], [-]))    // Formattazione punti elenco
+
+  // Metadati letti dal sito (non producono alcun output visibile)
+  [#metadata((
+    categoria: "lettera",
+    titolo: titolo, data-modifica: data, tipo: "esterno",
+  )) <info>]
 
   // Intestazione del gruppo
   align(left)[

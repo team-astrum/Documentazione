@@ -60,13 +60,18 @@ for src in sorted(ROOT.rglob('*.typ')):
     'titolo': meta.get('titolo') or src.stem,
     'baseline': rel.parts[0] if len(rel.parts) > 1 else 'Altro',
     'sezione': section_of(rel),
-    'versione': meta.get('versione') or '-',
     'data-modifica': to_iso(meta.get('data-modifica')) or git_date or None,
     'kind': meta.get('categoria'),
     'tipo': (meta.get('tipo') or '').lower() or None
   }
 
-  if meta.get('categoria') == 'documento':
+  cat = meta.get('categoria')
+  if cat == 'documento' or cat == 'verbale':
+    entry.update({
+      'versione': meta.get('versione') or '-',   # In bozza o approvato
+    })
+
+  if cat == 'documento':
     entry.update({
       'status': meta.get('status') or None,   # In bozza o approvato
     })

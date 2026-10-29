@@ -102,7 +102,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
   // Metadati letti dal sito (non producono alcun output visibile)
   [#metadata((
     categoria: "verbale",
-    tipo: tipo, data: data,
+    tipo: tipo,
     versione: if changelog.len() > 0 { changelog.first().ver } else { none },
     data-modifica: if changelog.len() > 0 { changelog.first().data } else { none }
   )) <info>]

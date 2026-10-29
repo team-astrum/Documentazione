@@ -2,6 +2,7 @@
 #show link: underline
 
 #show: conf.with(
+  titolo: "Lettera di Presentazione",
   data: "2026-10-29",
   oggetto: "Candidatura per il capitolato C0 - AIRA: AI Requests Automation di Sanmarco Informatica S.p.A."
 )
