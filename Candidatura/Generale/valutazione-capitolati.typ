@@ -1,7 +1,7 @@
 #import "../../Template/tmp-documentazione.typ": conf, usecase, G
 
 #show: conf.with(
-  titolo: "Valutazione capitolati",
+  titolo: "Valutazione Capitolati",
   status: "Approvato", // Oppure "Approvato"
   utilizzo: "Interno", // Oppure "Esterno"
   redazione: ("Gianluca Bacco", "Corrado Bacco"),

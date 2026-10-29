@@ -1,7 +1,7 @@
 #import "../../Template/tmp-documentazione.typ": conf, G, deco-line
 
 #show: conf.with(
-  titolo: "Preventivo costi",
+  titolo: "Dichiarazione Impegni",
   status: "In bozza",
   utilizzo: "Esterno",
   redazione: ("Thomas Morettin","Gianluca Brotto"),
