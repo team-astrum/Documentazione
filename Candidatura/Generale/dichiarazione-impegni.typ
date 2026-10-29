@@ -6,7 +6,7 @@
   utilizzo: "Esterno",
   redazione: ("Thomas Morettin","Gianluca Brotto"),
   verifica: ("Matteo De Col", "Corrado Bacco"),
-  approvazione: none,
+  approvazione: "Filippo De Guio",
   changelog: (
     (ver: "0.2.1", data: "2026-10-28", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Corretto Refuso"),
     (ver: "0.2.0", data: "2026-10-28", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Aggiunta sezione Analisi dei rischi"),
