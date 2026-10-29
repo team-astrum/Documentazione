@@ -8,7 +8,7 @@
   verifica: ("Matteo De Col", "Corrado Bacco"),
   approvazione: "Filippo De Guio",
   changelog: (
-    (ver: "0.2.1", data: "2026-10-28", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Corretto Refuso"),
+    (ver: "1.0.0", data: "2026-10-28", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Corretto Refuso"),
     (ver: "0.2.0", data: "2026-10-28", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Aggiunta sezione Analisi dei rischi"),
     (ver: "0.1.5", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Refuso con figura di responsabile al capitolo 4.1."),
     (ver: "0.1.4", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore: "Corrado Bacco", desc: "Piccole correzioni su termini e ripetizioni."),
