@@ -70,9 +70,9 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
   v(0.5cm)
   
   body
+  linebreak()
 
   // Firma del responsabile
-  v(0.5cm)
   {if responsabile == none {
     text(weight: "bold", style: "italic")[Astrum]
   } else {
