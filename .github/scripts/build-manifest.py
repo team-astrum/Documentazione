@@ -27,7 +27,7 @@ def to_iso(s):
 def section_of(rel):
   """Scheda del sito, indexing automatico delle cartelle"""
   for part in rel.parts[1:-1]:    # Suddivisione del percorso
-    if part.lower().startswith(('verbali', 'diari')):    # Caso di verbali e diari di bordo: cartelle separate
+    if part.lower().startswith(('verbali', 'diari')):    # Caso di verbali e diari di bordo, cartelle separate
       return part.replace('-', ' ').replace('_', ' ').capitalize()
   return rel.parts[0] if len(rel.parts) > 1 else 'Altro'    # Caso di cartella non conforme
 
@@ -65,8 +65,11 @@ for src in sorted(ROOT.rglob('*.typ')):
     'kind': meta.get('categoria'),
     'tipo': (meta.get('tipo') or '').lower() or None
   }
+
   if meta.get('categoria') == 'documento':
-    'status': meta.get('status') or None,   # In bozza o approvato
+    entry.update({
+      'status': meta.get('status') or None,   # In bozza o approvato
+    })
   
   docs.append(entry)    # Inserimento entry appena creata
 
