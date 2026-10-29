@@ -8,6 +8,7 @@
   verifica: ("Gianluca Bacco", "Matteo De Col"),
   approvazione: "Filippo De Guio",
   changelog: (
+      (ver: "0.4.1", data: "2026-10-29", autore: "Gianluca Brotto", ruolo: "Redattore", desc: "Piccola Modifica nella sezione ruoli"),
       (ver: "0.4.0", data: "2026-10-28", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Aggiunta precisazione su funzionamento di generate-glossario.py in sottocapitolo 5.2; inserimento di sottocapitoli 5.3 e 5.3.1."),
       (ver: "0.3.1", data: "2026-10-28", autore: "Thomas Morettin", ruolo: "Redattore", desc: "Modifica in capitolo 4.1 su ruolo dell'amministratore e aggiunto appunto su data.js in capitolo 5.3."),
       (ver: "0.3.0", data: "2026-10-27", autore: "Thomas Morettin", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta sezione: Gestione dei repository e sito web \"cruscotto\"."),
@@ -111,7 +112,7 @@ Per ogni ruolo previsto vengono definite le specifiche responsabilità:
 - *Responsabile*:
   - Guida il team, assicurando l’allineamento alle tempistiche e al metodo di lavoro stabilito.
   - Gestisce tutte le relazioni e comunicazioni con l'azienda Proponente e i Committenti. 
-  - Redige i Diari di Bordo settimanali.
+  - Redige ed espone i Diari di Bordo settimanali.
   - Approva ufficialmente la documentazione prodotta prima del rilascio formale. 
   - Pianifica le attività all'inizio di ogni sprint e assegna i relativi task ai membri.
 
@@ -149,7 +150,7 @@ gli ambiti del progetto, il gruppo applica una politica di rotazione dei ruoli.
 
 La rotazione avviene all’inizio di ogni sprint, quindi ogni due settimane: in tale occasione il Responsabile assegna a ciascun membro il ruolo che ricoprirà nello sprint successivo. Tale cadenza permette a ogni membro di svolgere un ruolo per un periodo sufficientemente lungo da comprenderne a fondo le attività, riducendo i tempi di chiarimento e le difficoltà di apprendimento. L’assegnazione tiene conto sia della natura del lavoro previsto per lo sprint, sia dei ruoli già ricoperti da ciascun membro, in modo da garantire che ognuno svolga tutti i ruoli previsti almeno una volta nel corso dell’intero progetto.
 
-Al termine di ogni sprint, il membro uscente da un ruolo redige un resoconto delle attività svolte e, nella fase iniziale dello sprint successivo, fornisce supporto al subentrante per chiarire eventuali dubbi e rendere l’inserimento al nuovo ruolo il più veloce possibile. 
+Al termine di ogni sprint, il membro uscente da un ruolo comuica le attività svolte e, nella fase iniziale dello sprint successivo, fornisce supporto al subentrante per chiarire eventuali dubbi e rendere l’inserimento al nuovo ruolo il più veloce possibile. 
 
 = Gestione dei repository e sito web "cruscotto"
 Nel seguente capitolo si riportano le scelte progettuali circa la gestione dei repository all'interno dell'organizzazione e com'è strutturato il sito web "cruscotto" (#link("https://team-astrum.github.io")[team-astrum.github.io]).
