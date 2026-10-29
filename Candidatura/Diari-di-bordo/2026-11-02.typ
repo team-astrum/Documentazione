@@ -31,7 +31,7 @@ Attività svolte dal gruppo nel periodo di riferimento:
 - *Documentazione:*
   - Stesura delle norme di progetto (WoW).
   - Stesura della lettera di presentazione.
-  - Stesura della dichiarazione d'impegno (preventivo dei costi).
+  - Stesura della dichiarazione d'impegni (preventivo dei costi).
 
 
 #pagebreak()
