@@ -48,8 +48,7 @@ Attività svolte dal gruppo nel periodo di riferimento:
 - Pianificare incontro con l'azienda proponente per la definizione dei requisiti obbligatori e delle specifiche del progetto.
 
 #pagebreak()
-
-*Difficoltà riscontrate:*
+\ *Difficoltà riscontrate:*
 - Definizione di uno standard per la rotazione dei ruoli all'interno del team.
 
 *Dubbi per il Committente / Proponente:*
