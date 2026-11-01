@@ -23,6 +23,7 @@ Attività svolte dal gruppo nel periodo di riferimento:
 - *Infrastruttura:*
   - Implementazione nell'organizzazione GitHub e nel "cruscotto" della continuos deployment per la documentazione (CD).
   - Implementazione del glossario automatizzato tramite script in Python con layout grafico dedicato.
+  
   - Confronto sul funzionamento del glossario e sulla sua integrazione con la documentazione.
   - Rilascio pubblico del "cruscotto" all'interno dell'organizzazione GitHub.
 
@@ -43,6 +44,7 @@ Attività svolte dal gruppo nel periodo di riferimento:
 - Studio delle tecnologie e dei framework da utilizzare per la realizzazione del progetto.
 - Inizio dell'analisi dei requisiti e della progettazione del sistema.
 - Pianificare incontro con l'azienda proponente per la definizione dei requisiti obbligatori e delle specifiche del progetto.
+
 
 *Difficoltà riscontrate:*
 - Definizione di uno standard per la rotazione dei ruoli all'interno del team.
