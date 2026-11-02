@@ -14,7 +14,7 @@
   )
 )
 
-#slide-title("Retrospettiva: Attività svolte")
+#slide-title("Retrospettiva: Attività Svolte")
 
 Attività svolte dal gruppo nel periodo di riferimento:
 
@@ -44,7 +44,8 @@ Attività svolte dal gruppo nel periodo di riferimento:
 - Inizio dell'analisi dei requisiti e della progettazione del sistema.
 - Pianificare incontro con l'azienda proponente per la definizione dei requisiti obbligatori e delle specifiche del progetto.
 
-*Difficoltà riscontrate:*
+#pagebreak()
+\ *Difficoltà riscontrate:*
 - Definizione di uno standard per la rotazione dei ruoli all'interno del team.
 
 *Dubbi per il Committente / Proponente:*
