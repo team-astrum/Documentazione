@@ -23,9 +23,6 @@ Attività svolte dal gruppo nel periodo di riferimento:
 - *Infrastruttura:*
   - Implementazione nell'organizzazione GitHub e nel "cruscotto" della continuos deployment per la documentazione (CD).
   - Implementazione del glossario automatizzato tramite script in Python con layout grafico dedicato.
-
-#pagebreak();
-
   - Confronto sul funzionamento del glossario e sulla sua integrazione con la documentazione.
   - Rilascio pubblico del "cruscotto" all'interno dell'organizzazione GitHub.
 
