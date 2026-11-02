@@ -14,7 +14,7 @@
   )
 )
 
-#slide-title("Retrospettiva: Attività svolte")
+#slide-title("Retrospettiva: Attività Svolte")
 
 Attività svolte dal gruppo nel periodo di riferimento:
 
