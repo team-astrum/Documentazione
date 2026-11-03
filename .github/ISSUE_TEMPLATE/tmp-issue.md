@@ -3,7 +3,6 @@ about: Template predefinito per la creazione di task (Documenti, Codice, Setup)
 title: "[TIPO] [Breve descrizione]"
 labels: ''
 assignees: ''
----
 
 ## Descrizione dell'issue
 [Spiegare in modo chiaro e conciso cosa deve essere fatto e qual è l'obiettivo]
@@ -18,6 +17,5 @@ assignees: ''
 - [ ] È stata aperta una pull request.
 - [ ] Un verificatore ha revisionato e approvato la pull request.
 
-## Riferimenti e Dipendenze
-- **Dipende da:** [Inserire ID dell'issue dal quale dipende]
-- **Assegnato a:** @[Assegnatario]
+## Dipendenze
+**Dipende da:** [Inserire ID dell'issue dal quale dipende]
