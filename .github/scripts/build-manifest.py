@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Compila i .typ in PDF ed estrae i metadati in _site/manifest.json."""
 import json, pathlib, re, subprocess, sys
 from datetime import datetime, timezone
