@@ -1,8 +1,10 @@
+---
 name: Template issue
 about: Template predefinito per la creazione di task (Documenti, Codice, Setup)
 title: "[TIPO] [Breve descrizione]"
 labels: ''
 assignees: ''
+---
 
 ## Descrizione dell'issue
 [Spiegare in modo chiaro e conciso cosa deve essere fatto e qual è l'obiettivo]
