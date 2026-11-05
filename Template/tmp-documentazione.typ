@@ -16,6 +16,29 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 #let light-accent = rgb("#2563EB")
 #let txt-gray = rgb("#626973")
 
+#let firme() = {
+  align(center)[
+    #v(0.5cm)
+    #grid(
+      columns: (1fr, 1fr, 1fr, 1fr),
+
+      [_Corrado Bacco_ \ #text(txt-gray)[2148615]],
+      [_Gianluca Bacco_ \ #text(txt-gray)[2111937]],
+      [_Gianluca Brotto_ \ #text(txt-gray)[2148626]],
+      [_Matteo De Col_ \ #text(txt-gray)[2148619]]
+    )
+    
+    #v(1em)
+    #grid(
+      columns: (1fr, 1fr, 1fr),
+      
+      [_Filippo De Guio_ \ #text(txt-gray)[2113177]],
+      [_Samuele Gobbi_ \ #text(txt-gray)[2148004]],
+      [_Thomas Morettin_ \ #text(txt-gray)[2111001]]
+    )
+  ]
+}
+
 // Template per ciascun caso d'uso
 #let usecase(id, titolo, attore, pre, post, scenario) = {
   set par(justify: false)
