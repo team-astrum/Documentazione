@@ -229,7 +229,7 @@ Per uniformare il lavoro all'interno dei diversi repository si è optato per ado
 Si riporta un esempio di scrittura secondo convenzione: `docs/vi-2026-11-09`.
 
 === Regola di branch protection
-All'interno di tutti i repository si è deciso di attivare la seguente regola di #G("branch") protection: viene inibita la possibilità di effettura #G("commit") diretti all'interno dei #G("branch") `develop` e `main`, impedendo così a qualsiasi membro del team di poter caricare modifiche ai sorgenti senza l'apertura di una #G("PR (Pull Request)") dal #G("branch") di supporto precedentemente creato.
+All'interno di tutti i repository si è deciso di attivare la seguente regola di #G("branch") protection: viene inibita la possibilità di effettuare #G("commit") diretti all'interno dei #G("branch") `develop` e `main`, impedendo così a qualsiasi membro del team di poter caricare modifiche ai sorgenti senza l'apertura di una #G("PR (Pull Request)") dal #G("branch") di supporto precedentemente creato.
 
 === Regola di minimum review
 All'interno di tutti i repository si è deciso di attivare la seguente regola per le #G("PR (Pull Request)"): per poter effettuare lo "squash & merge" all'interno del #G("branch") di default è necessario che almeno un verificatore abbia approvato la #G("PR (Pull Request)") corrente, pena l'impossibilità di effettuare l'operazione di merging.
