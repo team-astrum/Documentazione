@@ -221,7 +221,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
             #entry.ruolo: #entry.autore
             #if "verificatore" in entry and entry.verificatore != none [
               #h(0.5em) #text(fill: deco-line)[|] #h(0.5em) 
-              Verificatore: #entry.verificatore
+              Verificato: #entry.verificatore
             ]
           ]
         ]

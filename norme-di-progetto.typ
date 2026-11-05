@@ -5,10 +5,10 @@
   status: "In Bozza", // Oppure "Approvato"
   utilizzo: "Interno", // Oppure "Esterno"
   redazione: ("Corrado Bacco", "Samuele Gobbi","Gianluca Brotto", "Thomas Morettin"),
-  verifica: ("Samuele Gobbi", "Gianluca Brotto"),
+  verifica: ("Samuele Gobbi", "Gianluca Brotto", "Gianluca Bacco", "Matteo De Col"),
   approvazione: "",
   changelog: (
-      (ver: "1.1.0", data: "2026-11-04", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore:"", desc: "Aggiunta di capitolo 6 inerente alla configurazione dei repository GitHub."),
+      (ver: "1.1.0", data: "2026-11-04", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore:"Gianluca Brotto, Samuele Gobbi", desc: "Aggiunta di capitolo 6 inerente alla configurazione dei repository GitHub."),
       (ver: "1.0.0", data: "2026-10-29", autore: "Filippo De Guio", ruolo: "Responsabile", desc: "Approvazione del documento."),
       (ver: "0.4.1", data: "2026-10-29", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Piccola Modifica nella sezione ruoli"),
       (ver: "0.4.0", data: "2026-10-28", autore: "Thomas Morettin", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta precisazione su funzionamento di generate-glossario.py in sottocapitolo 5.2; inserimento di sottocapitoli 5.3 e 5.3.1."),
@@ -222,6 +222,7 @@ Un elenco di tipologie di operazioni che si possono utilizzare è il seguente:
 Il primo aspetto da analizzare riguarda la suddivisione del lavoro, all'interno di ciascun repository, in #G("branch"). Questi permettono di organizzare il lavoro come segue:
 - `develop`: #G("branch") di default, all'interno del quale sono riportate tutte le modifiche ai file sorgenti approvate dai verificatori durante la #G("PR (Pull Request)")\; questo branch è sempre in vantaggio o parallelo rispetto al `main`, in quanto presenta modifiche stabili, pronte per essere rilasciate dal responsabile al momento del completamento; questo ramo è stato reso di default in modo che qualsiasi #G("branch") di supporto sia collegato direttamente ad esso e non a `main`;
 - `main`: #G("branch") di esposizione degli artefatti; tutto ciò che viene caricato, sempre tramite #G("PR (Pull Request)"), è in versione stabile, visibile agli stakeholders come artefatti completi; le #G("PR (Pull Request)") per questo branch vengono eseguite solamente al completamento di una milestone o alla necessità di rendere visibili documenti stabili (e.g. verbali, diari di bordo, ...);
+- `hotfix`: #G("branch") temporaneo creato per risolvere bug critici o problemi di sicurezza urgenti direttamente nella versione del software attualmente in produzione, senza dover aspettare il normale ciclo di rilascio delle nuove feature, seguendo la logica del #G("gitflow workflow", def: "Modello di ramificazione (branching model) per Git, ideato da Vincent Driessen, progettato per gestire lo sviluppo software strutturato e cicli di rilascio pianificati.");
 - #G("branch") di supporto: utilizzati per attuare modifiche ai file sorgente del progetto o integrare funzionalità che devono essere obbligatoriamente approvate tramite #G("PR (Pull Request)") da almeno *1 verificatore*; successivamente all'approvazione viene eseguito il merge con il branch `develop`.
 
 === Convenzione di nomenclatura per i #G("branch") di supporto <nomebranch>
@@ -232,7 +233,8 @@ Si riporta un esempio di scrittura secondo convenzione: `docs/vi-2026-11-09`.
 All'interno di tutti i repository si è deciso di attivare la seguente regola di #G("branch") protection: viene inibita la possibilità di effettuare #G("commit") diretti all'interno dei #G("branch") `develop` e `main`, impedendo così a qualsiasi membro del team di poter caricare modifiche ai sorgenti senza l'apertura di una #G("PR (Pull Request)") dal #G("branch") di supporto precedentemente creato.
 
 === Regola di minimum review
-All'interno di tutti i repository si è deciso di attivare la seguente regola per le #G("PR (Pull Request)"): per poter effettuare lo "squash & merge" all'interno del #G("branch") di default è necessario che almeno un verificatore abbia approvato la #G("PR (Pull Request)") corrente, pena l'impossibilità di effettuare l'operazione di merging.
+All'interno di tutti i repository si è deciso di attivare la seguente regola per le #G("PR (Pull Request)"): per poter effettuare lo "squash & merge" all'interno del #G("branch") di default è necessario che almeno un verificatore abbia approvato la #G("PR (Pull Request)") corrente, pena l'impossibilità di effettuare l'operazione di merging.\
+L'operazione di "squash & merge" è riservata alla figura del verificatore, conseguentemente all'approvazione formale delle modifiche dell'autore.
 
 === Regola di "squash & merge"
 Per impedire a qualsiasi membro del team la possibilità di caricare molteplici #G("commit") nel branch di default, derivanti dalla mole di modifiche che è inserita all'interno della #G("PR (Pull Request)"), si è optato per bloccare la possibilità di merging del #G("branch") di supporto al solo "squash & merge", ossia un'operazione che inserisce all'interno del ramo padre solamente il #G("commit") riguardante il merge della #G("PR (Pull Request)"), eliminando del tutto i #G("commit") interni a quest'ultima.
@@ -303,7 +305,7 @@ Questi criteri sono applicabili a qualsiasi tipologia di #G("issue") e sono i se
 - *convenzione di commit*: tutti i commit adottano la convenzione di nomenclatura definita in @nomecommit;
 - *#G("PR (Pull Request)") formale*: è stata aperta una #G("PR (Pull Request)") formale verso il #G("branch") `develop`, contenente il comando di chiusura della #G("issue") associata (vedere @tmppr);
 - *ispezione indipendente*: la #G("PR (Pull Request)") è stata assegnata ai verificatori dello sprint corrente e almeno uno ha approvato le modifiche che apporta;
-- *integrazione e pulizia*: l'integrazione all'interno del #G("branch") `develop` avviene solamente tramite strategia "squash & merge", garantendo la pulizia nei commit all'interno del #G("branch") di default;
+- *integrazione e pulizia*: l'integrazione all'interno del #G("branch") `develop` avviene solamente tramite strategia "squash & merge" (riservata al verificatore), garantendo la pulizia nei commit all'interno del #G("branch") di default;
 - *aggiornamento #G("project")*: la issue associata transita automaticamente nello stato di `Done` e l'avanzamento è riflesso sulla relativa #G("milestone").
 
 === Criteri specifici per gli artefatti documentali
