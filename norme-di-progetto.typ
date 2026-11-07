@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi", "Gianluca Brotto", "Gianluca Bacco", "Matteo De Col"),
   approvazione: "",
   changelog: (
+      (ver: "1.1.1", data: "2026-11-07", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore:"Gianluca Brotto, Samuele Gobbi", desc: "Modifica lettera maiuscola al nome proprio di Gitflow."),
       (ver: "1.1.0", data: "2026-11-04", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore:"Gianluca Brotto, Samuele Gobbi", desc: "Aggiunta di capitolo 6 inerente alla configurazione dei repository GitHub."),
       (ver: "1.0.0", data: "2026-10-29", autore: "Filippo De Guio", ruolo: "Responsabile", desc: "Approvazione del documento."),
       (ver: "0.4.1", data: "2026-10-29", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Piccola Modifica nella sezione ruoli"),
