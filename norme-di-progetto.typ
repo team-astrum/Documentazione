@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi", "Gianluca Brotto", "Gianluca Bacco", "Matteo De Col"),
   approvazione: "",
   changelog: (
+      (ver: "1.1.1", data: "2026-11-07", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore:"Gianluca Brotto, Samuele Gobbi", desc: "Modifica lettera maiuscola al nome proprio di Gitflow."),
       (ver: "1.1.0", data: "2026-11-04", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore:"Gianluca Brotto, Samuele Gobbi", desc: "Aggiunta di capitolo 6 inerente alla configurazione dei repository GitHub."),
       (ver: "1.0.0", data: "2026-10-29", autore: "Filippo De Guio", ruolo: "Responsabile", desc: "Approvazione del documento."),
       (ver: "0.4.1", data: "2026-10-29", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Piccola Modifica nella sezione ruoli"),
@@ -222,7 +223,7 @@ Un elenco di tipologie di operazioni che si possono utilizzare è il seguente:
 Il primo aspetto da analizzare riguarda la suddivisione del lavoro, all'interno di ciascun repository, in #G("branch"). Questi permettono di organizzare il lavoro come segue:
 - `develop`: #G("branch") di default, all'interno del quale sono riportate tutte le modifiche ai file sorgenti approvate dai verificatori durante la #G("PR (Pull Request)")\; questo branch è sempre in vantaggio o parallelo rispetto al `main`, in quanto presenta modifiche stabili, pronte per essere rilasciate dal responsabile al momento del completamento; questo ramo è stato reso di default in modo che qualsiasi #G("branch") di supporto sia collegato direttamente ad esso e non a `main`;
 - `main`: #G("branch") di esposizione degli artefatti; tutto ciò che viene caricato, sempre tramite #G("PR (Pull Request)"), è in versione stabile, visibile agli stakeholders come artefatti completi; le #G("PR (Pull Request)") per questo branch vengono eseguite solamente al completamento di una milestone o alla necessità di rendere visibili documenti stabili (e.g. verbali, diari di bordo, ...);
-- `hotfix`: #G("branch") temporaneo creato per risolvere bug critici o problemi di sicurezza urgenti direttamente nella versione del software attualmente in produzione, senza dover aspettare il normale ciclo di rilascio delle nuove feature, seguendo la logica del #G("gitflow workflow", def: "Modello di ramificazione (branching model) per Git, ideato da Vincent Driessen, progettato per gestire lo sviluppo software strutturato e cicli di rilascio pianificati.");
+- `hotfix`: #G("branch") temporaneo creato per risolvere bug critici o problemi di sicurezza urgenti direttamente nella versione del software attualmente in produzione, senza dover aspettare il normale ciclo di rilascio delle nuove feature, seguendo la logica del #G("Gitflow workflow", def: "Modello di ramificazione (branching model) per Git, ideato da Vincent Driessen, progettato per gestire lo sviluppo software strutturato e cicli di rilascio pianificati.");
 - #G("branch") di supporto: utilizzati per attuare modifiche ai file sorgente del progetto o integrare funzionalità che devono essere obbligatoriamente approvate tramite #G("PR (Pull Request)") da almeno *1 verificatore*; successivamente all'approvazione viene eseguito il merge con il branch `develop`.
 
 === Convenzione di nomenclatura per i #G("branch") di supporto <nomebranch>
