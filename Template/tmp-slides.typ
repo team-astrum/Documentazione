@@ -104,7 +104,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
       align: horizon,
 
       image("./Assets/logo-unipd.svg", height: 3cm),
-      line(angle: 90deg, length: 3cm, stroke: 1.5pt + txt-gray),
+      line(angle: 90deg, length: 3cm, stroke: 0.5pt + txt-gray),
       image(logo, height: 1.5cm)
     )
     #v(1.6em) // Spazio dal logo ridotto
