@@ -16,6 +16,29 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 #let light-accent = rgb("#2563EB")
 #let txt-gray = rgb("#626973")
 
+#let firme() = {
+  align(center)[
+    #v(0.5cm)
+    #grid(
+      columns: (1fr, 1fr, 1fr, 1fr),
+
+      [_Corrado Bacco_ \ #text(txt-gray)[2148615]],
+      [_Gianluca Bacco_ \ #text(txt-gray)[2111937]],
+      [_Gianluca Brotto_ \ #text(txt-gray)[2148626]],
+      [_Matteo De Col_ \ #text(txt-gray)[2148619]]
+    )
+    
+    #v(1em)
+    #grid(
+      columns: (1fr, 1fr, 1fr),
+      
+      [_Filippo De Guio_ \ #text(txt-gray)[2113177]],
+      [_Samuele Gobbi_ \ #text(txt-gray)[2148004]],
+      [_Thomas Morettin_ \ #text(txt-gray)[2111001]]
+    )
+  ]
+}
+
 // Template per ciascun caso d'uso
 #let usecase(id, titolo, attore, pre, post, scenario) = {
   set par(justify: false)
@@ -127,7 +150,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
       align: horizon,
 
       image("./Assets/logo-unipd.svg", height: 2cm),
-      line(angle: 90deg, length: 2cm, stroke: 0.5pt + deco-line),
+      line(angle: 90deg, length: 2cm, stroke: 0.5pt + txt-gray),
       image(logo, height: 1cm)
     )
     #v(1cm)
@@ -198,7 +221,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
             #entry.ruolo: #entry.autore
             #if "verificatore" in entry and entry.verificatore != none [
               #h(0.5em) #text(fill: deco-line)[|] #h(0.5em) 
-              Verificatore: #entry.verificatore
+              Verificato: #entry.verificatore
             ]
           ]
         ]

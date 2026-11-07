@@ -1,14 +1,16 @@
-#import "Template/tmp-documentazione.typ": conf, usecase, G
+#import "Template/tmp-documentazione.typ": conf, usecase, G, firme
 
 #show: conf.with(
   titolo: "Norme di Progetto",
-  status: "Approvato", // Oppure "Approvato"
+  status: "In Bozza", // Oppure "Approvato"
   utilizzo: "Interno", // Oppure "Esterno"
   redazione: ("Corrado Bacco", "Samuele Gobbi","Gianluca Brotto", "Thomas Morettin"),
-  verifica: ("Gianluca Bacco", "Matteo De Col"),
-  approvazione: "Filippo De Guio",
+  verifica: ("Samuele Gobbi", "Gianluca Brotto", "Gianluca Bacco", "Matteo De Col"),
+  approvazione: "",
   changelog: (
-     (ver: "1.0.0", data: "2026-10-29", autore: "Filippo De Guio", ruolo: "Responsabile", desc: "Approvazione del documento."),
+      (ver: "1.1.1", data: "2026-11-07", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore:"Gianluca Brotto, Samuele Gobbi", desc: "Modifica lettera maiuscola al nome proprio di Gitflow."),
+      (ver: "1.1.0", data: "2026-11-04", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore:"Gianluca Brotto, Samuele Gobbi", desc: "Aggiunta di capitolo 6 inerente alla configurazione dei repository GitHub."),
+      (ver: "1.0.0", data: "2026-10-29", autore: "Filippo De Guio", ruolo: "Responsabile", desc: "Approvazione del documento."),
       (ver: "0.4.1", data: "2026-10-29", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Piccola Modifica nella sezione ruoli"),
       (ver: "0.4.0", data: "2026-10-28", autore: "Thomas Morettin", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Aggiunta precisazione su funzionamento di generate-glossario.py in sottocapitolo 5.2; inserimento di sottocapitoli 5.3 e 5.3.1."),
       (ver: "0.3.1", data: "2026-10-28", autore: "Thomas Morettin", ruolo: "Redattore", verificatore:"Matteo De Col", desc: "Modifica in capitolo 4.1 su ruolo dell'amministratore e aggiunto appunto su data.js in capitolo 5.3."),
@@ -126,7 +128,7 @@ Per ogni ruolo previsto vengono definite le specifiche responsabilità:
 
 - *Analista*:
   - Interagisce con il Proponente per individuare, studiare e comprendere i bisogni del progetto. 
-  - Classifica i requisiti software ( ad esempio in funzionali / non funzionali)  e assegna le priorità di sviluppo in accordo con gli stakeholder.
+  - Classifica i requisiti software (ad esempio in funzionali / non funzionali)  e assegna le priorità di sviluppo in accordo con gli stakeholder.
   - Elabora il modello concettuale del sistema, identificando gli attori coinvolti e redige i diagrammi dei casi d'uso (Use Case Diagram). 
   - Redige il documento di Analisi dei Requisiti. 
 
@@ -193,3 +195,128 @@ Per concludere, il sito web "cruscotto" è suddiviso nelle seguenti sezioni cons
 - *#G("dashboard", def: "Interfaccia grafica che raccoglie, organizza e mostra i dati più importanti in modo sintetico e visivo.")* per visualizzare lo stato di avanzamento del progetto con relativi costi, integrata anche con la rendicontazione delle ore per ciascun membro e ruolo;
 - *documenti*, contenente tutti i documenti/verbali caricati automaticamente, tramite il processo sopra descritto, dal repository *Documentazione*; questa sezione comprende anche la visualizzazione di documenti generali come _glossario.pdf_ e _norme-di-progetto.pdf_, i quali non appartengono ad una milestone predefinita ma fanno parte nel progetto nel suo complesso;
 - *membri del team*, per dare visibilità agli artefici del complesso lavoro dietro al progetto universitario.
+
+= Funzionamento della pipeline di #G("CI (Continuous Integration)")
+Per automatizzare il procedimento di integrazione continua dei documenti all'interno dei repository dell'organizzazione si è deciso di adottare un processo che sfrutti al meglio ciò che la piattaforma di #G("GitHub") offre.\
+Si riportano nei successivi capitoli tutte le decisioni intraprese per l'automazione e le convenzioni di nomenclatura.
+
+== Ciclo di vita del codice sorgente
+Prima di descrivere e spiegare il funzionamento degli standard di progetto adottati all'interno dell'organizzazione è opportuno descrivere il ciclo di vita del codice sorgente nella sua totalità, il quale comprende tutte le attività che portano alla sua integrazione all'interno del codice revisionato e pronto al rilascio.\
+Il ciclo di vita, pertanto, consiste nei seguenti passaggi:
+1. creazione del #G("branch", def: "Linea di sviluppo parallela all'interno di un progetto software.") di supporto, il quale deve contenere tutte le modifiche che si vuole apportare ai file sorgenti; il #G("branch") viene creato automaticamente a partire dal branch `develop` (vedere @branch);
+2. lavoro e creazione dei #G("commit", def: "Salvataggio dello stato del codice in un determinato momento.") all'interno del #G("branch") di supporto creato al passo precedente;
+3. al termine di tutte le modifiche si effettua il push del #G("branch") di supporto all'interno del repository e si apre la #G("PR (Pull Request)") verso il #G("branch") `develop` (la direzione di merging verso `develop` è automatica);
+4. completare come da @tmppr i parametri della #G("PR (Pull Request)") ed inserire le figure di verificatori che hanno il compito di approvare l'operazione, l'assegnatario (contributore che ha effettuato le modifiche), le label corrispondenti e, se utile, la milestone di riferimento;
+5. attendere la verifica delle figure preposte; nel caso in cui la verifica non dovesse essere approvata è necessario procedere alle modifiche secondo quanto riportato nei commenti di rifiuto della #G("PR (Pull Request)")\; è compito delle figure di verificatori spuntare le proprie caselle all'interno della checklist in descrizione;
+6. successivamente all'approvazione della #G("PR (Pull Request)"), effettuare lo "squash & merge" con il #G("branch") `develop` tramite il pulsante apposito.
+
+== Tipologie di modifiche/implementazioni <type>
+A partire da questo sottocapitolo si farà riferimento ad un campo specifico all'interno delle convenzioni di nomenclatura, ovvero `<type>`, il quale identifica la tipologia di operazione che si intende svolgere, sia che si tratti di un #G("branch"), un'#G("issue", def: "Segnalazione utilizzata all'interno di un progetto per tracciare bug, richiedere nuove funzionalità, pianificare attività o discutere miglioramenti al codice sorgente.") o una #G("PR (Pull Request)").\
+Un elenco di tipologie di operazioni che si possono utilizzare è il seguente:
+- `bug`: segnalazione di un errore/refuso;
+- `docs`: stesura o modifica di documenti formali;
+- `feat`: sviluppo di una nuova funzionalità software;
+- `setup`: lavori di manutenzione ordinaria o configurazione (riservata alla figura di amministratore);
+- `test`: scrittura ed esecuzione di test di unità/integrazione.
+
+== #G("Branch") <branch>
+Il primo aspetto da analizzare riguarda la suddivisione del lavoro, all'interno di ciascun repository, in #G("branch"). Questi permettono di organizzare il lavoro come segue:
+- `develop`: #G("branch") di default, all'interno del quale sono riportate tutte le modifiche ai file sorgenti approvate dai verificatori durante la #G("PR (Pull Request)")\; questo branch è sempre in vantaggio o parallelo rispetto al `main`, in quanto presenta modifiche stabili, pronte per essere rilasciate dal responsabile al momento del completamento; questo ramo è stato reso di default in modo che qualsiasi #G("branch") di supporto sia collegato direttamente ad esso e non a `main`;
+- `main`: #G("branch") di esposizione degli artefatti; tutto ciò che viene caricato, sempre tramite #G("PR (Pull Request)"), è in versione stabile, visibile agli stakeholders come artefatti completi; le #G("PR (Pull Request)") per questo branch vengono eseguite solamente al completamento di una milestone o alla necessità di rendere visibili documenti stabili (e.g. verbali, diari di bordo, ...);
+- `hotfix`: #G("branch") temporaneo creato per risolvere bug critici o problemi di sicurezza urgenti direttamente nella versione del software attualmente in produzione, senza dover aspettare il normale ciclo di rilascio delle nuove feature, seguendo la logica del #G("Gitflow workflow", def: "Modello di ramificazione (branching model) per Git, ideato da Vincent Driessen, progettato per gestire lo sviluppo software strutturato e cicli di rilascio pianificati.");
+- #G("branch") di supporto: utilizzati per attuare modifiche ai file sorgente del progetto o integrare funzionalità che devono essere obbligatoriamente approvate tramite #G("PR (Pull Request)") da almeno *1 verificatore*; successivamente all'approvazione viene eseguito il merge con il branch `develop`.
+
+=== Convenzione di nomenclatura per i #G("branch") di supporto <nomebranch>
+Per uniformare il lavoro all'interno dei diversi repository si è optato per adottare la seguente convenzione di nomenclatura circa i branch di supporto: `<type>/<modifica>`. Il campo `<type>` fa riferimento alla tipologia di modifica che si sta attuando (vedere @type), mentre `<modifica>` viene utilizzato per descrivere brevemente lo scopo del branch.\
+Si riporta un esempio di scrittura secondo convenzione: `docs/vi-2026-11-09`.
+
+=== Regola di branch protection
+All'interno di tutti i repository si è deciso di attivare la seguente regola di #G("branch") protection: viene inibita la possibilità di effettuare #G("commit") diretti all'interno dei #G("branch") `develop` e `main`, impedendo così a qualsiasi membro del team di poter caricare modifiche ai sorgenti senza l'apertura di una #G("PR (Pull Request)") dal #G("branch") di supporto precedentemente creato.
+
+=== Regola di minimum review
+All'interno di tutti i repository si è deciso di attivare la seguente regola per le #G("PR (Pull Request)"): per poter effettuare lo "squash & merge" all'interno del #G("branch") di default è necessario che almeno un verificatore abbia approvato la #G("PR (Pull Request)") corrente, pena l'impossibilità di effettuare l'operazione di merging.\
+L'operazione di "squash & merge" è riservata alla figura del verificatore, conseguentemente all'approvazione formale delle modifiche dell'autore.
+
+=== Regola di "squash & merge"
+Per impedire a qualsiasi membro del team la possibilità di caricare molteplici #G("commit") nel branch di default, derivanti dalla mole di modifiche che è inserita all'interno della #G("PR (Pull Request)"), si è optato per bloccare la possibilità di merging del #G("branch") di supporto al solo "squash & merge", ossia un'operazione che inserisce all'interno del ramo padre solamente il #G("commit") riguardante il merge della #G("PR (Pull Request)"), eliminando del tutto i #G("commit") interni a quest'ultima.
+
+== #G("Commit"), #G("PR (Pull Request)") e #G("issue")
+Si riportano di seguito tutte le decisioni prese circa gli standard adottati per #G("commit"), #G("PR (Pull Request)") e #G("issue").
+
+=== Convenzione di nomenclatura per #G("commit") e #G("PR (Pull Request)") <nomecommit>
+Per effettuare delle modifiche all'interno dei diversi repository è necessario eseguire uno o più #G("commit") con la seguente convenzione di nomenclatura: `<type>(<contesto opzionale>): <descrizione> (#<num. issue>)`. I campi fanno riferimento ai seguenti aspetti:
+- `<type>`: tipologia di modifica che si sta attuando (vedere @type);
+- `<contesto opzionale>`: singolo termine che identifica dove si sta lavorando all'interno della tipologia di modifica; questo campo è per definizione opzionale;
+- `<descrizione>`: breve descrizione sulla modifica apportata;
+- `<num. issue>`: se le modifiche fanno riferimento ad una #G("issue") aperta si specifichi il codice in modo da effettuare un collegamento diretto.\
+La stessa convenzione di nomenclatura la si applica ai titoli delle #G("PR (Pull Request)").\
+Si riporta un esempio di scrittura secondo convenzione: `setup(template): aggiunta tabella per azioni da intraprendere (#15)`.
+
+=== Template e convenzione di nomenclatura per le #G("issue") <tmpissue>
+Per uniformare la creazione delle #G("issue") si è deciso di adottare uno standard univoco, il quale al suo interno riporta le seguenti informazioni sul task che si sta aprendo:
+- *titolo*: identificativo della #G("issue"), il quale segue il proprio standard di nomenclatura: `[<TYPE>] <descrizione>`; il campo `<TYPE>` fa sempre riferimento alla tipologia di modifica che si sta attuando (vedere @type); si riporta un esempio di scrittura secondo convenzione: `[DOCS] Redigere capitolo 6 delle Norme di Progetto`;
+- *descrizione*: contenente le seguenti sezioni:
+ - *descrizione dell'#G("issue")*: viene ampliata la descrizione presente all'interno del titolo, per fornire una maggiore comprensione del task che si sta andando a completare;
+ - *scadenza differente dalla milestone*: nel caso in cui il task non abbia data di scadenza corrispondente alla milestone, ma ne deve possedere una personalizzata, è possibile inserirla all'interno di questa sezione; è fondamentale che sia scritta esattamente nel formato markdown riportato nel template, ovvero: `**Scadenza:** AAAA-MM-GG`; questo permette una lettura corretta da parte del codice sul sito web per impostarne la data di scadenza; il fallback, nel caso questa data non dovesse essere presente è la data di scadenza della #G("milestone") associata;
+ - *criteri di accettazione*: checklist che riporta i passi da svolgere per poter considerare la #G("issue") completata;
+ - *dipendenze*: nel caso in cui la #G("issue") dipenda da un altro task è possibile inserirla all'interno di questa sezione per mantenere una corretta tracciabilità.
+
+=== Template per le #G("PR (Pull Request)") <tmppr>
+Per uniformare la creazione delle #G("PR (Pull Request)"), come per le #G("issue"), si è deciso di adottare uno standard univoco, il quale al suo interno riporta le seguenti informazioni sul task che si sta aprendo:
+- *descrizione della #G("PR (Pull Request)")*: viene ampliata la descrizione presente all'interno del titolo, per fornire una maggiore comprensione del task che si è deciso di modificare;
+- *issue collegata*: viene inserito un automatismo di #G("GitHub") che permette la chiusura della #G("issue") al merging del #G("branch") per il quale si sta effettuando la #G("PR (Pull Request)")\;
+- *checklist per l'autore*: elenco di azioni da svolgere prima che l'autore possa dire di aver preparato una #G("PR (Pull Request)") corretta, pronta per la fase di review da parte dei verificatori correnti;
+- *checklist per il verificatore*: elenco di azioni che sono state svolte da parte del verificatore corrente per accertare l'accettazione della #G("PR (Pull Request)").
+La creazione del #G("commit") finale per lo "squash & merge" della #G("PR (Pull Request)") all'interno del #G("branch") di default è automatica; ciò significa che riprende titolo e descrizione della #G("PR (Pull Request)") stessa, senza dover eseguire nessuna operazione se non il merging.
+
+== #G("Project", def: "Hub di pianificazione e gestione del lavoro integrato direttamente con le issue e le pull request della piattaforma") AIRA: AI Requests Automation
+Per la gestione centralizzata di tutte le #G("issue") e #G("PR (Pull Request)") dell'organizzazione si è deciso di aprire un #G("project"), accessibile in primo luogo ai membri del team per visualizzare lo stato di avanzamento dei lavori e in secondo luogo anche agli #G("stakeholders") per monitorare il progetto.\
+Il #G("project") fa uso di un template kanban, che permette di organizzare al meglio lo stato di avanzamento in categorie come: `Todo`, `In Progress`, `In Review` e `Done`.
+
+=== Workflows di modifica dello stato
+All'interno del #G("project") sono attivi otto workflows, i quali permettono di automatizzare il processo di cambio dello stato di ciascuna #G("issue") o #G("PR (Pull Request)"). Questo permette a chi modifica i sorgenti di non dover occuparsi manualmente di far corrispondere lo stato del proprio lavoro all'effettivo avanzamento di quest'ultimo.\
+Nello specifico si riportano alcuni workflow attivi:
+- *Auto-add to project*: tutte le #G("issue") e #G("PR (Pull Request)") provenienti dal repository *Documentazione* vengono automaticamente aggiunte al #G("project"), rendendone immediato l'abbinamento;
+- *Pull request merged*: al momento di merge della #G("PR (Pull Request)") il suo stato e quello della #G("issue") ad essa collegata si sposta automaticamente in `Done` (vedere @dod);
+- *Code changes requested*: nel momento in cui un verificatore richiede la modifica dei sorgenti all'interno della #G("PR (Pull Request)") lo stato di avanzamento di quest'ultima ritorna a `In Progress`.
+
+=== #G("Milestone", def: "Funzionalità di project management che permette di raggruppare issue e pull request per tracciare i progressi verso un obiettivo specifico o una scadenza.")
+Per la corretta gestione delle scadenze di progetto si fa uso delle #G("milestone") le quali hanno l'obbligo di essere quantificabili in un periodo di tempo consono allo stato di avanzamento del progetto, non potendo essere eccessivamente dilazionate nel tempo.\
+Per il precedente motivo si è deciso di istanziare ciascuna #G("milestone") con il termine della creazione di ciascun artefatto (e.g. stesura AdR, scrittura #G("PoC (Proof of Concept)"), ...).
+
+=== Iterazioni (sprint)
+Si è optato per introdurre un campo speciale all'interno del #G("project") che permetta di identificare lo sprint all'interno del quale è definito il task. Vale a dire che, un task senza un'iterazione assegnata fa parte del #G("Product Backlog", def: "Elenco ordinato e dinamico di tutto il lavoro ritenuto necessario per creare, sviluppare, mantenere e migliorare un prodotto."), mentre un task con iterazione entra a far parte dello sprint scelto.
+
+=== Labels
+Per organizzare al meglio #G("issue") e #G("PR (Pull Request)") si è deciso di fare uso di labels personalizzate, che permettano di identificare tutti i parametri necessari per questi elementi. Nello specifico, le labels si dividono nelle seguenti categorie:
+- `role`: gestione dell'assegnatario in base al ruolo che ne ha la responsabilità nello sprint corrente;
+- `type`: tipologie di operazioni che apportano modifiche (vedere @type);
+- `priority`: priorità di esecuzione del task, in base allo stato di avanzamento del progetto;
+- `review`: gestione della fase di review da parte dei verificatori nello sprint corrente;
+- `scad`: scadenza in termini di baseline (#G("RTB (Requirements & Technology Baseline)") o #G("PB (Product Baseline)")).
+È possibile fare uso di label speciali dedicate al repository all'interno del quale si sta lavorando, come ad esempio per il repository *Documentazione* (e.g. `docs: NdP`, per stabilire che il task porta alla modifica del presente documento).
+
+== #G("DoD (Definition of Done)", def: "Descrizione formale e condivisa dello stato in cui deve trovarsi un incremento di prodotto per poter essere considerato realmente completato e pronto per il rilascio.") <dod>
+Questa definizione formale è l'insieme dei criteri oggettivi e non negoziabili che un'#G("issue") deve soddisfare per essere considerata formalmente conclusa dal team. Nessuna #G("issue") può transitare nello stato `Done` del #G("project") se anche solo uno dei vincoli definiti non risulta verificato ed attestato da evidenze oggettive.\
+Questa definizione persegue il principio di *verifica indipendente*: l'autore di una modifica non può in alcun caso validare o autorizzare l'integrazione del proprio lavoro.
+
+=== Criteri generali di processo (trasversali)
+Questi criteri sono applicabili a qualsiasi tipologia di #G("issue") e sono i seguenti:
+- *#G("branch") dedicato*: l'attività è stata interamente sviluppata su un ramo effimero originato dal #G("branch") `develop`, denominato secondo convenzione (vedere @nomebranch);
+- *convenzione di commit*: tutti i commit adottano la convenzione di nomenclatura definita in @nomecommit;
+- *#G("PR (Pull Request)") formale*: è stata aperta una #G("PR (Pull Request)") formale verso il #G("branch") `develop`, contenente il comando di chiusura della #G("issue") associata (vedere @tmppr);
+- *ispezione indipendente*: la #G("PR (Pull Request)") è stata assegnata ai verificatori dello sprint corrente e almeno uno ha approvato le modifiche che apporta;
+- *integrazione e pulizia*: l'integrazione all'interno del #G("branch") `develop` avviene solamente tramite strategia "squash & merge" (riservata al verificatore), garantendo la pulizia nei commit all'interno del #G("branch") di default;
+- *aggiornamento #G("project")*: la issue associata transita automaticamente nello stato di `Done` e l'avanzamento è riflesso sulla relativa #G("milestone").
+
+=== Criteri specifici per gli artefatti documentali
+Questi criteri sono applicabili, in aggiunta ai criteri generali sopra descritti, a tutti gli artefatti documentali:
+- *conformità strutturale*: il documento rispetta il template ufficiale dell'organizzazione senza modifiche sostanziali non concordate con i membri del team;
+- *assenza di anomalie*: il testo non presenta errori grammaticali o sintattici, collegamenti interroti o segnaposto temporanei (e.g. "TODO", "Lorem Ipsum", ...);
+- *registro delle modifiche (changelog)*: la tabella dello storico delle versioni è costantemente aggiornata con le ultime modifiche;
+- *build con successo*: il sorgente documentale deve essere compilabile con successo, senza generare errori di parsing o warning indesiderati.
+
+= Firme di sottoscrizione dei membri
+Il presente documento è stato firmato da tutti i membri del team _Astrum_ per garantire, in qualsiasi scenario di progetto, il rispetto di tutte le convenzioni sopra riportate.
+
+#firme()

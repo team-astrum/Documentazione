@@ -43,7 +43,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
       align: horizon,
 
       image("./Assets/logo-unipd.svg", height: 1.5cm),
-      line(angle: 90deg, length: 1.5cm, stroke: 0.5pt + deco-line),
+      line(angle: 90deg, length: 1.5cm, stroke: 0.5pt + txt-gray),
       image(logo, height: 0.75cm)
     )
     #text(size: 10pt, fill: txt-gray)[

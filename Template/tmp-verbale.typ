@@ -1,5 +1,5 @@
 /* MODELLO PER VERBALI DI RIUNIONE
-Il seguente modello può essere incorporato nelle presentazioni tramite comando: #import "../../Template/tmp-verbale.typ": conf, decisioni, G
+Il seguente modello può essere incorporato nelle presentazioni tramite comando: #import "../../Template/tmp-verbale.typ": conf, azioni, G
 Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 */
 
@@ -16,19 +16,6 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 #let light-accent = rgb("#2563EB")
 #let txt-gray = rgb("#626973")
 
-// Helper per le decisioni prese nel corso del meeting
-#let decisioni(..items) = {
-  table(
-    columns: (15%, 85%),
-    stroke: 0.5pt + deco-line,
-    table.header(
-      text(weight: "bold")[ID],
-      text(weight: "bold")[Decisione]
-    ),
-    ..items
-  )
-}
-
 // Conversione di data estesa in formato standard datetime
 #let parserData(s) = {
   let parti = s.trim().split("-")
@@ -39,6 +26,25 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 }
 
 #let dataVerbali = datetime(year: 2026, month: 11, day: 03)
+
+// Tabella delle azioni per mitigare le decisioni
+#let azioni(..items) = {
+  v(0.5em)
+  table(
+    columns: (50%, 20%, 10%, 20%),
+    stroke: 0.5pt + deco-line,
+    align: (left + horizon, center + horizon, center + horizon, center + horizon),
+    
+    table.header(
+      table.cell[#text(weight: "bold")[Azione]],
+      table.cell[#text(weight: "bold")[Incaricato]],
+      table.cell[#text(weight: "bold")[Issue]],
+      table.cell[#text(weight: "bold")[Scadenza]]
+    ),
+    ..items
+  )
+  v(0.5em)
+}
 
 #let conf(
   tipo: none,
@@ -90,9 +96,8 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
         #v(-0.25em)
         #set text(size: 8pt, fill: txt-gray)
         #grid(
-          columns: (1fr, 1fr, 1fr),
+          columns: (1fr, 1fr),
           align(left)[Redazione: #redattore],
-          align(center)[Verificatore: #verificatore],
           align(right)[Pagina #counter(page).display("1 / 1", both: true)]
         )
       ]
@@ -128,7 +133,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
       align: horizon,
 
       image("./Assets/logo-unipd.svg", height: 2cm),
-      line(angle: 90deg, length: 2cm, stroke: 0.5pt + deco-line),
+      line(angle: 90deg, length: 2cm, stroke: 0.5pt + txt-gray),
       image(logo, height: 1cm)
     )
     #v(1cm)
@@ -198,7 +203,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
             #entry.ruolo: #entry.autore
             #if "verificatore" in entry and entry.verificatore != none [
               #h(0.5em) #text(fill: deco-line)[|] #h(0.5em) 
-              Verificatore: #entry.verificatore
+              Verificato: #entry.verificatore
             ]
           ]
         ]
