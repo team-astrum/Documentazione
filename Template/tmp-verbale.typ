@@ -96,9 +96,8 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
         #v(-0.25em)
         #set text(size: 8pt, fill: txt-gray)
         #grid(
-          columns: (1fr, 1fr, 1fr),
+          columns: (1fr, 1fr),
           align(left)[Redazione: #redattore],
-          align(center)[Verificatore: #verificatore],
           align(right)[Pagina #counter(page).display("1 / 1", both: true)]
         )
       ]
@@ -134,7 +133,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
       align: horizon,
 
       image("./Assets/logo-unipd.svg", height: 2cm),
-      line(angle: 90deg, length: 2cm, stroke: 0.5pt + deco-line),
+      line(angle: 90deg, length: 2cm, stroke: 0.5pt + txt-gray),
       image(logo, height: 1cm)
     )
     #v(1cm)
