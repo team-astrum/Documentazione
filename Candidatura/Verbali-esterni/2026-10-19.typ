@@ -1,4 +1,4 @@
-#import "../../Template/tmp-verbale.typ": conf, decisioni, G
+#import "../../Template/tmp-verbale.typ": conf, azioni, G
 
 #show: conf.with(
   tipo: "Esterno", 
