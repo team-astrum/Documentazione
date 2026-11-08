@@ -2,9 +2,7 @@ name: Compila, pubblica i PDF e genera manifest
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "**" ]   # Qualsiasi branch
   workflow_dispatch:
 
 permissions:
@@ -22,8 +20,9 @@ jobs:
       # Setup dell'ambiente Typst
       - uses: typst-community/setup-typst@v3
 
-      # Esecuzione script Python per il glossario
+      # Esecuzione script Python per il glossario (solo branch main)
       - name: Genera il glossario
+        if: github.ref == 'refs/heads/main'
         run: python3 .github/scripts/generate-glossario.py
 
       # Compilazione Typst e generazione del manifest.json
@@ -32,19 +31,19 @@ jobs:
 
       # Configurazione GitHub Pages
       - name: Configura GitHub Pages
+        if: github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v5
-        if: github.event_name != 'pull_request'
 
       # Prepara l'artefatto per il deploy su GitHub Pages
       - name: Carica artefatto Pages
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
-        if: github.event_name != 'pull_request'
         with:
           path: _site
 
       # Crea l'archivio scaricabile con tutti i PDF
       - name: Salva artefatto PDF
-        if: github.event_name != 'pull_request'
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: pdf-documents
@@ -52,8 +51,8 @@ jobs:
 
   deploy:
     needs: build
-    # Il job di deploy viene saltato completamente durante le Pull Request
-    if: github.event_name != 'pull_request'
+    # Il deploy parte solo da main
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       pages: write
