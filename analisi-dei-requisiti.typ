@@ -8,7 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
-    (ver: "0.0.2", data: "2026-11-09", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:" ", desc: "Completamento della sezione introduttiva."),
+    (ver: "0.1.0", data: "2026-11-09", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Completamento della sezione introduttiva."),
     (ver: "0.0.1", data: "2026-11-07", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Creazione e stesura della bozza iniziale di documento."),
   )
 )
@@ -81,7 +81,7 @@ Per facilitare la lettura e la tracciabilità, la prima occorrenza di un termine
 === Riferimenti normativi
 - #link("https://www.math.unipd.it/~tullio/IS-1/2026/Progetto/C0-AIRA.pdf")[Capitolato C0 - AIRA: AI Requests Automation] - Sanmarco Informatica S.p.A.
 - #link("https://www.math.unipd.it/~tullio/IS-1/2026/Dispense/PD1.pdf")[Regolamento progetto didattico a.a. 2026/2027]
-- #link("https://team-astrum.github.io/Documentazione/norme-di-progetto.pdf")[Norme di Progetto] - versione 1.1.1
+- #link("https://team-astrum.github.io/Documentazione/norme-di-progetto.pdf")[Norme di Progetto]
 === Riferimenti informativi
 - #link("https://team-astrum.github.io/Documentazione/glossario.pdf")[Glossario]
 - Dispense del corso di Ingegneria del Software, a.a. 2026/2027:
