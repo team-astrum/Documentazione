@@ -5,10 +5,10 @@
   status: "Da approvare", // Oppure "Approvato"
   utilizzo: "Interno", // Oppure "Esterno"
   redazione: ("Filippo De Guio", "Matteo De Col", "Gianluca Bacco"),
-  verifica: (" ", " "),
+  verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
-      (ver: "0.0.1", data: "2026-11-07", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:" ", desc: "Creazione e stesura della bozza iniziale di documento."),
+      (ver: "0.0.1", data: "2026-11-07", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Creazione e stesura della bozza iniziale di documento."),
   )
 )
 
