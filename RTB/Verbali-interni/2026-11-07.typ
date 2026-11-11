@@ -13,7 +13,7 @@
   redattore: "Thomas Morettin",
   verificatore: "Gianluca Brotto, Samuele Gobbi",
   changelog: (
-    (ver: "0.1.1", data: "2026-11-07", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore: "Gianluca Brotto, Samuele Gobbi", desc: "Redazione del documento post meeting."),
+    (ver: "0.1.0", data: "2026-11-07", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore: "Gianluca Brotto, Samuele Gobbi", desc: "Redazione del documento post meeting."),
     (ver: "0.0.1", data: "2026-11-05", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore: "Gianluca Brotto, Samuele Gobbi", desc: "Impostazione iniziale documento."),
   )
 )
@@ -84,5 +84,5 @@ Le decisioni intraprese durante la riunione sono le seguenti:
 
 = Azioni da intraprendere
 #azioni(
-  [Redazione dell'introduzione al documento Analisi dei Requsiti], [Gianluca Bacco, Matteo De Col e Filippo De Guio], [\#16], [2026-11-13]
+  [Redazione dell'introduzione al documento Analisi dei Requisiti], [Gianluca Bacco, Matteo De Col e Filippo De Guio], [\#16], [2026-11-13]
 )
