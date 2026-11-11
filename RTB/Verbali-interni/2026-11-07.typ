@@ -7,7 +7,7 @@
   ora-fine: "11:30",
   luogo: "Discord",
   azienda: none,
-  presenti: ("Thomas Morettin", "Corrado Bacco", "Gianluca Brotto", "Matteo De Col", "Filippo De Guio", "Samuele Gobbi"),
+  presenti: ("Thomas Morettin", "Corrado Bacco", "Gianluca Brotto", "Matteo De Col", "Filippo De Guio", "Samuele Gobbi", "Gianluca Bacco"),
   assenti: (),
   responsabile: "Corrado Bacco",
   redattore: "Thomas Morettin",
