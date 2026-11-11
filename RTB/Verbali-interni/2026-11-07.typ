@@ -9,7 +9,7 @@
   azienda: none,
   presenti: ("Thomas Morettin", "Corrado Bacco", "Gianluca Brotto", "Matteo De Col", "Filippo De Guio", "Samuele Gobbi"),
   assenti: (),
-  responsabile: "Gianluca Bacco",
+  responsabile: "Corrado Bacco",
   redattore: "Thomas Morettin",
   verificatore: "Gianluca Brotto, Samuele Gobbi",
   changelog: (
