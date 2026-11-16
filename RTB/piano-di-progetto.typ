@@ -250,7 +250,7 @@ Si riportano di seguito i rischi individuati dal gruppo, accompagnati dalla rela
 )\
 
 = Calendario di massima del progetto
-Il gruppo _Astrum_ si impegna a presentare la candidatura per l'*RTB* entro il SEGNA DATA, con possibilità di deroga a seconda delle necessità del gruppo.\ Inoltre, come descritto nella #underline(link("https://team-astrum.github.io/Documentazione/Candidatura/Generale/dichiarazione-impegni.pdf")[Dichiarazione degli Impegni]) _Astrum_ si impegna a terminare il progetto entro il giorno *16 aprile 2027*, senza alcuna possibilità di deroga.
+Il gruppo _Astrum_ si impegna a presentare la candidatura per l'*RTB* entro il *19 febbraio 2027*, con possibilità di deroga a seconda delle necessità del gruppo.\ Inoltre, come descritto nella #underline(link("https://team-astrum.github.io/Documentazione/Candidatura/Generale/dichiarazione-impegni.pdf")[Dichiarazione degli Impegni]) _Astrum_ si impegna a terminare il progetto entro il giorno *16 aprile 2027*, senza alcuna possibilità di deroga.
 
 \
 = Impegno orario previsto
