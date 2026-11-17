@@ -11,7 +11,7 @@
   assenti: ("Thomas Morettin",),
   responsabile: "Gianluca Bacco",
   redattore: "Samuele Gobbi",
-  verificatore: "",
+  verificatore: "Filippo De Guio, Matteo De Col",
   changelog: (
     (ver: "0.0.1", data: "2026-11-16", autore: "Samuele Gobbi", ruolo: "Amministratore", verificatore: "", desc: "Stesura Iniziale Documento."),
   )
