@@ -8,7 +8,8 @@
   verifica: ("Samuele Gobbi", "Gianluca Brotto"),
   approvazione: "",
   changelog: (
-    (ver: "0.1.0", data: "2026-11-14", autore: "Corrado Bacco", ruolo: "Redattore", verificatore: "", desc: "Completamento parziale del documento."),
+    (ver: "0.1.1", data: "2026-11-17", autore: "Corrado Bacco", ruolo: "Redattore", verificatore: "Gianluca Brotto", desc: "Correzione del documento."),
+    (ver: "0.1.0", data: "2026-11-14", autore: "Corrado Bacco", ruolo: "Redattore", verificatore: "Gianluca Brotto", desc: "Completamento parziale del documento."),
   )
 )
 
@@ -26,20 +27,20 @@
 
 = Introduzione
 == Scopo del documento
-Il seguente documento presenta il *#G("Piano di Progetto", def: "Documento gestionale che pianifica tempi, costi, risorse e rischi del progetto. Serve a monitorare l'avanzamento confrontando, per ogni sprint: preventivo, consuntivo di periodo, preventivo a finire e analisi dei compiti svolti e dei rischi. In modo tale da ricalibrare le attività in corso d'opera.")* del gruppo _Astrum_, ha lo scopo di definire in modo chiaro e strutturato le attività e i *#G("task", def: "compito, mansione da svolgere assegnata ad un specifico soggetto")* necessari alla realizzazione del progetto, andando a stabilire risorse, modalità operative e tempistiche di sviluppo. Il documento fornisce una visione complessiva e costantemente aggiornata dell'avanzamento del progetto didattico, consentendo al gruppo di pianificare, assegnare e monitorare i task definiti all'interno di ogni *#G("sprint", def: "Periodo breve e definito a monte (solitamente 1-2 settimane) in cui il team sviluppa un incremento di prodotto.")*.\
+Il seguente documento presenta il #G("Piano di Progetto", def: "Documento gestionale che pianifica tempi, costi, risorse e rischi del progetto. Serve a monitorare l'avanzamento confrontando, per ogni sprint: preventivo, consuntivo di periodo, preventivo a finire e analisi dei compiti svolti e dei rischi. In modo tale da ricalibrare le attività in corso d'opera.") del gruppo _Astrum_, ha lo scopo di definire in modo chiaro e strutturato le attività e i #G("task", def: "compito, mansione da svolgere assegnata ad un specifico soggetto") necessari alla realizzazione del progetto, andando a stabilire risorse, modalità operative e tempistiche di sviluppo. Il documento fornisce una visione complessiva e costantemente aggiornata dell'avanzamento del progetto didattico, consentendo al gruppo di pianificare, assegnare e monitorare i task definiti all'interno di ogni #G("sprint", def: "Periodo breve e definito a monte (solitamente 1-2 settimane) in cui il team sviluppa un incremento di prodotto.").\
 
-Per il documento risulta fondamentale l'analisi dei rischi attesi, accompagnata dalle relative politiche di mitigazione, al fine di riddurre l'incertezza e permettere al gruppo di affrontare imprevisti tecnologici, organizzattivi e/o personali con l'obiettivo di garantire la continuità del lavoro e il rispetto dei tempi di consegna. Inoltre, nel piano di progetto è incluso il *#G("preventivo", def: "Sezione del Piano di Progetto, che viene compilata ogni sprint, nel quale si stimano le ore e le risorse necessarie per completare le attività pianificate.")*, del progetto in cui viene definita la stima dei costi complessivi e la suddivisione oraria prevista per ogni ruolo, necesasari per la *candidatura*.\
+Per il documento risulta fondamentale l'analisi dei rischi attesi, accompagnata dalle relative politiche di mitigazione, al fine di riddurre l'incertezza e permettere al gruppo di affrontare imprevisti tecnologici, organizzativi e/o personali con l'obiettivo di garantire la continuità del lavoro e il rispetto dei tempi di consegna. Inoltre, nel piano di progetto è incluso il #G("preventivo", def: "Sezione del Piano di Progetto, che viene compilata ogni sprint, nel quale si stimano le ore e le risorse necessarie per completare le attività pianificate."), del progetto in cui viene definita la stima dei costi complessivi e la suddivisione oraria prevista per ogni ruolo, necessari per la *candidatura*.\
 
-Il gruppo _Astrum_ ha scelto di adottare un approccio *#G("agile", def: "Insieme di metodologie di sviluppo software basate su iterazioni brevi, collaborazione costante e adattamento continuo ai cambiamenti.")*, al termine di ogni sprint vengono aggiornati il *#G("consuntivo di periodo", def: "Sezione nel Piano di Progetto, che viene compilata ogni sprint, nel quale vengono analizzate le ore effettivamente consumate nello sprint interessato e di conseguenza le risorse utilizzate.")*, l'analisi dei rischi riscontrati, il *#G("preventivo a finire", def: "Sezione nel Piano di Progetto, che viene compilata ogni sprint, nel quale viene aggiornata la pianificazione futura e le risorse rimanenti in funzione delle risorse utilizzate nello sprint corrente.")* e il preventivo dello sprint successivo, i quali vengono analizzati durante le *#G("sprint retrospective", def: "Riunione interna del team volta a migliorare il way of working. Durante l'incontro si analizza cosa non ha funzionato nello Sprint appena concluso e si discutono possibili azioni per migliorare il processo nei successivi.")* bisettimanali.
+Il gruppo _Astrum_ ha scelto di adottare un approccio #G("agile", def: "Insieme di metodologie di sviluppo software basate su iterazioni brevi, collaborazione costante e adattamento continuo ai cambiamenti."), al termine di ogni sprint vengono aggiornati il #G("consuntivo di periodo", def: "Sezione nel Piano di Progetto, che viene compilata ogni sprint, nel quale vengono analizzate le ore effettivamente consumate nello sprint interessato e di conseguenza le risorse utilizzate."), l'analisi dei rischi riscontrati, il #G("preventivo a finire", def: "Sezione nel Piano di Progetto, che viene compilata ogni sprint, nel quale viene aggiornata la pianificazione futura e le risorse rimanenti in funzione delle risorse utilizzate nello sprint corrente.") e il preventivo dello sprint successivo, i quali vengono analizzati durante le #G("sprint retrospective", def: "Riunione interna del team volta a migliorare il way of working. Durante l'incontro si analizza cosa non ha funzionato nello Sprint appena concluso e si discutono possibili azioni per migliorare il processo nei successivi.") bisettimanali.
 
-Questo processo permette di aggiornare costantemente la pianificazione delle attività e dei task, migliorare i processi tramite review o retrospective periodiche e mantentenere una stima realistica del completamento finale.
+Questo processo permette di aggiornare costantemente la pianificazione delle attività e dei task, migliorare i processi tramite review o retrospective periodiche e mantenere una stima realistica del completamento finale.
 
 == Glossario
 Il *glossario* è un documento redatto dal gruppo e aggiornato nell'arco del progetto didattico, con lo scopo di fornire definizioni coerenti per i termini tecnici e specifici al corso di Ingegneria del Software. 
 
 Questo documento risulta fondamentale per garantire una comprensione uniforme della documentazione prodotta ai soggetti esterni al gruppo e per definire uno standard di comunicazione interna tra i membri del gruppo, riducendo possibili incomprensioni e ambiguità. 
 
-Per indicare che la definizione di una parola o di un concetto è disponibile nel glossario, si è deciso di utilizzare la seguente notazione: *#G("definizione nel glossario")*
+Per indicare che la definizione di una parola o di un concetto è disponibile nel glossario, si è deciso di utilizzare la seguente notazione: definizione nel glossario#sub[G]
 
 == Riferimenti
 === Riferimenti normativi
@@ -75,12 +76,12 @@ Il workflow previsto per ogni sprint è il seguente:
  - registra i rischi occorsi analizzandone cause e modalità di gestione;
  - aggiorna le risorse impiegate;
  - aggiorna ore e budget rimanente.
-+ Infine, definisce i compiti da svolgere nello sprint corrente, individua i rischi attesi e compila il *preventivo* delle risorse necessarie.
++ Infine, il *responsabile subentrante* definisce i compiti da svolgere nello sprint corrente, individua i rischi attesi e compila il *preventivo* delle risorse necessarie.
 
 
 = Analisi e mitigazione dei rischi
-Questa sezione analizza i potenziali rischi e le difficoltàche il gruppo potrebbe incontrare durante lo svolgimento del progetto didattico.\
-Realizzare un'ottima analisi preventiva consente di evitare conflitti interni, ritardi nelle scadenze, aumento dei costi di produzione e soppratutto, la realizzazione di un prodotto finale non conforme alle aspettative dell'azienda proponente.
+Questa sezione analizza i potenziali rischi e le difficoltà che il gruppo potrebbe incontrare durante lo svolgimento del progetto didattico.\
+Realizzare un'ottima analisi preventiva consente di evitare conflitti interni, ritardi nelle scadenze, aumento dei costi di produzione e soprattutto, la realizzazione di un prodotto finale non conforme alle aspettative dell'azienda proponente.
 
 L'analisi dei rischi si articola in quattro fasi:\
  - *Identificazione:* individuare i possibili rischi legati al progetto, al prodotto e al contesto di riferimento, riconoscendo tutti i fattori che potrebbero compromettere lo sviluppo del progetto e la qualità del prodotto finale;
@@ -89,10 +90,11 @@ L'analisi dei rischi si articola in quattro fasi:\
 
 - *Pianificazione:* definizione delle strategie di prevenzione o mitigazione dei rischi, stabilendo anticipatamente le azioni da intraprendere nel caso in cui il rischio si concretizzi.
 
-- *Controllo:* monitoraggio costante attraverso indicatpri che rilevano eventuali problematiche, l'attuazione delle strategie di mitigazione e il miglioramento costante delle *Norme di Progetto*
+- *Controllo:* monitoraggio costante attraverso indicatori che rilevano eventuali problematiche, l'attuazione delle strategie di mitigazione e il miglioramento costante delle *Norme di Progetto*
 
 Si riportano di seguito i rischi individuati dal gruppo, accompagnati dalla relativa analisi e dalle strategie di mitigazione.
 
+\
 == Rischi tecnologici
 === Apprendimento di nuove tecnologie
 #figure(
@@ -119,11 +121,11 @@ Si riportano di seguito i rischi individuati dal gruppo, accompagnati dalla rela
     stroke: 0.5pt + deco-line,
     align: (col, row) => if col == 0 { left + top } else { left + top },
 
-    [*Descrizione*], [Il gruppo potrebbe incontrare difficoltà nello sviluppo softuware del *#G("PoC", def: "Proof of Concept - artefatto realizzato ad inizio progetto con lo scopo di valutare la fattibilità tecnologica del prodotto atteso. Deve rappresentare le richieste principali del capitolato.")* o l'*#G("MVP", def: "Minimum Viable Product - approssimazione del prodotto atteso dalla proponente, dotata di funzionalità minime ma sufficienti a essere testata e valutare la bontà della visione iniziale.")*, dovute a bug di programmazione o, nei casi più gravi, a errori di design. Tali problematiche potrbbero rallentare significatamente le attività e ostacolare il raggiungimento degli obiettivi.], 
+    [*Descrizione*], [Il gruppo potrebbe incontrare difficoltà nello sviluppo software del #G("PoC", def: "Proof of Concept - artefatto realizzato ad inizio progetto con lo scopo di valutare la fattibilità tecnologica del prodotto atteso. Deve rappresentare le richieste principali del capitolato.") o l'#G("MVP", def: "Minimum Viable Product - approssimazione del prodotto atteso dalla proponente, dotata di funzionalità minime ma sufficienti a essere testata e valutare la qualità della visione iniziale."), dovute a bug di programmazione o, nei casi più gravi, a errori di design. Tali problematiche potrbbero rallentare significatamente le attività e ostacolare il raggiungimento degli obiettivi.], 
     
-    [*Misure di mitigazione*], [Il gruppo è consapevole che gli errori di programmazione sono inevitabili, sopprattutto considerando la limitata esperienza dei componenti del gruppo.\ Per mitigare questo rischio, si è scelto di adottare un approccio di sviluppo *#G("fail fast", def: "approccio di sviluppo che mira a identificare e risolvere errori o problemi il prima possibile, evitando di perdere tempo e risorse in progetti o funzionalità non validi.")*, con l'obiettivo di individuare i bug software il prima possibile attraverso:\
+    [*Misure di mitigazione*], [Il gruppo è consapevole che gli errori di programmazione sono inevitabili, sopprattutto considerando la limitata esperienza dei componenti del gruppo.\ Per mitigare questo rischio, si è scelto di adottare un approccio di sviluppo #G("fail fast", def: "approccio di sviluppo che mira a identificare e risolvere errori o problemi il prima possibile, evitando di perdere tempo e risorse in progetti o funzionalità non validi."), con l'obiettivo di individuare i bug software il prima possibile attraverso:\
     - Scrittura di test corretti e aggiornati per ogni funzionalità implementata, in modo da rilevare eventuali regressioni o malfunzionamenti;
-    - Mantenimento di un'elevata *#G("code coverage", def: "Percentuale di codice coperta dai test automatici, indica quanto è testata l'applicazione.")*
+    - Mantenimento di un'elevata #G("code coverage", def: "Percentuale di codice coperta dai test automatici, indica quanto è testata l'applicazione.")
     
     Inoltre, chi dovesse riscontrare questa problematica potrà sempre richiedere supporto agli altri membri del gruppo e se necessario, contattare il proponente aziendale per chiarimenti o supporto tecnico.],
   
@@ -180,7 +182,7 @@ Si riportano di seguito i rischi individuati dal gruppo, accompagnati dalla rela
 
     [*Descrizione*], [Un insufficiente coinvolgimento dell'azienda proponente potrebbe causare un'incompresione dei requisiti, portando a un prodotto finale non conforme alle aspettative.], 
     
-    [*Misure di mitigazione*], [ Il gruppo si impegna a mantenere una costante comunicazione con l'azienda proponente, presentando regolarmente lo stato di avanzamento del progetto e chiarendo tempestivamente eventuali dubbi o incertezze.\ Per garantire un allineamento continuo ed evitare incompresioni, _Astrum_ e l'azienda proponente pianificheranno incontri periodici per una review di quanto svolto, in modo da assicurare che lo sviluppo del progetto proceda in linea con le aspettative e i requisiti definiti.],
+    [*Misure di mitigazione*], [ Il gruppo si impegna a mantenere una costante comunicazione con l'azienda proponente, presentando regolarmente lo stato di avanzamento del progetto e chiarendo tempestivamente eventuali dubbi o incertezze.\ Per garantire un allineamento continuo ed evitare incomprensioni, _Astrum_ e l'azienda proponente pianificheranno incontri periodici per una review di quanto svolto, in modo da assicurare che lo sviluppo del progetto proceda in linea con le aspettative e i requisiti definiti.],
   
     [*Occorrenza*], [Media],
     [*Impatto*], [Alto]
@@ -259,7 +261,7 @@ Il gruppo ha deciso di dedicare un totale di *95 ore produttive* per ogni compon
 #pagebreak()
 
 = Stima dei costi realizzazione
-Il preventivo dei costi riportato di seguito è calcolato motivando le ore assegnate a ciascun ruolo per il relativo costo orario.
+Il preventivo dei costi riportato di seguito è stato calcolato moltiplicando le ore assegnate a ciascun ruolo per il relativo costo orario.
 #figure(
   table(
     columns: (1fr, 50pt, 75pt, 100pt, 100pt),
@@ -283,18 +285,18 @@ Il preventivo dei costi riportato di seguito è calcolato motivando le ore asseg
 La *RTB* è un periodo in cui vengono fissati i requisiti da soddisfare e si motivano le tecnologie, i framework e le librerie scelte. Inoltre, è necessario produrre un artefatto, chiamato *PoC*, il quale ha lo scopo di valutare la fattibilità del prodotto atteso secondo le scelte implementative intraprese.
 
 == Stesura Analisi dei Requisiti
-Il documento *#G("Analisi dei Requisiti", def: "Attività che studia i bisogni dell'utente e del dominio d'uso per definire che cosa il prodotto software deve fare per soddisfarli, senza descrivere come sarà realizzato. Produce una specifica completa, verificabile e tracciabile dei requisiti del sistema ")* ha lo scopo di formalizzare le specifiche del prodotto finale, definendo in modo chiaro le funzionalità, i vincoli e le interazioni del sistema. Questo documento rappresenta il riferimento principale per la verifica della conformità del prodotto rispetto alle richieste dell'azienda proponente. \ Per la stesura dell'*Analisi dei Requisiti* sono previste le seguenti attività:
+Il documento #G("Analisi dei Requisiti", def: "Attività che studia i bisogni dell'utente e del dominio d'uso per definire che cosa il prodotto software deve fare per soddisfarli, senza descrivere come sarà realizzato. Produce una specifica completa, verificabile e tracciabile dei requisiti del sistema ") ha lo scopo di formalizzare le specifiche del prodotto finale, definendo in modo chiaro le funzionalità, i vincoli e le interazioni del sistema. Questo documento rappresenta il riferimento principale per la verifica della conformità del prodotto rispetto alle richieste dell'azienda proponente. \ Per la stesura dell'*Analisi dei Requisiti* sono previste le seguenti attività:
 
 - *Analisi del capitolato e identificazione delle tecnologie:* analisi approfondita del capitolato con identificazione delle tecnologie necessarie per lo sviluppo del prodotto finale;
 
-- *Definizione scenari d'uso:* individuazione degli scenari appricativi di ogni tecnologia con l'obiettivo di scomporli in casi d'uso più specifici;
+- *Definizione scenari d'uso:* individuazione degli scenari applicativi di ogni tecnologia con l'obiettivo di scomporli in casi d'uso più specifici;
 
 - *Definizione dei casi d'uso (use case):* modellazione delle interazioni tramite diagrammi UML e descrizioni testuali dettagliate, comprendenti pre e post-condizioni, scenari applicativi principali e alternativi
 \
 
 - *Specifica dei requisiti:* individuazione e classificazione dei requisiti in:
  - Funzionali: comportamenti attesi dal prodotto finale;
- - Non funzionali: vincoli di qualità.performace, e sicurezza;
+ - Non funzionali: vincoli di qualità, performace, e sicurezza;
  - Di dominio: vincoli dipendenti dal contesto applicativo.
 
 La stesura di questo documento coprirà l'intero arco temporale del periodo di RTB, iniziando dal primo sprint e concludendosi con la revisione RTB che attesta la corretta definizione dei requisiti e delle tecnologie scelte.
@@ -308,10 +310,10 @@ Nel documento sono richieste le seguenti sezioni:
  - Pianificazione a lungo termine delle attività previste per l'*RTB*;
  - Analisi dettagliata dei singoli *sprint*.
 
-Il documento in questione verrà aggiornato nel corso di tutti gli *sprint*, poiché ha l'obiettivo di rendicontarne l'avanzamento.\ Le stime relative ai costi e alla data di consegna potrebbero essere aggiornate qualora emergano nuove informazioni o si rilevino previsioni errate. Allo stesso modo, l'analisi dei rischi e le reletive strategie di mitigazione protrebbero essre riviste ogni volta che viene rilevato un rischio, trattandosi di un processso continuo e non limitato al periodo iniziale.
+Il documento in questione verrà aggiornato nel corso di tutti gli *sprint*, poiché ha l'obiettivo di rendicontarne l'avanzamento.\ Le stime relative ai costi e alla data di consegna potrebbero essere aggiornate qualora emergano nuove informazioni o si rilevino previsioni errate. Allo stesso modo, l'analisi dei rischi e le reletive strategie di mitigazione potrebbero essere riviste ogni volta che viene rilevato un rischio, trattandosi di un processo continuo e non limitato al periodo iniziale.
 
 == Stesura Norme di Progetto
-Il documento *#G("Norme di Progetto", def: "Documento esecutivo interno al gruppo che definisce procedure, regole e strumenti per organizzare il lavoro in modo professionale e ripetibile.")* definisce il Way of Working del gruppo, stabilendo le regole e le procedure operative da seguire per garantire uniformità, efficienza ed efficacia nello svolgimento del progetto.
+Il documento #G("Norme di Progetto", def: "Documento esecutivo interno al gruppo che definisce procedure, regole e strumenti per organizzare il lavoro in modo professionale e ripetibile.") definisce il Way of Working del gruppo, stabilendo le regole e le procedure operative da seguire per garantire uniformità, efficienza ed efficacia nello svolgimento del progetto.
 
 Il documento prevede la definizione delle seguenti tipologie di processo:
 
@@ -320,10 +322,10 @@ Il documento prevede la definizione delle seguenti tipologie di processo:
 - *Processi di supporto:* definiscono le attività che integrano con i processi primari con l'obiettivo di semplificare e migliorare il lavoro del gruppo. Alcuni processi di supporto sono la *gestione delle configurazioni* e la *documentazione* 
 - *Processi organizzativi:* avvengono parallelamente ai processi primari, le attività previste da questi processi sono volte a garantire un'ottima organizzazione dei processi di ciclo vita e di migliorarli durante l'esecuzione del progetto. Esempio di processo organizzativo è la *formazione*.
 
-Questo documento è incrementale perciò verrà aggiornato durante tutto l'arco del progetto didattico, con l'obiettivo di ultimarlo definitavamente verso la fine del periodo di *RTB*, quando le attività e i processi saranno ben definiti.
+Questo documento è incrementale perciò verrà aggiornato durante tutto l'arco del progetto didattico, con l'obiettivo di ultimarlo definitivamente verso la fine del periodo di *RTB*, quando le attività e i processi saranno ben definiti.
 
 == Stesura glossario
-Il *glossario* ha lo scopo di facilitare la comprensione della documentazione da parte dei lettori esterni al gruppo _Astrum_ e di fissare, all'interno del team, definizioni univoche che riducano possibili ambiguità interpretative. Il documento viene costantemente aggiornato automaticamente tramite uno script in Phyton, integrando progressivamente nuove definizioni. La stesura completa è prevista al completamento del progetto didattico.
+Il *glossario* ha lo scopo di facilitare la comprensione della documentazione da parte dei lettori esterni al gruppo _Astrum_ e di fissare, all'interno del team, definizioni univoche che riducano possibili ambiguità interpretative. Il documento viene costantemente aggiornato automaticamente tramite uno script in Python, integrando progressivamente nuove definizioni. La stesura completa è prevista al completamento del progetto didattico.
 
 \
 = Pianificazione e analisi sprint per RTB
@@ -339,13 +341,13 @@ Questo primo *sprint* ha lo scopo di avviare lo studio delle varie tecnologie ne
 
 === Compiti da svolgere
 Il gruppo ha individuato i seguenti compiti da svolgere:
-- Studio delle tecnologie necessarie per la realizzazione del prodotto finale;
+- Studio iniziale delle tecnologie necessarie per la realizzazione del prodotto finale;
 - Stesura iniziale del *Piano di Progetto* da parte del responsabile;
 - Stesura iniziale dell'*Analisi dei Requisiti* da parte degli analisti.
 
 === Compiti svolti
 Il gruppo ha svolto con successo i seguenti compiti:
-- Studio delle tecnologie necessarie per la realizzazione del prodotto finale;
+- Studio iniziale delle tecnologie necessarie per la realizzazione del prodotto finale;
 - Stesura iniziale del *Piano di Progetto* da parte del responsabile;
 - Stesura iniziale dell'*Analisi dei Requisiti* da parte degli analisti.
 
@@ -377,13 +379,13 @@ Nelle tabelle di conteggio delle risorse utilizzate e rimanenti verranno utilizz
     
     "Corrado Bacco", "3", "-", "-", "-", "-", "-", [*3*],
     "Gianluca Bacco", "-", "-", "2", "-", "-", "-", [*2*],
-    "Gianluca Brotto", "-", "-", "-", "-", "-", "3", [*3*],
+    "Gianluca Brotto", "-", "-", "-", "-", "-", "4", [*4*],
     "Matteo De Col", "-", "-", "2", "-", "-", "-", [*2*],
     "Filippo De Guio", "-", "-", "3", "-", "-", "-", [*3*],
     "Samuele Gobbi", "-", "-", "-", "-", "-", "3", [*3*],
     "Thomas Morettin", "-", "6", "-", "-", "-", "-", [*6*],
     
-    table.footer([*TOTALE*], [*3*], [*6*], [*7*], [*0*], [*0*], [*6*], [*22*]),
+    table.footer([*TOTALE*], [*3*], [*6*], [*7*], [*0*], [*0*], [*7*], [*23*]),
   ),
   caption: [Sprint 1 - Risorse utilizzate]
 )
@@ -404,59 +406,39 @@ Nelle tabelle di conteggio delle risorse utilizzate e rimanenti verranno utilizz
     
     "Corrado Bacco", "3", "-", "-", "-", "-", "-", [*92*],
     "Gianluca Bacco", "-", "-", "2", "-", "-", "-", [*93*],
-    "Gianluca Brotto", "-", "-", "-", "-", "-", "3", [*92*],
+    "Gianluca Brotto", "-", "-", "-", "-", "-", "4", [*91*],
     "Matteo De Col", "-", "-", "2", "-", "-", "-", [*93*],
     "Filippo De Guio", "-", "-", "3", "-", "-", "-", [*92*],
     "Samuele Gobbi", "-", "-", "-", "-", "-", "3", [*92*],
     "Thomas Morettin", "-", "6", "-", "-", "-", "-", [*89*],
     
-    table.footer([*TOTALE*], [*3*], [*6*], [*7*], [*0*], [*0*], [*6*], [*643*]),
+    table.footer([*TOTALE*], [*3*], [*6*], [*7*], [*0*], [*0*], [*7*], [*642*]),
   ),
   caption: [Sprint 1 - Aggiornamento ore rimanenti]
 )
 
+#pagebreak()
 ==== Aggiornamento costi
+Nella tabella di aggiornamento dei costi i valori indicati tra parentesi fanno riferimento alle risorse utilizzate nello sprint analizzato.
+
 #figure(
   table(
-    columns: (1fr, 50pt, 75pt, 100pt, 100pt),
+    columns: (1fr, 1fr, 1fr),
     inset: 10pt,
-    stroke: (0.5pt + deco-line),
+    stroke: 0.5pt + deco-line,
     align: (col, _) => if col == 0 { left } else { center },
     table.header(
-      [*Ruolo*], [*%*], [*Ore totali*], [*Costo orario*], [*Costo totale*]
+      [*Ruolo*], [*Ore rimanenti*], [*Budget rimanente*]
     ),
-    [Responsabile], [8%], [52 (-3)], [30€/h], [1.560€ (-90€)],
-    [Amministratore], [8%], [49 (-6)], [20€/h], [980€ (-120€)],
-    [Analista], [11%], [63 (-7)], [25€/h], [1.575€ (-175€)],
-    [Progettista], [15%], [100], [25€/h], [2.500€],
-    [Programmatore], [29%], [195], [15€/h], [2.925€],
-    [Verificatore], [29%], [184 (-6)], [15€/h], [2.760€ (-90€)],
-    table.cell(align: right)[*TOTALE*], [*100%*], [*643*], [-], [*12.300€*]
+    [Responsabile], [52 (-3)], [1.560€ (-90€)],
+    [Amministratore], [49 (-6)], [980€ (-120€)],
+    [Analista], [63 (-7)], [1.575€ (-175€)],
+    [Progettista], [100], [2.500€],
+    [Programmatore], [195], [2.925€],
+    [Verificatore], [183 (-7)], [2.745€ (-105€)],
+    table.footer(
+      table.cell(align: right)[*TOTALE*], [*642 (-23)*], [*12.285€ (-490€)*]
+    ),
   ),
-  caption: [Sprint 1 - Aggiornamento costi])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+  caption: [Sprint 1 - Aggiornamento costi]
+)
