@@ -88,3 +88,22 @@ Per facilitare la lettura e la tracciabilità, la prima occorrenza di un termine
  - #link("https://www.math.unipd.it/~tullio/IS-1/2026/Dispense/T05.pdf")
  - #link("https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf")
 
+
+#pagebreak()
+= Casi d'Uso
+== Introduzione
+
+
+== Attori
+
+== Lista dei Casi d'Uso
+
+=== UC1 - Autenticazione Utente
+
+
+
+=== UC11 - 
+
+
+
+=== UC21 -
