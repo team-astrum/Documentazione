@@ -8,8 +8,10 @@
   verifica: ("Samuele Gobbi", "Gianluca Brotto"),
   approvazione: "",
   changelog: (
+    (ver: "0.1.2", data: "2026-11-18", autore: "Corrado Bacco", ruolo: "Redattore", verificatore: "Gianluca Brotto", desc: "Ulteriore correzione del documento."),
     (ver: "0.1.1", data: "2026-11-17", autore: "Corrado Bacco", ruolo: "Redattore", verificatore: "Gianluca Brotto", desc: "Correzione del documento."),
     (ver: "0.1.0", data: "2026-11-14", autore: "Corrado Bacco", ruolo: "Redattore", verificatore: "Gianluca Brotto", desc: "Completamento parziale del documento."),
+    (ver: "0.0.1", data: "2026-11-13", autore: "Corrado Bacco", ruolo: "Redattore", verificatore: "Gianluca Brotto", desc: "Stesura iniziale del documento."),
   )
 )
 
@@ -36,11 +38,13 @@ Il gruppo _Astrum_ ha scelto di adottare un approccio #G("agile", def: "Insieme 
 Questo processo permette di aggiornare costantemente la pianificazione delle attività e dei task, migliorare i processi tramite review o retrospective periodiche e mantenere una stima realistica del completamento finale.
 
 == Glossario
-Il *glossario* è un documento redatto dal gruppo e aggiornato nell'arco del progetto didattico, con lo scopo di fornire definizioni coerenti per i termini tecnici e specifici al corso di Ingegneria del Software. 
+Il *glossario* è un documento redatto dal gruppo e costantemente aggiornato nel corso del progetto didattico, con l'obiettivo di offrire definizioni coerenti e condivise dei termini tecnici.
 
-Questo documento risulta fondamentale per garantire una comprensione uniforme della documentazione prodotta ai soggetti esterni al gruppo e per definire uno standard di comunicazione interna tra i membri del gruppo, riducendo possibili incomprensioni e ambiguità. 
+Questo documento riveste un ruolo chiave per due motivi principali:
+- *_Comunicazione interna:_* definisce uno standard linguistico comune tra i membri del team, riducendo il rischio di ambiguità e incomprensioni.
+- *_Comprensione esterna:_* garantisce che la documentazione prodotta risulti chiara e uniforme anche per chi è esterno al gruppo.
 
-Per indicare che la definizione di una parola o di un concetto è disponibile nel glossario, si è deciso di utilizzare la seguente notazione: definizione nel glossario#sub[G]
+Per segnalare che una determinata parola o un concetto possiede una definizione ufficiale all'interno del documento, si adotta la specifica notazione: definizione nel glossario#sub[G].
 
 == Riferimenti
 === Riferimenti normativi
@@ -63,7 +67,7 @@ Per indicare che la definizione di una parola o di un concetto è disponibile ne
 
 - *Glossario:*
   - #underline[https://team-astrum.github.io/Documentazione/glossario.pdf]
-
+\
 == Redazione del documento
 Il *responsabile* è la figura incaricata di compilare e aggiornare il documento, con cadenza regolare al termine di ogni sprint.
 
@@ -78,6 +82,7 @@ Il workflow previsto per ogni sprint è il seguente:
  - aggiorna ore e budget rimanente.
 + Infine, il *responsabile subentrante* definisce i compiti da svolgere nello sprint corrente, individua i rischi attesi e compila il *preventivo* delle risorse necessarie.
 
+#pagebreak()
 
 = Analisi e mitigazione dei rischi
 Questa sezione analizza i potenziali rischi e le difficoltà che il gruppo potrebbe incontrare durante lo svolgimento del progetto didattico.\
@@ -94,7 +99,6 @@ L'analisi dei rischi si articola in quattro fasi:\
 
 Si riportano di seguito i rischi individuati dal gruppo, accompagnati dalla relativa analisi e dalle strategie di mitigazione.
 
-\
 == Rischi tecnologici
 === Apprendimento di nuove tecnologie
 #figure(
@@ -121,7 +125,7 @@ Si riportano di seguito i rischi individuati dal gruppo, accompagnati dalla rela
     stroke: 0.5pt + deco-line,
     align: (col, row) => if col == 0 { left + top } else { left + top },
 
-    [*Descrizione*], [Il gruppo potrebbe incontrare difficoltà nello sviluppo software del #G("PoC", def: "Proof of Concept - artefatto realizzato ad inizio progetto con lo scopo di valutare la fattibilità tecnologica del prodotto atteso. Deve rappresentare le richieste principali del capitolato.") o l'#G("MVP", def: "Minimum Viable Product - approssimazione del prodotto atteso dalla proponente, dotata di funzionalità minime ma sufficienti a essere testata e valutare la qualità della visione iniziale."), dovute a bug di programmazione o, nei casi più gravi, a errori di design. Tali problematiche potrbbero rallentare significatamente le attività e ostacolare il raggiungimento degli obiettivi.], 
+    [*Descrizione*], [Il gruppo potrebbe incontrare difficoltà nello sviluppo software del #G("PoC (Proof of Concept)", def: "Artefatto realizzato ad inizio progetto con lo scopo di valutare la fattibilità tecnologica del prodotto atteso. Deve rappresentare le richieste principali del capitolato.") o l'#G("MVP (Minimum Viable Product)", def: "Approssimazione del prodotto atteso dalla proponente, dotata di funzionalità minime ma sufficienti a essere testata e valutare la qualità della visione iniziale."), dovute a bug di programmazione o, nei casi più gravi, a errori di design. Tali problematiche potrbbero rallentare significatamente le attività e ostacolare il raggiungimento degli obiettivi.], 
     
     [*Misure di mitigazione*], [Il gruppo è consapevole che gli errori di programmazione sono inevitabili, sopprattutto considerando la limitata esperienza dei componenti del gruppo.\ Per mitigare questo rischio, si è scelto di adottare un approccio di sviluppo #G("fail fast", def: "approccio di sviluppo che mira a identificare e risolvere errori o problemi il prima possibile, evitando di perdere tempo e risorse in progetti o funzionalità non validi."), con l'obiettivo di individuare i bug software il prima possibile attraverso:\
     - Scrittura di test corretti e aggiornati per ogni funzionalità implementata, in modo da rilevare eventuali regressioni o malfunzionamenti;
@@ -258,8 +262,7 @@ Il gruppo _Astrum_ si impegna a presentare la candidatura per l'*RTB* entro il *
 = Impegno orario previsto
 Il gruppo ha deciso di dedicare un totale di *95 ore produttive* per ogni componente, le quali verranno distribuite tra diversi ruoli.
 
-#pagebreak()
-
+\
 = Stima dei costi realizzazione
 Il preventivo dei costi riportato di seguito è stato calcolato moltiplicando le ore assegnate a ciascun ruolo per il relativo costo orario.
 #figure(
@@ -282,24 +285,36 @@ Il preventivo dei costi riportato di seguito è stato calcolato moltiplicando le
   caption: [Preventivo con ripartizione ore per ruolo])
 \
 = Pianificazione RTB
-La *RTB* è un periodo in cui vengono fissati i requisiti da soddisfare e si motivano le tecnologie, i framework e le librerie scelte. Inoltre, è necessario produrre un artefatto, chiamato *PoC*, il quale ha lo scopo di valutare la fattibilità del prodotto atteso secondo le scelte implementative intraprese.
-
+L'*RTB* è la fase in cui vengono definiti i requisiti da soddisfare e si giustifica la scelta di tecnologie, framework e librerie. Durante questo periodo è inoltre richiesta la realizzazione del *PoC*, un artefatto finalizzato a verificare la fattibilità del prodotto atteso alla luce delle soluzioni implementative adottate.
 == Stesura Analisi dei Requisiti
-Il documento #G("Analisi dei Requisiti", def: "Attività che studia i bisogni dell'utente e del dominio d'uso per definire che cosa il prodotto software deve fare per soddisfarli, senza descrivere come sarà realizzato. Produce una specifica completa, verificabile e tracciabile dei requisiti del sistema ") ha lo scopo di formalizzare le specifiche del prodotto finale, definendo in modo chiaro le funzionalità, i vincoli e le interazioni del sistema. Questo documento rappresenta il riferimento principale per la verifica della conformità del prodotto rispetto alle richieste dell'azienda proponente. \ Per la stesura dell'*Analisi dei Requisiti* sono previste le seguenti attività:
+Il documento #G("Analisi dei Requisiti", def: "Attività che studia i bisogni dell'utente e del dominio d'uso per definire che cosa il prodotto software deve fare per soddisfarli, senza descrivere come sarà realizzato. Produce una specifica completa, verificabile e tracciabile dei requisiti del sistema ") ha lo scopo di formalizzare le specifiche del prodotto finale, definendo  le funzionalità, i vincoli e le interazioni del prodotto finale. Questo documento rappresenta il riferimento principale per la verifica della conformità del prodotto rispetto alle richieste dell'azienda proponente. \ Per la stesura dell'*Analisi dei Requisiti* sono previste le seguenti attività:
 
 - *Analisi del capitolato e identificazione delle tecnologie:* analisi approfondita del capitolato con identificazione delle tecnologie necessarie per lo sviluppo del prodotto finale;
 
 - *Definizione scenari d'uso:* individuazione degli scenari applicativi di ogni tecnologia con l'obiettivo di scomporli in casi d'uso più specifici;
 
-- *Definizione dei casi d'uso (use case):* modellazione delle interazioni tramite diagrammi UML e descrizioni testuali dettagliate, comprendenti pre e post-condizioni, scenari applicativi principali e alternativi
-\
+- *Definizione dei casi d'uso (use case):* modellazione delle interazioni tramite diagrammi UML con pre e post-condizioni, analisi degli scenari applicativi principali e alternativi;
 
 - *Specifica dei requisiti:* individuazione e classificazione dei requisiti in:
- - Funzionali: comportamenti attesi dal prodotto finale;
- - Non funzionali: vincoli di qualità, performace, e sicurezza;
- - Di dominio: vincoli dipendenti dal contesto applicativo.
+ - _Funzionali:_ comportamenti attesi dal prodotto finale;
+ - _Non funzionali:_ vincoli di qualità, performace, e sicurezza;
+ - _Di dominio:_ vincoli dipendenti dal contesto applicativo.
 
 La stesura di questo documento coprirà l'intero arco temporale del periodo di RTB, iniziando dal primo sprint e concludendosi con la revisione RTB che attesta la corretta definizione dei requisiti e delle tecnologie scelte.
+
+
+== Stesura Norme di Progetto
+Il documento #G("Norme di Progetto", def: "Documento esecutivo interno al gruppo che definisce procedure, regole e strumenti per organizzare il lavoro in modo professionale e ripetibile.") definisce il Way of Working del gruppo, stabilendo le regole e le procedure di lavoro da seguire per garantire uniformità, efficienza ed efficacia nello sviluppo del progetto.
+
+Il documento prevede la definizione delle seguenti tipologie di processo:
+
+- *Processi primari:* definiscono le attività direttamente legate alla realizzazione del prodotto finale, come l'*aggiudicazione dell'appalto*;
+
+- *Processi di supporto:* definiscono le attività che integrano con i processi primari con l'obiettivo di semplificare e migliorare il lavoro del gruppo. Alcuni processi di supporto sono la gestione dell'*organizzazione GitHub* e la stesura della *documentazione* 
+- *Processi organizzativi:* avvengono parallelamente ai processi primari, le attività previste da questi processi sono volte a garantire un'ottima organizzazione dei processi di ciclo vita e di migliorarli durante l'esecuzione del progetto. Esempio di processo organizzativo è la *formazione*.
+
+Questo documento è incrementale perciò verrà aggiornato durante tutto l'arco del progetto didattico, con l'obiettivo di ultimarlo definitivamente verso la fine del periodo di *RTB*, quando le attività e i processi saranno ben definiti.
+
 
 == Stesura Piano di Progetto
 Il *Piano di Progetto* definisce in modo chiaro e strutturato tutte le attività necessarie alla realizzazione del progetto, stabilendo risorse, modalità lavorative e tempistiche di sviluppo.
@@ -310,22 +325,11 @@ Nel documento sono richieste le seguenti sezioni:
  - Pianificazione a lungo termine delle attività previste per l'*RTB*;
  - Analisi dettagliata dei singoli *sprint*.
 
-Il documento in questione verrà aggiornato nel corso di tutti gli *sprint*, poiché ha l'obiettivo di rendicontarne l'avanzamento.\ Le stime relative ai costi e alla data di consegna potrebbero essere aggiornate qualora emergano nuove informazioni o si rilevino previsioni errate. Allo stesso modo, l'analisi dei rischi e le reletive strategie di mitigazione potrebbero essere riviste ogni volta che viene rilevato un rischio, trattandosi di un processo continuo e non limitato al periodo iniziale.
+Il documento in questione verrà aggiornato nel corso di tutti gli *sprint*, poiché ha l'obiettivo di rendicontare l'avanzamento del progetto. \ Le stime relative ai costi e alla data di consegna potrebbero essere aggiornate qualora emergano nuove informazioni o si rilevino previsioni errate. Allo stesso modo, l'analisi dei rischi e le reletive strategie di mitigazione potrebbero essere riviste ogni volta che viene rilevato un rischio, trattandosi di un processo continuo e non limitato al periodo iniziale.
 
-== Stesura Norme di Progetto
-Il documento #G("Norme di Progetto", def: "Documento esecutivo interno al gruppo che definisce procedure, regole e strumenti per organizzare il lavoro in modo professionale e ripetibile.") definisce il Way of Working del gruppo, stabilendo le regole e le procedure operative da seguire per garantire uniformità, efficienza ed efficacia nello svolgimento del progetto.
-
-Il documento prevede la definizione delle seguenti tipologie di processo:
-
-- *Processi primari:* definiscono le attività direttamente legate alla realizzazione del prodotto finale, come l'*aggiudicazione dell'appalto*;
-
-- *Processi di supporto:* definiscono le attività che integrano con i processi primari con l'obiettivo di semplificare e migliorare il lavoro del gruppo. Alcuni processi di supporto sono la *gestione delle configurazioni* e la *documentazione* 
-- *Processi organizzativi:* avvengono parallelamente ai processi primari, le attività previste da questi processi sono volte a garantire un'ottima organizzazione dei processi di ciclo vita e di migliorarli durante l'esecuzione del progetto. Esempio di processo organizzativo è la *formazione*.
-
-Questo documento è incrementale perciò verrà aggiornato durante tutto l'arco del progetto didattico, con l'obiettivo di ultimarlo definitivamente verso la fine del periodo di *RTB*, quando le attività e i processi saranno ben definiti.
-
+#pagebreak()
 == Stesura glossario
-Il *glossario* ha lo scopo di facilitare la comprensione della documentazione da parte dei lettori esterni al gruppo _Astrum_ e di fissare, all'interno del team, definizioni univoche che riducano possibili ambiguità interpretative. Il documento viene costantemente aggiornato automaticamente tramite uno script in Python, integrando progressivamente nuove definizioni. La stesura completa è prevista al completamento del progetto didattico.
+Il *glossario* ha lo scopo di facilitare la comprensione della documentazione da parte dei lettori esterni al gruppo _Astrum_ e di fissare, all'interno del team, definizioni univoche che riducano possibili ambiguità interpretative. Il documento viene costantemente aggiornato automaticamente tramite uno script in Python, integrando progressivamente nuove definizioni. La stesura completa è conseguente alla conclusione del progetto didattico.
 
 \
 = Pianificazione e analisi sprint per RTB
