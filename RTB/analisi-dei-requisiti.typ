@@ -135,7 +135,7 @@ Quelli individuati sono:
 
 === UC1 - Autenticazione Utente
 
-=== UC11 - Impostazione frequenza di controllo del canale di comunicazione
+=== UC10 - Impostazione frequenza di controllo del canale di comunicazione
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* -\
@@ -159,10 +159,10 @@ Quelli individuati sono:
 
 - *Spiecializzazioni:* -
 
-- *Estensioni:* UC18
+- *Estensioni:* UC17
 
 
-=== UC12 - Modifica configurazione canale di comunicazione
+=== UC11 - Modifica configurazione canale di comunicazione
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* -\
@@ -181,13 +181,13 @@ Quelli individuati sono:
 - *Scenari alternativi:* \
    - Configurazione inserita non valida: se mancano campi obbligatori o i dati non sono validi, l'applicativo blocca il salvataggio della configurazione e notifica l'errore.
    - Annullamento: l'amministratore annulla l'operazione prima di salvare, l'applicativo ripristina i valori precedenti senza apportare modifiche. 
-- *Inclusioni:* UC11\
+- *Inclusioni:* UC10\
 
-- *Estensioni:* UC18
+- *Estensioni:* UC17
 
 - *Spiecializzazioni:* -
 
-=== UC13 - Attivazione del canale di comunicazione
+=== UC12 - Attivazione del canale di comunicazione
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* -\
@@ -207,9 +207,9 @@ Quelli individuati sono:
 
 - *Spiecializzazioni:* -
 
-- *Estensioni:* UC18
+- *Estensioni:* UC17
 
-=== UC14 - Disattivazione del canale di comunicazione 
+=== UC13 - Disattivazione del canale di comunicazione 
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* -\
@@ -231,7 +231,7 @@ Quelli individuati sono:
 
 - *Spiecializzazioni:* -
 
-=== UC15 - Eliminazione del canale di comunicazione 
+=== UC14 - Eliminazione del canale di comunicazione 
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* -\
@@ -255,7 +255,7 @@ Quelli individuati sono:
 - *Estensioni:* -
 - *Spiecializzazioni:* -
 
-=== UC16 - Connessione al canale di comunicazione 
+=== UC15 - Connessione al canale di comunicazione 
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* Mail, WhatsApp\
@@ -277,9 +277,9 @@ Quelli individuati sono:
 
 - *Inclusioni:* -\
 - *Spiecializzazioni:* -
-- *Estensioni:* UC17, UC18
+- *Estensioni:* UC16, UC17
 
-=== UC17 - Connessione al canale di comunicazione non riuscita
+=== UC16 - Connessione al canale di comunicazione non riuscita
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* Mail, WhatsApp\
@@ -301,7 +301,7 @@ Quelli individuati sono:
 - *Estensioni:* -
 - *Spiecializzazioni:* -
 
-=== UC18 - Configurazione del canale di comunicazione non valida
+=== UC17 - Configurazione del canale di comunicazione non valida
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* -\
@@ -326,7 +326,7 @@ Quelli individuati sono:
 - *Spiecializzazioni:* -
 
 #pagebreak()
-=== UC19 - Associazione canale a tenant
+=== UC18 - Associazione canale a tenant
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* -\
@@ -354,7 +354,7 @@ Quelli individuati sono:
 - *Spiecializzazioni:* -
 
 
-=== UC20 - Creazione del tenant
+=== UC19 - Creazione del tenant
 - *Attore primario:* Amministratore \
 
 - *Attori secondari:* -\
@@ -372,13 +372,13 @@ Quelli individuati sono:
    + L'applicativo verifica l'unicità del nome, memorizza il nuovo tenant e mostra un messaggio di successo.
 
 - *Scenari alternativi:* \
-   - Nome tenant già esistente: se il nome del tenant è già presente all'interno dell'applicativo, l'operazione viene bloccta e viene mostrato un messaggio di errore.
+   - Nome tenant già esistente: se il nome del tenant è già presente all'interno dell'applicativo, l'operazione viene bloccata e viene mostrato un messaggio di errore.
 
 - *Inclusioni:* -\
 
 - *Spiecializzazioni:* -
 
-- *Estensioni:* UC21
+- *Estensioni:* UC20
 
 
 
