@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
+    (ver: "0.2.0", data: "2026-11-18", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"", desc: "Stesuara Introduzione e Attori della sezione Casi d'Uso"),
     (ver: "0.1.0", data: "2026-11-09", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Completamento della sezione introduttiva."),
     (ver: "0.0.1", data: "2026-11-07", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Creazione e stesura della bozza iniziale di documento."),
   )
@@ -92,18 +93,47 @@ Per facilitare la lettura e la tracciabilità, la prima occorrenza di un termine
 #pagebreak()
 = Casi d'Uso
 == Introduzione
+La presente sezione descrive le funzionalità offerte dal sistema _AIRA_ dal punto di vista degli utenti e dei sistemi esterni che interagiscono con esso, attraverso diagrammi dei #G("Casi d'Uso", def: "Un Caso d'Uso è un insieme di scenari (sequenze di azioni) che hanno in comune uno scopo finale (obiettivo) per un utente (attore).") e delle relative descrizioni testuali.
 
+Per garantire uniformità e tracciabilità rispetto ai requisiti, ogni Caso d'Uso è identificato da un codice univoco con formato _UCn_, dove _n_ è un numero intero progressivo. Questa notazione si applica ai Casi d'Uso autonomi e a quelli che estendono un altro Caso d'Uso tramite relazione di estensione («extend»).
 
-== Attori
+I Casi d'Uso che dipendono strutturalmente da un Caso d'Uso di riferimento, ovvero quelli ottenuti tramite relazione di inclusione («include») o di generalizzazione, adottano invece la notazione _UCn.m_, dove _n_ indica il Caso d'Uso di riferimento (rispettivamente, quello che include e quello generalizzato) e _m_ un numero progressivo interno ad esso.
+
+Ciascun Caso d'Uso è corredato da una scheda strutturata che riporta:
++ *Attore principale:* l'#G("attore", def: "qualsiasi entità esterna al sistema che interagisce con esso per raggiungere un determinato obiettivo") che avvia il Caso d'Uso per raggiungere un obiettivo;
++ *Attori secondari:* sistemi o servizi esterni coinvolti durante l'esecuzione del flusso;
++ *Precondizioni:* condizioni che devono risultare vere prima dell'inizio del Caso d'Uso;
++ *Postcondizioni:* condizioni che risultano vere al termine dello scenario principale, a seguito del suo completamento con successo;
++ *Trigger:* l'evento che dà inizio all'esecuzione del Caso d'Uso;
++ *Scenario principale:* sequenza di passi che descrive il caso in cui l'obiettivo dell'attore principale viene raggiunto senza deviazioni;
++ *Scenari alternativi:* deviazioni dallo scenario principale, ciascuna associata alla condizione che la determina;
++ *Inclusioni:* Casi d'Uso inclusi dal Caso d'Uso corrente (relazione «include»). Il loro comportamento viene eseguito sempre e incondizionatamente durante lo scenario del Caso d'Uso base, che non può completarsi senza di essi;
++ *Estensioni:* Casi d'Uso che estendono il Caso d'Uso corrente (relazione «extend»). Vengono eseguiti solo al verificarsi di una condizione specifica;
++ *Generalizzazioni:* varianti del Caso d'Uso generale e sono tra loro mutualmente esclusive, senza imporre un percorso di esecuzione obbligatorio;
+
+== Attori 
+Gli attori rappresentano le entità esterne al sistema che interagiscono direttamente con esso.
+Quelli individuati sono:
+
+- *Mittente (attore generalizzato):* soggetto esterno che invia richieste al sistema tramite i canali previsti.
+  - *Cliente censito:* mittente presente nell'anagrafica. Invia richieste (e-mail con allegati, messaggi WhatsApp testuali e vocali) che il sistema deve elaborare. Può ricevere risposte automatiche in caso di ricezione o errore nella ricezione.
+  - *Mittente non censito:* mittente non presente nell'anagrafica. Le sue richieste devono essere bloccate dal Filto Sicurezza.
+
+- *Utente non autenticato:* soggetto che tenta di accedere all'interfaccia amministrativa prima di aver effettuato l'autenticazione.
+- *Utente autenticato:* soggetto che si è autenticato al sistema. Per garantire un accesso differenziato si specializza nei seguenti profili:
+  - *Amministratore*: utente con privilegi elevati, può configurare i canali attivi, consultare le richieste, consultare lo storico dei log e gestire la persistenza locale dei dati.
+  - *Operatore:* utente che si occupa dell'eventuale validazione manuale delle richieste.
+  
+- *Canale e-mail:* casella di posta elettronica esterna monitorata dal sistema per l'acquisizione delle richieste (testo e allegati). Può essere utilizata anche per l'invio delle risposte automatiche al mittente.
+- *Canale WhatsApp:* servizio di messaggistica esterno, monitorato dal sistema per l'acquisizione delle richieste (testuali e vocali). Può essere utilizzato anche per l'invio delle risposte automatiche al mittente.
+- *Servizio LLM:* esegue l'interpretazione semantica. Riceve il testo da interpretare e restituisce le informazioni strutturate corrispondenti (tipologia della richiesta, entità rilevate, intenzione principale)
+- *Sistema gestionale di destinazione* (#G("B2B"), #G("ERP"), #G("CRM"), ticketing): riceve i dati validati tramite #G("API REST", def: "interfaccia di programmazione che permette a due applicazioni di comunicare tra loro tramite internet usando lo stesso protocollo del web: HTTP").
+
 
 == Lista dei Casi d'Uso
 
 === UC1 - Autenticazione Utente
 
-
-
 === UC11 - 
-
-
 
 === UC21 -
