@@ -8,7 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
-    (ver: "0.2.0", data: "2026-11-18", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"", desc: "Stesuara Introduzione e Attori della sezione Casi d'Uso"),
+    (ver: "0.2.0", data: "2026-11-18", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Filippo De Guio", desc: "Stesuara Introduzione e Attori della sezione Casi d'Uso"),
     (ver: "0.1.0", data: "2026-11-09", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Completamento della sezione introduttiva."),
     (ver: "0.0.1", data: "2026-11-07", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Creazione e stesura della bozza iniziale di documento."),
   )
