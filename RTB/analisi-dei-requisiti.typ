@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
+    (ver: "0.3.0", data: "2026-11-19", autore: "Corrado Bacco", ruolo: "Redattore", verificatore:"", desc: "Stesuara Casi d'Uso da UC11 a UC20"),
     (ver: "0.2.0", data: "2026-11-18", autore: "Gianluca Brotto", ruolo: "Redattore", verificatore:"Filippo De Guio", desc: "Stesuara Introduzione e Attori della sezione Casi d'Uso"),
     (ver: "0.1.0", data: "2026-11-09", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Completamento della sezione introduttiva."),
     (ver: "0.0.1", data: "2026-11-07", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Creazione e stesura della bozza iniziale di documento."),
@@ -109,7 +110,7 @@ Ciascun Caso d'Uso è corredato da una scheda strutturata che riporta:
 + *Scenari alternativi:* deviazioni dallo scenario principale, ciascuna associata alla condizione che la determina;
 + *Inclusioni:* Casi d'Uso inclusi dal Caso d'Uso corrente (relazione «include»). Il loro comportamento viene eseguito sempre e incondizionatamente durante lo scenario del Caso d'Uso base, che non può completarsi senza di essi;
 + *Estensioni:* Casi d'Uso che estendono il Caso d'Uso corrente (relazione «extend»). Vengono eseguiti solo al verificarsi di una condizione specifica;
-+ *Generalizzazioni:* varianti del Caso d'Uso generale e sono tra loro mutualmente esclusive, senza imporre un percorso di esecuzione obbligatorio;
++ *Specializzazioni:* varianti del Caso d'Uso generale e sono tra loro mutualmente esclusive, senza imporre un percorso di esecuzione obbligatorio;
 
 == Attori 
 Gli attori rappresentano le entità esterne al sistema che interagiscono direttamente con esso.
@@ -134,6 +135,252 @@ Quelli individuati sono:
 
 === UC1 - Autenticazione Utente
 
-=== UC11 - 
+=== UC11 - Impostazione frequenza di controllo del canale di comunicazione
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* -\
+
+- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è almeno configurato un canale di comunicazione (Mail, WhatsApp).
+
+- *Postcondizioni:* la frequenza di monitoraggio dei canali di comunicazione è configurata nel sistema e applicata dallo Scheduler.\
+
+- *Trigger:* l'amministratore ha la possibilità di impostare o modificare la frequenza di controllo di un canale specifico.
+
+- *Scenario principale:* \
+  + L'amministratore accede alla sezione di configurazione dei canali e seleziona il canale desiderato.
+  + L'amministratore inserisce il valore relativo alla frequenza di controllo (intervallo di polling per il monitoraggio).
+  + L'amministratore conferma il salvataggio del parametro.
+  + L'applicativo verifica la validità del valore inserito e aggiorna la configurazione del canale.
+  \
+- *Scenari alternativi:* \
+  - Valore inserito non valido: se il valore di frequenza inserito non rispetta i limiti consentiti, il sistema annulla il salvataggio e mostra un messaggio di errore. 
+
+- *Inclusioni:* -\
+
+- *Spiecializzazioni:* -
+
+- *Estensioni:* UC18
+
+
+=== UC12 - Modifica configurazione canale di comunicazione
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* -\
+
+- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione. 
+- *Postcondizioni:* i parametri aggiornati del canale (es. credenziali, host, percorso o cartella monitorata) sono presenti nel database.\
+
+- *Trigger:* l'amministratore seleziona un canale esistente e avvia la procedura di modifica dei suoi parametri.
+
+- *Scenario principale:* \
+   + L'amministratore visualizza il dettaglio del canale e attiva la modalità di modifica.
+   + L'amministratore aggiorna uno o più campi di configurazione (credenziali, cartella da modificare o frequenza).
+   + L'amministratore salva le modifiche.
+   + L'applicativo valida la completezza e correttezza formale dei dati inseriti e registra la nuova configurazione.
+
+- *Scenari alternativi:* \
+   - Configurazione inserita non valida: se mancano campi obbligatori o i dati non sono validi, l'applicativo blocca il salvataggio della configurazione e notifica l'errore.
+   - Annullamento: l'amministratore annulla l'operazione prima di salvare, l'applicativo ripristina i valori precedenti senza apportare modifiche. 
+- *Inclusioni:* UC11\
+
+- *Estensioni:* UC18
+
+- *Spiecializzazioni:* -
+
+=== UC13 - Attivazione del canale di comunicazione
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* -\
+
+- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione che si trova nello stato "disattivato". 
+- *Postcondizioni:* lo stato del canale passa ad "attivo" e lo Scheduler avvia il monitoraggio periodico.
+
+- *Trigger:* l'amministratore seleziona il comando di attivazione su un canale disattivo.
+
+- *Scenario principale:* \
+   + L'amministratore individua un canale disattivo nella lista dei canali configurati nell'applicativo.
+   + L'amministratore seleziona l'opzione di attivazione del canale.
+   + L'applicativo verifica la validità della configurazione e aggiorna lo stato del canale ad "attivo".
+- *Scenari alternativi:* \
+   - Configurazione incompleta: se il canale non possiede tutti i parametri validi, l'applicativo impedisce l'attivazione e mostra un errore.
+- *Inclusioni:* -\
+
+- *Spiecializzazioni:* -
+
+- *Estensioni:* UC18
+
+=== UC14 - Disattivazione del canale di comunicazione 
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* -\
+
+- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione che attualmente è in stato "attivo". 
+- *Postcondizioni:* lo stato del canale passa a "disattivo" e lo Scheduler sospende il monitoraggio periodico.
+
+- *Trigger:* l'amministratore seleziona il comando di disattivazione su un canale attivo.
+
+- *Scenario principale:* \
+   + L'amministratore individua un canale attivo nella lista dei canali configurati nell'applicativo.
+   + L'amministratore seleziona l'opzione di disattivazione del canale.
+   + L'applicativo imposta lo stato su "disattivo" e interrompe la ricezione di nuove richieste da quel canale.
+- *Scenari alternativi:* - \
+
+- *Inclusioni:* -\
+
+- *Estensioni:* -
+
+- *Spiecializzazioni:* -
+
+=== UC15 - Eliminazione del canale di comunicazione 
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* -\
+
+- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione. 
+- *Postcondizioni:* il canale di comunicazione selezionato viene rimosso definitivamente dall'applicativo.
+
+- *Trigger:* l'amministratore seleziona l'azione di eliminazione di un canale.
+
+- *Scenario principale:* \
+   + L'amministratore seleziona il canale da eliminare.
+   + L'applicativo chiede, attraverso un banner, la conferma dell'eliminazione del canale scelto.
+   + L'amministratore conferma l'eliminazione del canale selezionato.
+   + L'applicativo rimuove definitivamente la configurazione del canale eliminato.
+
+- *Scenari alternativi:* \
+   - Annullamento: l'amministratore rifiuta o chiude il banner di conferma; l'operazione viene interrotta.
+
+- *Inclusioni:* -
+
+- *Estensioni:* -
+- *Spiecializzazioni:* -
+
+=== UC16 - Connessione al canale di comunicazione 
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* Mail, WhatsApp\
+
+- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed ha inserito i parametri di configurazione del canale.
+- *Postcondizioni:* l'amministratore riceve riscontro immediato sull'esito della connettività verso il servizio esterno.
+
+- *Trigger:* l'amministratore imposta "attivo" il canale e viene avviata la connessione.
+
+- *Scenario principale:* \
+   + L'amministratore attiva un canale di comunicazione configurato nell'applicativo.
+   + L'applicativo tenta la connessione al canale selezionato attraverso i parametri configurati.
+   + La connessione ha esito positivo e l'applicativo mostra un messaggio di successo.
+
+
+- *Scenari alternativi:* \
+   - Parametri non validi: se i parametri inseriti nella configurazione del canale non sono corretti, la connessione viene rifiutata.
+   - Connessione non riuscita: se il servizio esterno non è raggiungibile o rifiuta i parametri inseriti, la connessione non viene stabilita.
+
+- *Inclusioni:* -\
+- *Spiecializzazioni:* -
+- *Estensioni:* UC17, UC18
+
+=== UC17 - Connessione al canale di comunicazione non riuscita
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* Mail, WhatsApp\
+
+- *Precondizioni:* è stato avviato un tentativo di connessione e il servizio esterno ha restituito un errore.
+
+- *Postcondizioni:* l'amministratore viene informato del fallimento della connessione attraverso un banner di errore.
+
+- *Trigger:* rilevamento di un errore di rete o di autenticazione durante il tentativo di connessione.
+
+- *Scenario principale:* \
+   + L'applicativo intercetta l'errore restituito dal canale esterno.
+   + L'applicativo registra l'esito negativo e mostra un messaggio di errore all'amministratore.
+
+- *Scenari alternativi:* - \
+
+- *Inclusioni:* -\
+
+- *Estensioni:* -
+- *Spiecializzazioni:* -
+
+=== UC18 - Configurazione del canale di comunicazione non valida
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* -\
+
+- *Precondizioni:* tentativo di salvataggio di una configurazione di canale con dati mancanti o errati.
+
+- *Postcondizioni:* la configurazione non viene salvata e vengono evidenziati gli errori riscontrati.
+
+- *Trigger:* rilevamento di anomalie di validazione sui campi della configurazione del canale.
+
+- *Scenario principale:* \
+   + L'applicativo esegue i controlli di validazione sui parametri inseriti.
+   + L'applicativo rileva i campi obbligatori vuoti o non corretti.
+   + L'applicativo blocca l'operazione in corso e mostra i dettagli dell'errore all'amministratore.
+
+- *Scenari alternativi:* -\
+
+- *Inclusioni:* -\
+
+- *Estensioni:* -
+
+- *Spiecializzazioni:* -
+
+#pagebreak()
+=== UC19 - Associazione canale a tenant
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* -\
+
+- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed esiste almeno un canale di comunicazione configurato e almeno un tenant registrato.
+
+- *Postcondizioni:* il canale risulta collegato al tenant scelto, garantendo l'isolamento logico della richieste. 
+
+- *Trigger:* l'amministratore seleziona il tenant di riferimento per un canale.
+
+- *Scenario principale:* \
+   + L'amministratore accede alla configurazione del canale.
+   + L'amministratore seleziona il tenant desiderato dall'elenco disponibile.
+   + L'amministratore conferma il salvataggio dell'associazione.
+   + L'applicativo memorizza il legame tra canale e tenant nel database.
+
+
+- *Scenari alternativi:* \
+   - Nessun tenant disponibile: se non esistono tenant registrati, l'amministratore deve prima crearne uno.
+
+- *Inclusioni:* -\
+
+- *Estensioni:* -
+
+- *Spiecializzazioni:* -
+
+
+=== UC20 - Creazione del tenant
+- *Attore primario:* Amministratore \
+
+- *Attori secondari:* -\
+
+- *Precondizioni:* l'amministratore è autenticato nell'interfaccia amministrativa.
+
+- *Postcondizioni:* un nuovo tenant con spazio logico isolato viene registrato nel database.
+
+- *Trigger:* l'amministratore avvia la procedura di creazione di un nuovo tenant.
+
+- *Scenario principale:* \
+   + L'amministratore accede alla sezione dei tenant e seleziona la creazione di un nuovo elemento.
+   + L'amministratore inserisce il nome identificativo del tenant.
+   + L'amministratore conferma la creazione del tenant.
+   + L'applicativo verifica l'unicità del nome, memorizza il nuovo tenant e mostra un messaggio di successo.
+
+- *Scenari alternativi:* \
+   - Nome tenant già esistente: se il nome del tenant è già presente all'interno dell'applicativo, l'operazione viene bloccta e viene mostrato un messaggio di errore.
+
+- *Inclusioni:* -\
+
+- *Spiecializzazioni:* -
+
+- *Estensioni:* UC21
+
+
+
 
 === UC21 -
