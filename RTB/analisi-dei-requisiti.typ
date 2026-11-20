@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
+    (ver: "0.4.2", data: "2026-11-20", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Correzione del documento"),
     (ver: "0.4.1", data: "2026-11-20", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Inserimento diagrammi casi d'uso UC1 - UC9"),
     (ver: "0.4.0", data: "2026-11-19", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso UC1 - UC9"),
     (ver: "0.3.0", data: "2026-11-19", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC10 a UC19"),
