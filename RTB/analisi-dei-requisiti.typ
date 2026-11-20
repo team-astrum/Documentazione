@@ -581,7 +581,7 @@ Quelli individuati sono:
 
 - *Inclusioni:* -\
 
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 - *Estensioni:* UC17
 
@@ -609,7 +609,7 @@ Quelli individuati sono:
 
 - *Estensioni:* UC17
 
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC12 - Attivazione del canale di comunicazione
 - *#G("Attore") primario:* Amministratore \
@@ -629,7 +629,7 @@ Quelli individuati sono:
    - Configurazione incompleta: se il canale non possiede tutti i parametri validi, l'applicativo impedisce l'attivazione e mostra un errore.
 - *Inclusioni:* -\
 
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 - *Estensioni:* UC17
 
@@ -653,7 +653,7 @@ Quelli individuati sono:
 
 - *Estensioni:* -
 
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC14 - Eliminazione del canale di comunicazione 
 - *#G("Attore") primario:* Amministratore \
@@ -677,7 +677,7 @@ Quelli individuati sono:
 - *Inclusioni:* -
 
 - *Estensioni:* -
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC15 - Connessione al canale di comunicazione 
 - *#G("Attore") primario:* Amministratore \
@@ -700,7 +700,7 @@ Quelli individuati sono:
    - Connessione non riuscita: se il servizio esterno non è raggiungibile o rifiuta i parametri inseriti, la connessione non viene stabilita.
 
 - *Inclusioni:* -\
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 - *Estensioni:* UC16, UC17
 
 === UC16 - Connessione al canale di comunicazione non riuscita
@@ -723,7 +723,7 @@ Quelli individuati sono:
 - *Inclusioni:* -\
 
 - *Estensioni:* -
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC17 - Configurazione del canale di comunicazione non valida
 - *#G("Attore") primario:* Amministratore \
@@ -747,7 +747,7 @@ Quelli individuati sono:
 
 - *Estensioni:* -
 
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC18 - Associazione canale a tenant
 - *#G("Attore") primario:* Amministratore \
@@ -774,7 +774,7 @@ Quelli individuati sono:
 
 - *Estensioni:* -
 
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 
 === UC19 - Creazione del tenant
@@ -799,7 +799,7 @@ Quelli individuati sono:
 
 - *Inclusioni:* -\
 
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 - *Estensioni:* UC20
 
