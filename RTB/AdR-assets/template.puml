@@ -1,0 +1,20 @@
+@startuml
+<style>
+  note {
+    BackgroundColor #FFFFFF
+  }
+</style>
+
+left to right direction
+actor "[Nome attore]" as [ID attore]
+rectangle AIRA {
+  usecase "[COD - Titolo]" as [ID usecase]
+}
+
+[ID attore] -- [ID usecase]
+[ID usecase 1] ..> [ID usecase 2] : <<include>>
+[ID usecase 3] ..> [ID usecase 1] : <<extend>>
+note on link
+[Testo nota]
+end note
+@enduml

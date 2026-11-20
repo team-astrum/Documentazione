@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
+    (ver: "0.4.1", data: "2026-11-20", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Inserimento diagrammi casi d'uso UC1 - UC9"),
     (ver: "0.4.0", data: "2026-11-19", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso UC1 - UC9"),
     (ver: "0.3.0", data: "2026-11-19", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC10 a UC19"),
     (ver: "0.2.0", data: "2026-11-18", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Stesura Introduzione e Attori della sezione Casi d'Uso"),
@@ -135,6 +136,12 @@ Quelli individuati sono:
 == Lista dei Casi d'Uso
 
 === UC1 - Autenticazione utente
+#figure(
+  image("AdR-assets/uc1-uc2.svg"),
+  caption: [
+    Diagramma per UC1, UC1.1, UC1.2 e UC2.
+  ],
+)
 - *#G("Attore") principale:* Utente non autenticato
 - *Attori secondari:* -
 - *Precondizioni:*
@@ -243,6 +250,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC4 - Modifica password
+#figure(
+  image("AdR-assets/uc4-uc5.svg"),
+  caption: [
+    Diagramma per UC4, UC4.1, UC4.2 e UC5.
+  ],
+)
 - *#G("Attore") principale:* Utente autenticato
 - *Attori secondari:* -
 - *Precondizioni:*
@@ -376,6 +389,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC8 - Aggiunta canale e-mail
+#figure(
+  image("AdR-assets/uc8+uc17.svg"),
+  caption: [
+    Diagramma per UC8, UC8.1, UC8.2, UC8.3 e UC17.
+  ],
+)
 - *#G("Attore") principale:* Amministratore
 - *Attori secondari:* -
 - *Precondizioni:*
@@ -468,6 +487,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC9 - Aggiunta canale WhatsApp
+#figure(
+  image("AdR-assets/uc9+uc17.svg"),
+  caption: [
+    Diagramma per UC9, UC9.1, UC9.2, UC9.3 e UC17.
+  ],
+)
 - *#G("Attore") principale:* Amministratore
 - *Attori secondari:* -
 - *Precondizioni:*
