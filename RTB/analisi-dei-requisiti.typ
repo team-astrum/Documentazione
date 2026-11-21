@@ -8,7 +8,10 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
-    (ver: "0.4.0", data: "2026-11-19", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso UC1 - UC9"),
+    (ver: "0.4.3", data: "2026-11-21", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"Filippo De Guio, Matteo De Col", desc: "Correzione del documento"),
+    (ver: "0.4.2", data: "2026-11-20", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Correzione del documento"),
+    (ver: "0.4.1", data: "2026-11-20", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Inserimento diagrammi casi d'uso UC1 - UC9"),
+    (ver: "0.4.0", data: "2026-11-19", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Stesura casi d'uso UC1 - UC9"),
     (ver: "0.3.0", data: "2026-11-19", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC10 a UC19"),
     (ver: "0.2.0", data: "2026-11-18", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Stesura Introduzione e Attori della sezione Casi d'Uso"),
     (ver: "0.1.0", data: "2026-11-09", autore: "Filippo De Guio", ruolo: "Redattore", verificatore:"Samuele Gobbi", desc: "Completamento della sezione introduttiva."),
@@ -135,6 +138,12 @@ Quelli individuati sono:
 == Lista dei Casi d'Uso
 
 === UC1 - Autenticazione utente
+#figure(
+  image("AdR-assets/uc1-uc2.svg"),
+  caption: [
+    Diagramma per UC1, UC1.1, UC1.2 e UC2.
+  ],
+)
 - *#G("Attore") principale:* Utente non autenticato
 - *Attori secondari:* -
 - *Precondizioni:*
@@ -142,12 +151,12 @@ Quelli individuati sono:
   - L'utente dispone di un account valido e già registrato all'interno del sistema.
   - L'utente non ha attualmente una #G("sessione", def: "Intervallo di tempo in cui un utente interagisce con un sito web o un'applicazione, dall'accesso fino all'uscita o alla scadenza.") autenticata attiva.
 - *Postcondizioni:*
-  - L'utente è autenticato nel sistema (#G("sessione") attiva abbinata ad un #G("token", def: "Una stringa di dati crittografata che viene rilasciata da un server dopo il login dell'utente; permette all'utente di navigare tra diverse pagine o servizi senza dover reinserire ogni volta le proprie credenziali.") valido).
+  - L'utente è autenticato nel sistema (#G("sessione") attiva associata a un #G("token", def: "Una stringa di dati crittografata che viene rilasciata da un server dopo il login dell'utente; permette all'utente di navigare tra diverse pagine o servizi senza dover reinserire ogni volta le proprie credenziali.") valido).
   - Il sistema ha caricato i permessi necessari associati alla figura di amministratore; l'utente viene quindi reindirizzato all'interfaccia amministrativa con le proprie funzionalità attive.
 - *Trigger:* L'utente non autenticato effettua l'accesso all'interfaccia web-based AIRA inserendo e-mail e password.
 - *Scenario principale:*
   + Il sistema mostra all'utente la pagina di autenticazione dove è possibile inserire e-mail e password.
-  + L'utente non autenticato inserisce il proprio e-mail (include UC1.1).
+  + L'utente non autenticato inserisce la propria e-mail (include UC1.1).
   + L'utente non autenticato inserisce la propria password (include UC1.2) e invia il modulo di accesso.
   + Il sistema verifica che lo e-mail esista, l'account associato sia attivo e che la password corrisponda alle credenziali memorizzate.
   + Il sistema associa la #G("sessione") al ruolo di amministratore, genera il relativo #G("token") di accesso a scadenza e concede l'accesso all'interfaccia secondo i permessi previsti.
@@ -155,7 +164,7 @@ Quelli individuati sono:
 - *Scenari alternativi:*
   - Campi obbligatori mancanti: prima dell'invio dei dati e-mail e password, se mancanti, il sistema segnala i campi mancanti all'utente non autenticato e lo invita a completarli, tornando al passo 2.
   - Credenziali errate o account non riconosciuto: il sistema non autentica l'utente ed estende UC2 (mostrando un messaggio di errore generico rispettando il principio di "secure by default & by design"); il sistema riprende dal passo 1.
-  - Utente già autenticato (accesso diretto): se l'utente possiede già una #G("sessione") aperta per il ruolo di amministratore, il sistema bypassa il form di accesso e mostra direttamente l'interfaccia dedicata.
+  - Utente già autenticato (accesso diretto): se l'utente possiede già una #G("sessione") aperta per il ruolo di amministratore, il sistema aggira il form di accesso e mostra direttamente l'interfaccia dedicata.
 - *Inclusioni:*
   - UC1.1 - Inserimento e-mail.
   - UC1.2 - Inserimento password.
@@ -209,7 +218,7 @@ Quelli individuati sono:
   - Le credenziali fornite non superano la verifica del sistema (identificativo inesistente, password errata o account non abilitato).
 - *Postcondizioni:*
   - L'accesso all'interfaccia amministrativa è negato e nessuna #G("sessione") o #G("token") di autenticazione viene generato.
-  - L'utente non autenticato visualizza un messaggio di errore informativo e resta nella schermata di autenticazione, pronto per un nuovo tentativo UC1.
+  - L'utente non autenticato visualizza un messaggio di errore informativo e resta nella schermata di autenticazione, pronto per un nuovo tentativo tramite UC1.
 - *Trigger:* Il flusso di UC1 raggiunge il passo 4 e la validazione ha esito negativo.
 - *Scenario principale:*
   + Il sistema interrompe la procedura di accesso avviata in UC1, impedendo la creazione della #G("sessione") e l'emissione del #G("token") di autenticazione.
@@ -230,7 +239,7 @@ Quelli individuati sono:
 - *Postcondizioni:*
   - La #G("sessione") dell'utente è terminata e il relativo #G("token") di accesso è invalidato.
   - I dati di #G("sessione") locali sul client sono stati rimossi e l'utente torna nello stato di utente non autenticato.
-  - L'interfaccia visualizza nuovamente la schermata di autenticazione per UC1 ed eventuali richieste successivo verso risorse protette con il #G("token") precedente vengono rifiutate.
+  - L'interfaccia visualizza nuovamente la schermata di autenticazione per UC1 ed eventuali richieste successive verso risorse protette con il #G("token") precedente vengono rifiutate.
 - *Trigger:* l'utente autenticato seleziona l'apposito comando di disconnessione nell'interfaccia amministrativa.
 - *Scenario principale:*
   + L'utente autenticato seleziona il comando di logout dall'interfaccia amministrativa web-based AIRA.
@@ -243,6 +252,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC4 - Modifica password
+#figure(
+  image("AdR-assets/uc4-uc5.svg"),
+  caption: [
+    Diagramma per UC4, UC4.1, UC4.2 e UC5.
+  ],
+)
 - *#G("Attore") principale:* Utente autenticato
 - *Attori secondari:* -
 - *Precondizioni:*
@@ -341,7 +356,7 @@ Quelli individuati sono:
   - Lo stato dei dati e delle configurazioni nel sistema rimane invariato (operazione di sola lettura).
 - *Trigger:* l'amministratore seleziona la sezione dedicata alla gestione dei canali dal menu dell'interfaccia amministrativa.
 - *Scenario principale:*
-  + L'amministratore seleziona le sezione di gestione dei canali nell'interfaccia amministrativa web-based AIRA.
+  + L'amministratore seleziona la sezione di gestione dei canali nell'interfaccia amministrativa web-based AIRA.
   + Il sistema verifica la validità della #G("sessione") e i permessi del ruolo amministratore, quindi recupera l'elenco dei canali in ingresso configurati.
   + Il sistema visualizza la lista dei canali mostrando, per ciascuno di essi, la tipologia (e.g. e-mail, WhatsApp), il nome identificativo, lo stato corrente (attivo/disattivo) e il tenant associato, rendendo disponibili le azioni di consultazione e gestione previste.
 - *Scenari alternativi:*
@@ -376,6 +391,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC8 - Aggiunta canale e-mail
+#figure(
+  image("AdR-assets/uc8+uc17.svg"),
+  caption: [
+    Diagramma per UC8, UC8.1, UC8.2, UC8.3 e UC17.
+  ],
+)
 - *#G("Attore") principale:* Amministratore
 - *Attori secondari:* -
 - *Precondizioni:*
@@ -398,7 +419,7 @@ Quelli individuati sono:
   - Annullamento dell'operazione: se l'amministratore annulla l'operazione prima dell'invio, il sistema interrompe la procedura senza salvare alcuna configurazione e torna alla vista precedente.
   - Configurazione incompleta o non valida: se mancano campi obbligatori oppure uno o più parametri risultano formalmente non validi (e.g. porta fuori intervallo o #G("host") malformato), il sistema impedisce il salvataggio e attiva UC17, permettendo all'amministratore di correggere i dati dal passo 3.
   - Canale già configurato: se il nome identificativo o la stessa casella/cartella risulta già registrata nel sistema, quest'ultimo segnala il conflitto e invita l'amministratore a modificare i parametri inseriti.
-  - #G("Sessione") scaduta o permessi insufficienti: se al momento del salvataggio la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore, il sistema nega l'operazione l'operazione senza salvare dati (reindirizzando a UC1 se la #G("sessione") è scaduta).
+  - #G("Sessione") scaduta o permessi insufficienti: se al momento del salvataggio la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore, il sistema nega l'operazione senza salvare dati (reindirizzando a UC1 se la #G("sessione") è scaduta).
 - *Inclusioni:*
   - UC8.1 - #G("Host") e porta.
   - UC8.2 - Credenziali casella.
@@ -421,8 +442,8 @@ Quelli individuati sono:
   + L'amministratore inserisce il numero di porta del server di posta (confermando eventualmente la porta predefinita per connessioni cifrate, e.g. 993).
   + Il sistema acquisisce entrambi i valori nel modulo di configurazione.
 - *Scenari alternativi:*
-  - #G("Host") mancante o sintatticamente non valido: se il campo #G("host") viene lasciato vuoto o contiene caratteri non validi, l'anomalia viene segnalata in fase di validazione in UC8 (attivando UC18).
-  - Porta mancante o fuori intervallo: se il numero di porta è vuoto, non numerico o esterno all'intervallo valido (1 - 65.535), l'anomalia viene segnalata in fase di validazione in UC8 (attivando UC18).
+  - #G("Host") mancante o sintatticamente non valido: se il campo #G("host") viene lasciato vuoto o contiene caratteri non validi, l'anomalia viene segnalata in fase di validazione in UC8 (attivando UC17).
+  - Porta mancante o fuori intervallo: se il numero di porta è vuoto, non numerico o esterno all'intervallo valido (1 - 65.535), l'anomalia viene segnalata in fase di validazione in UC8 (attivando UC17).
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
@@ -468,6 +489,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC9 - Aggiunta canale WhatsApp
+#figure(
+  image("AdR-assets/uc9+uc17.svg"),
+  caption: [
+    Diagramma per UC9, UC9.1, UC9.2, UC9.3 e UC17.
+  ],
+)
 - *#G("Attore") principale:* Amministratore
 - *Attori secondari:* -
 - *Precondizioni:*
@@ -489,7 +516,7 @@ Quelli individuati sono:
   - Annullamento dell'operazione: se l'amministratore annulla l'operazione prima dell'invio, il sistema interrompe la procedura senza salvare alcuna configurazione e torna alla vista precedente.
   - Configurazione incompleta o non valida: se mancano campi obbligatori oppure uno o più parametri risultano formalmente non validi (e.g. formato del numero telefonico non valido o #G("token") mancante/malformato), il sistema impedisce il salvataggio e attiva UC17, permettendo all'amministratore di correggere i dati dal passo 3.
   - Canale o numero aziendale già configurato: se il nome identificativo o lo stesso numero aziendale risulta già registrato nel sistema, quest'ultimo segnala il conflitto e invita l'amministratore a modificare i parametri inseriti.
-  - #G("Sessione") scaduta o permessi insufficienti: se al momento del salvataggio la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore, il sistema nega l'operazione l'operazione senza salvare dati (reindirizzando a UC1 se la #G("sessione") è scaduta).
+  - #G("Sessione") scaduta o permessi insufficienti: se al momento del salvataggio la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore, il sistema nega l'operazione senza salvare dati (reindirizzando a UC1 se la #G("sessione") è scaduta).
 - *Inclusioni:*
   - UC9.1 - Credenziali o #G("token") API.
   - UC9.2 - Numero aziendale.
@@ -508,7 +535,7 @@ Quelli individuati sono:
 - *Trigger:* il flusso di UC9 raggiunge il passo 4 e richiede l'inserimento delle credenziali o del #G("token") API per il servizio WhatsApp.
 - *Scenario principale:*
   + L'amministratore inserisce il #G("token") di accesso API (o l'identificativo applicativo e relativa chiave d'accesso) previsto per il servizio di messaggistica WhatsApp.
-  + Il sistema acquisisce i valori inseriti, mascherando (rispettando il principio di "secure by default & by design") per impostazione predefinita a schermo i caratteri del #G("token") o della chiave per impedirne la lettura visiva.
+  + Il sistema acquisisce i valori inseriti e, per impostazione predefinita, maschera a schermo (rispettando il principio di "secure by default & by design") i caratteri del #G("token") o della chiave per impedirne la lettura visiva.
 - *Scenari alternativi:*
   - Campi obbligatori mancanti o formalmente non validi: se il #G("token") API o le credenziali richieste vengono lasciati vuoti oppure presentano caratteri/formato non ammessi, l'anomalia viene segnalata in fase di validazione in UC9 (attivando UC17).
   - Visualizzazione temporanea del #G("token") o chiave: durante o dopo la digitazione, l'amministratore attiva l'apposito comando per mostrare il valore inserito; il sistema rende temporaneamente leggibili in chiaro i caratteri fino alla disattivazione del comando o all'invio/abbandono del modulo, ripristinando poi il mascheramento.
@@ -535,250 +562,166 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC10 - Impostazione frequenza di controllo del canale di comunicazione
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* -\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* -
 - *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è almeno configurato un canale di comunicazione (Mail, WhatsApp).
-
-- *Postcondizioni:* la frequenza di monitoraggio dei canali di comunicazione è configurata nel sistema e applicata dallo Scheduler.\
-
+- *Postcondizioni:* la frequenza di monitoraggio dei canali di comunicazione è configurata nel sistema e applicata dallo Scheduler.
 - *Trigger:* l'amministratore ha la possibilità di impostare o modificare la frequenza di controllo di un canale specifico.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
   + L'amministratore accede alla sezione di configurazione dei canali e seleziona il canale desiderato.
   + L'amministratore inserisce il valore relativo alla frequenza di controllo (intervallo di polling per il monitoraggio).
   + L'amministratore conferma il salvataggio del parametro.
   + L'applicativo verifica la validità del valore inserito e aggiorna la configurazione del canale.
-  \
-- *Scenari alternativi:* \
+- *Scenari alternativi:* 
   - Valore inserito non valido: se il valore di frequenza inserito non rispetta i limiti consentiti, il sistema annulla il salvataggio e mostra un messaggio di errore. 
-
-- *Inclusioni:* -\
-
-- *Spiecializzazioni:* -
-
+- *Inclusioni:* -
+- *Specializzazioni:* -
 - *Estensioni:* UC17
 
-
 === UC11 - Modifica configurazione canale di comunicazione
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* -\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* -
 - *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione. 
-- *Postcondizioni:* i parametri aggiornati del canale (es. credenziali, #G("host"), percorso o cartella monitorata) sono presenti nel database.\
-
+- *Postcondizioni:* i parametri aggiornati del canale (es. credenziali, #G("host"), percorso o cartella monitorata) sono presenti nel database.
 - *Trigger:* l'amministratore seleziona un canale esistente e avvia la procedura di modifica dei suoi parametri.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'amministratore visualizza il dettaglio del canale e attiva la modalità di modifica.
    + L'amministratore aggiorna uno o più campi di configurazione (credenziali, cartella da modificare o frequenza).
    + L'amministratore salva le modifiche.
    + L'applicativo valida la completezza e correttezza formale dei dati inseriti e registra la nuova configurazione.
-
-- *Scenari alternativi:* \
+- *Scenari alternativi:* 
    - Configurazione inserita non valida: se mancano campi obbligatori o i dati non sono validi, l'applicativo blocca il salvataggio della configurazione e notifica l'errore.
    - Annullamento: l'amministratore annulla l'operazione prima di salvare, l'applicativo ripristina i valori precedenti senza apportare modifiche. 
-- *Inclusioni:* UC10\
-
+- *Inclusioni:* UC10
 - *Estensioni:* UC17
-
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC12 - Attivazione del canale di comunicazione
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* -\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* -
 - *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione che si trova nello stato "disattivato". 
 - *Postcondizioni:* lo stato del canale passa ad "attivo" e lo Scheduler avvia il monitoraggio periodico.
-
 - *Trigger:* l'amministratore seleziona il comando di attivazione su un canale disattivo.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'amministratore individua un canale disattivo nella lista dei canali configurati nell'applicativo.
    + L'amministratore seleziona l'opzione di attivazione del canale.
    + L'applicativo verifica la validità della configurazione e aggiorna lo stato del canale ad "attivo".
-- *Scenari alternativi:* \
+- *Scenari alternativi:* 
    - Configurazione incompleta: se il canale non possiede tutti i parametri validi, l'applicativo impedisce l'attivazione e mostra un errore.
-- *Inclusioni:* -\
-
-- *Spiecializzazioni:* -
-
+- *Inclusioni:* -
+- *Specializzazioni:* -
 - *Estensioni:* UC17
 
 === UC13 - Disattivazione del canale di comunicazione 
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* -\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* -
 - *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione che attualmente è in stato "attivo". 
 - *Postcondizioni:* lo stato del canale passa a "disattivo" e lo Scheduler sospende il monitoraggio periodico.
-
 - *Trigger:* l'amministratore seleziona il comando di disattivazione su un canale attivo.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'amministratore individua un canale attivo nella lista dei canali configurati nell'applicativo.
    + L'amministratore seleziona l'opzione di disattivazione del canale.
    + L'applicativo imposta lo stato su "disattivo" e interrompe la ricezione di nuove richieste da quel canale.
-- *Scenari alternativi:* - \
-
-- *Inclusioni:* -\
-
+- *Scenari alternativi:* - 
+- *Inclusioni:* -
 - *Estensioni:* -
-
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC14 - Eliminazione del canale di comunicazione 
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* -\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* -
 - *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione. 
 - *Postcondizioni:* il canale di comunicazione selezionato viene rimosso definitivamente dall'applicativo.
-
 - *Trigger:* l'amministratore seleziona l'azione di eliminazione di un canale.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'amministratore seleziona il canale da eliminare.
    + L'applicativo chiede, attraverso un banner, la conferma dell'eliminazione del canale scelto.
    + L'amministratore conferma l'eliminazione del canale selezionato.
    + L'applicativo rimuove definitivamente la configurazione del canale eliminato.
-
-- *Scenari alternativi:* \
+- *Scenari alternativi:* 
    - Annullamento: l'amministratore rifiuta o chiude il banner di conferma; l'operazione viene interrotta.
-
 - *Inclusioni:* -
-
 - *Estensioni:* -
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC15 - Connessione al canale di comunicazione 
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* Mail, WhatsApp\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* Mail, WhatsApp
 - *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed ha inserito i parametri di configurazione del canale.
 - *Postcondizioni:* l'amministratore riceve riscontro immediato sull'esito della connettività verso il servizio esterno.
-
 - *Trigger:* l'amministratore imposta "attivo" il canale e viene avviata la connessione.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'amministratore attiva un canale di comunicazione configurato nell'applicativo.
    + L'applicativo tenta la connessione al canale selezionato attraverso i parametri configurati.
    + La connessione ha esito positivo e l'applicativo mostra un messaggio di successo.
-
-
-- *Scenari alternativi:* \
+- *Scenari alternativi:* 
    - Parametri non validi: se i parametri inseriti nella configurazione del canale non sono corretti, la connessione viene rifiutata.
    - Connessione non riuscita: se il servizio esterno non è raggiungibile o rifiuta i parametri inseriti, la connessione non viene stabilita.
-
-- *Inclusioni:* -\
-- *Spiecializzazioni:* -
+- *Inclusioni:* -
+- *Specializzazioni:* -
 - *Estensioni:* UC16, UC17
 
 === UC16 - Connessione al canale di comunicazione non riuscita
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* Mail, WhatsApp\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* Mail, WhatsApp
 - *Precondizioni:* è stato avviato un tentativo di connessione e il servizio esterno ha restituito un errore.
-
 - *Postcondizioni:* l'amministratore viene informato del fallimento della connessione attraverso un banner di errore.
-
 - *Trigger:* rilevamento di un errore di rete o di autenticazione durante il tentativo di connessione.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'applicativo intercetta l'errore restituito dal canale esterno.
    + L'applicativo registra l'esito negativo e mostra un messaggio di errore all'amministratore.
-
-- *Scenari alternativi:* - \
-
-- *Inclusioni:* -\
-
+- *Scenari alternativi:* - 
+- *Inclusioni:* -
 - *Estensioni:* -
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC17 - Configurazione del canale di comunicazione non valida
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* -\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* -
 - *Precondizioni:* tentativo di salvataggio di una configurazione di canale con dati mancanti o errati.
-
 - *Postcondizioni:* la configurazione non viene salvata e vengono evidenziati gli errori riscontrati.
-
 - *Trigger:* rilevamento di anomalie di validazione sui campi della configurazione del canale.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'applicativo esegue i controlli di validazione sui parametri inseriti.
    + L'applicativo rileva i campi obbligatori vuoti o non corretti.
    + L'applicativo blocca l'operazione in corso e mostra i dettagli dell'errore all'amministratore.
-
-- *Scenari alternativi:* -\
-
-- *Inclusioni:* -\
-
+- *Scenari alternativi:* -
+- *Inclusioni:* -
 - *Estensioni:* -
-
-- *Spiecializzazioni:* -
+- *Specializzazioni:* -
 
 === UC18 - Associazione canale a tenant
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* -\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* -
 - *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed esiste almeno un canale di comunicazione configurato e almeno un tenant registrato.
-
-- *Postcondizioni:* il canale risulta collegato al tenant scelto, garantendo l'isolamento logico della richieste. 
-
+- *Postcondizioni:* il canale risulta collegato al tenant scelto, garantendo l'isolamento logico delle richieste. 
 - *Trigger:* l'amministratore seleziona il tenant di riferimento per un canale.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'amministratore accede alla configurazione del canale.
    + L'amministratore seleziona il tenant desiderato dall'elenco disponibile.
    + L'amministratore conferma il salvataggio dell'associazione.
    + L'applicativo memorizza il legame tra canale e tenant nel database.
-
-
-- *Scenari alternativi:* \
+- *Scenari alternativi:* 
    - Nessun tenant disponibile: se non esistono tenant registrati, l'amministratore deve prima crearne uno.
-
-- *Inclusioni:* -\
-
+- *Inclusioni:* -
 - *Estensioni:* -
-
-- *Spiecializzazioni:* -
-
+- *Specializzazioni:* -
 
 === UC19 - Creazione del tenant
-- *#G("Attore") primario:* Amministratore \
-
-- *Attori secondari:* -\
-
+- *#G("Attore") primario:* Amministratore 
+- *Attori secondari:* -
 - *Precondizioni:* l'amministratore è autenticato nell'interfaccia amministrativa.
-
 - *Postcondizioni:* un nuovo tenant con spazio logico isolato viene registrato nel database.
-
 - *Trigger:* l'amministratore avvia la procedura di creazione di un nuovo tenant.
-
-- *Scenario principale:* \
+- *Scenario principale:* 
    + L'amministratore accede alla sezione dei tenant e seleziona la creazione di un nuovo elemento.
    + L'amministratore inserisce il nome identificativo del tenant.
    + L'amministratore conferma la creazione del tenant.
    + L'applicativo verifica l'unicità del nome, memorizza il nuovo tenant e mostra un messaggio di successo.
-
-- *Scenari alternativi:* \
+- *Scenari alternativi:* 
    - Nome tenant già esistente: se il nome del tenant è già presente all'interno dell'applicativo, l'operazione viene bloccata e viene mostrato un messaggio di errore.
-
-- *Inclusioni:* -\
-
-- *Spiecializzazioni:* -
-
+- *Inclusioni:* -
+- *Specializzazioni:* -
 - *Estensioni:* UC20
 
-
-
-
-=== UC21 -
+=== UC20 -
