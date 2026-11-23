@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
+    (ver: "0.5.1", data: "2026-11-23", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Correzione del documento"),
     (ver: "0.5.0", data: "2026-11-22", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC20 a UC27"),
     (ver: "0.4.3", data: "2026-11-21", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"Filippo De Guio, Matteo De Col", desc: "Correzione del documento"),
     (ver: "0.4.2", data: "2026-11-20", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Correzione del documento"),
@@ -563,10 +564,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC10 - Impostazione frequenza di controllo del canale di comunicazione
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* -
-- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è almeno configurato un canale di comunicazione (Mail, WhatsApp).
-- *Postcondizioni:* la frequenza di monitoraggio dei canali di comunicazione è configurata nel sistema e applicata dallo Scheduler.
+- *Precondizioni:* 
+  - l'amministratore è autenticato nell'interfaccia web-based ed è almeno configurato un canale di comunicazione (Mail, WhatsApp).
+- *Postcondizioni:* 
+  - la frequenza di monitoraggio dei canali di comunicazione è configurata nel sistema e applicata dallo Scheduler.
 - *Trigger:* l'amministratore ha la possibilità di impostare o modificare la frequenza di controllo di un canale specifico.
 - *Scenario principale:* 
   + L'amministratore accede alla sezione di configurazione dei canali e seleziona il canale desiderato.
@@ -580,10 +583,12 @@ Quelli individuati sono:
 - *Estensioni:* UC17
 
 === UC11 - Modifica configurazione canale di comunicazione
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* -
-- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione. 
-- *Postcondizioni:* i parametri aggiornati del canale (es. credenziali, #G("host"), percorso o cartella monitorata) sono presenti nel database.
+- *Precondizioni:* 
+  - l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione. 
+- *Postcondizioni:* 
+  - i parametri aggiornati del canale (es. credenziali, #G("host"), percorso o cartella monitorata) sono presenti nel database.
 - *Trigger:* l'amministratore seleziona un canale esistente e avvia la procedura di modifica dei suoi parametri.
 - *Scenario principale:* 
    + L'amministratore visualizza il dettaglio del canale e attiva la modalità di modifica.
@@ -598,10 +603,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC12 - Attivazione del canale di comunicazione
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* -
-- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione che si trova nello stato "disattivato". 
-- *Postcondizioni:* lo stato del canale passa ad "attivo" e lo Scheduler avvia il monitoraggio periodico.
+- *Precondizioni:* 
+ - l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione che si trova nello stato "disattivato". 
+- *Postcondizioni:* 
+ - lo stato del canale passa ad "attivo" e lo Scheduler avvia il monitoraggio periodico.
 - *Trigger:* l'amministratore seleziona il comando di attivazione su un canale disattivo.
 - *Scenario principale:* 
    + L'amministratore individua un canale disattivo nella lista dei canali configurati nell'applicativo.
@@ -614,10 +621,12 @@ Quelli individuati sono:
 - *Estensioni:* UC17
 
 === UC13 - Disattivazione del canale di comunicazione 
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* -
-- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione che attualmente è in stato "attivo". 
-- *Postcondizioni:* lo stato del canale passa a "disattivo" e lo Scheduler sospende il monitoraggio periodico.
+- *Precondizioni:* 
+ - l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione che attualmente è in stato "attivo". 
+- *Postcondizioni:* 
+ - lo stato del canale passa a "disattivo" e lo Scheduler sospende il monitoraggio periodico.
 - *Trigger:* l'amministratore seleziona il comando di disattivazione su un canale attivo.
 - *Scenario principale:* 
    + L'amministratore individua un canale attivo nella lista dei canali configurati nell'applicativo.
@@ -629,10 +638,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC14 - Eliminazione del canale di comunicazione 
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* -
-- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione. 
-- *Postcondizioni:* il canale di comunicazione selezionato viene rimosso definitivamente dall'applicativo.
+- *Precondizioni:* 
+  - l'amministratore è autenticato nell'interfaccia web-based ed è presente almeno un canale di comunicazione configurato nell'applicazione. 
+- *Postcondizioni:* 
+  - il canale di comunicazione selezionato viene rimosso definitivamente dall'applicativo.
 - *Trigger:* l'amministratore seleziona l'azione di eliminazione di un canale.
 - *Scenario principale:* 
    + L'amministratore seleziona il canale da eliminare.
@@ -646,10 +657,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC15 - Connessione al canale di comunicazione 
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* Mail, WhatsApp
-- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed ha inserito i parametri di configurazione del canale.
-- *Postcondizioni:* l'amministratore riceve riscontro immediato sull'esito della connettività verso il servizio esterno.
+- *Precondizioni:* 
+  - l'amministratore è autenticato nell'interfaccia web-based ed ha inserito i parametri di configurazione del canale.
+- *Postcondizioni:* 
+  - l'amministratore riceve riscontro immediato sull'esito della connettività verso il servizio esterno.
 - *Trigger:* l'amministratore imposta "attivo" il canale e viene avviata la connessione.
 - *Scenario principale:* 
    + L'amministratore attiva un canale di comunicazione configurato nell'applicativo.
@@ -663,10 +676,12 @@ Quelli individuati sono:
 - *Estensioni:* UC16, UC17
 
 === UC16 - Connessione al canale di comunicazione non riuscita
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* Mail, WhatsApp
-- *Precondizioni:* è stato avviato un tentativo di connessione e il servizio esterno ha restituito un errore.
-- *Postcondizioni:* l'amministratore viene informato del fallimento della connessione attraverso un banner di errore.
+- *Precondizioni:* 
+  - è stato avviato un tentativo di connessione e il servizio esterno ha restituito un errore.
+- *Postcondizioni:* 
+  - l'amministratore viene informato del fallimento della connessione attraverso un banner di errore.
 - *Trigger:* rilevamento di un errore di rete o di autenticazione durante il tentativo di connessione.
 - *Scenario principale:* 
    + L'applicativo intercetta l'errore restituito dal canale esterno.
@@ -677,10 +692,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC17 - Configurazione del canale di comunicazione non valida
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* -
-- *Precondizioni:* tentativo di salvataggio di una configurazione di canale con dati mancanti o errati.
-- *Postcondizioni:* la configurazione non viene salvata e vengono evidenziati gli errori riscontrati.
+- *Precondizioni:* 
+  - tentativo di salvataggio di una configurazione di canale con dati mancanti o errati.
+- *Postcondizioni:* 
+  - la configurazione non viene salvata e vengono evidenziati gli errori riscontrati.
 - *Trigger:* rilevamento di anomalie di validazione sui campi della configurazione del canale.
 - *Scenario principale:* 
    + L'applicativo esegue i controlli di validazione sui parametri inseriti.
@@ -692,10 +709,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC18 - Associazione canale a tenant
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* -
-- *Precondizioni:* l'amministratore è autenticato nell'interfaccia web-based ed esiste almeno un canale di comunicazione configurato e almeno un tenant registrato.
-- *Postcondizioni:* il canale risulta collegato al tenant scelto, garantendo l'isolamento logico delle richieste. 
+- *Precondizioni:* 
+  - l'amministratore è autenticato nell'interfaccia web-based ed esiste almeno un canale di comunicazione configurato e almeno un tenant registrato.
+- *Postcondizioni:* 
+  - il canale risulta collegato al tenant scelto, garantendo l'isolamento logico delle richieste. 
 - *Trigger:* l'amministratore seleziona il tenant di riferimento per un canale.
 - *Scenario principale:* 
    + L'amministratore accede alla configurazione del canale.
@@ -709,10 +728,12 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC19 - Creazione del tenant
-- *#G("Attore") primario:* Amministratore 
+- *#G("Attore") principale:* Amministratore 
 - *Attori secondari:* -
-- *Precondizioni:* l'amministratore è autenticato nell'interfaccia amministrativa.
-- *Postcondizioni:* un nuovo tenant con spazio logico isolato viene registrato nel database.
+- *Precondizioni:* 
+  - l'amministratore è autenticato nell'interfaccia amministrativa.
+- *Postcondizioni:* 
+  - un nuovo tenant con spazio logico isolato viene registrato nel database.
 - *Trigger:* l'amministratore avvia la procedura di creazione di un nuovo tenant.
 - *Scenario principale:* 
    + L'amministratore accede alla sezione dei tenant e seleziona la creazione di un nuovo elemento.
