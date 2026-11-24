@@ -8,7 +8,8 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
-    (ver: "0.5.0", data: "2026-11-22", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC20 a UC27"),
+    (ver: "0.5.1", data: "2026-11-24", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Modifica sezione Attori e correzione Casi d'Uso da UC20 a UC27"),
+    (ver: "0.5.0", data: "2026-11-22", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"Matteo De Col", desc: "Stesura Casi d'Uso da UC20 a UC27"),
     (ver: "0.4.3", data: "2026-11-21", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"Filippo De Guio, Matteo De Col", desc: "Correzione del documento"),
     (ver: "0.4.2", data: "2026-11-20", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Correzione del documento"),
     (ver: "0.4.1", data: "2026-11-20", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Inserimento diagrammi casi d'uso UC1 - UC9"),
@@ -127,8 +128,9 @@ Quelli individuati sono:
 
 - *Utente non autenticato:* soggetto che tenta di accedere all'interfaccia amministrativa prima di aver effettuato l'autenticazione.
 - *Utente autenticato:* soggetto che si è autenticato al sistema. Per garantire un accesso differenziato si specializza nei seguenti profili:
-  - *Amministratore*: utente con privilegi elevati, può configurare i canali attivi, consultare le richieste, consultare lo storico dei log e gestire la persistenza locale dei dati.
-  - *Operatore:* utente che si occupa dell'eventuale validazione manuale delle richieste.
+  - *Amministratore di piattaforma:* utente con privilegi globali a livello di sistema (cross-tenant). Gestisce il ciclo di vita dei tenant (creazione, modifica ed eliminazione) e la configurazione globale dell'infrastruttura.
+  - *Amministratore aziendale:* utente associato a uno specifico tenant. Configura i canali attivi, importa e consulta l'anagrafica dei mittenti, definisce le regole operative, consulta le richieste e lo storico dei log e gestisce la persistenza locale dei dati relativi al proprio tenant.
+  - *Operatore:* utente associato a uno specifico tenant che si occupa della consultazione delle richieste e dell'eventuale validazione manuale delle stesse.
   
 - *Canale e-mail:* casella di posta elettronica esterna monitorata dal sistema per l'acquisizione delle richieste (testo e allegati). Può essere utilizzata anche per l'invio delle risposte automatiche al mittente.
 - *Canale WhatsApp:* servizio di messaggistica esterno, monitorato dal sistema per l'acquisizione delle richieste (testuali e vocali). Può essere utilizzato anche per l'invio delle risposte automatiche al mittente.
@@ -726,44 +728,41 @@ Quelli individuati sono:
 - *Estensioni:* UC21
 
 === UC20 - Modifica tenant
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È registrato almeno un tenant è l'amministratore ha accesso alla lista dei tenant (UC22)  
+  - È registrato almeno un tenant e l'amministratore ha accesso alla lista dei tenant (UC22).
 - *Postcondizioni:*
   - Il nome identificativo del tenant è aggiornato.
-  - I canali, l'anagrafica mittenti e le richieste del tenant restano associati ad esso senza modifiche. 
 - *Trigger:* l'amministratore seleziona un tenant dalla lista e avvia la procedura di modifica.
 - *Scenario principale:*
   + L'amministratore seleziona un tenant dalla lista (UC22) e attiva la modalità di modifica.
   + Il sistema presenta il modulo di modifica con il nome identificativo attuale.
   + L'amministratore modifica il nome identificativo e conferma le modifiche.
   + Il sistema controlla che il nome non sia vuoto e non sia già utilizzato da un altro tenant, quindi salva la modifica.
-  + Il sistema mostra un messaggio di conferma e aggiorna la lista dei tenant.
 - *Scenari alternativi:*
   - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema mantiene invariato il nome attuale.
   - Nome mancante: se il campo è vuoto, il sistema impedisce il salvataggio, segnala il campo e invita l'amministratore a correggerlo.
-  - Nome già utilizzato: se il nome coincide con quello di un altro tenant, il sistema non applica la modifica e invita l'amministratore a inserirne uno di diverso.
+  - Nome già utilizzato: se il nome coincide con quello di un altro tenant, il sistema non applica la modifica (estende UC21).
 - *Inclusioni:* -
 - *Estensioni:*
   - UC21 - Nome tenant già utilizzato.
 - *Specializzazioni:* -
 
 === UC21 - Nome tenant già utilizzato
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC19 o UC20 è stato avviato.
-  - L'amministratore ha inserito un nome identificativo e confermato l'operazione.
+  - L'amministratore ha inserito un nome identificativo e ha confermato l'operazione.
   - Il nome che è stato inserito coincide con quello di un tenant già registrato.
 - *Postcondizioni:*
-  - L'operazione di creazione o modifica del tenant non vengono eseguite.
-  - L'amministratore visualizza un messaggio di errore e resta nel modulo, dandogli la possibilità di inserire un nome diverso.
+  - L'operazione di creazione o modifica del tenant non viene eseguita e l'amministratore viene invitato a inserire un nome diverso.
 - *Trigger:* la verifica di unicità del nome del tenant, eseguita in UC19 o UC20, ha esito negativo.
 - *Scenario principale:*
   + Il sistema interrompe l'operazione in corso, senza salvare alcuna modifica.
-  + Il sistema mostra un messaggio che segnala che il nome inserito è già utilizzato.
+  + Il sistema mostra un messaggio che segnala che il nome inserito è già utilizzato e invita l'amministratore a inserirne uno diverso.
   + Il sistema mantiene il valore inserito, consentendo all'amministratore di correggerlo.
 - *Scenari alternativi:* -
 - *Inclusioni:* -
@@ -771,7 +770,7 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC22 - Visualizzazione lista tenant
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
@@ -787,147 +786,121 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC23 - Eliminazione tenant
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
   - È registrato almeno un tenant e l'amministratore ha accesso alla lista dei tenant (UC22).
 - *Postcondizioni:*
-  - Il tenant selezionato e la relativa anagrafica mittenti sono rimossi dal sistema.
-- *Trigger:* l'amministratore seleziona l'azione di eliminazione su un tenant.
+  - Il tenant selezionato viene rimosso dal sistema.
+- *Trigger:* l'amministratore seleziona l'azione di eliminazione di un tenant.
 - *Scenario principale:*
   + L'amministratore seleziona il tenant da eliminare.
   + Il sistema verifica che al tenant non sia associato alcun canale.
-  + Il sistema chiede, attraverso un banner, la conferma dell'eliminazione del tenant scelto.
+  + Il sistema chiede la conferma dell'eliminazione del tenant scelto.
   + L'amministratore conferma l'eliminazione.
-  + Il sistema rimuove il tenant e la relativa anagrafica mittenti, mostra un messaggio di conferma e aggiorna la lista dei tenant.
+  + Il sistema rimuove il tenant e aggiorna la lista dei tenant.
 - *Scenari alternativi:*
-  - Annullamento: se l'amministratore rifiuta o chiude il banner di conferma, l'operazione è interrotta e nessun dato viene modificato.
-  - Tenant con canali associati: se al tenant è associato almeno un canale, il sistema non procede con l'eliminazione.
+  - Annullamento: se l'amministratore non conferma l'eliminazione, l'operazione viene interrotta e il tenant non viene eliminato.
+  - Tenant con canali associati: se al tenant è associato almeno un canale, il sistema non procede con l'eliminazione e attiva UC24.
 - *Inclusioni:* -
 - *Estensioni:*
   - UC24 - Eliminazione tenant non consentita.
 - *Specializzazioni:* -
 
 === UC24 - Eliminazione tenant non consentita
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC23 è stato avviato e l'amministratore ha selezionato un tenant da eliminare.
   - Al tenant è associato almeno un canale.
 - *Postcondizioni:*
-  - Il tenant non viene eliminato e nessun dato viene modificato.
-  - L'amministratore visualizza un messaggio che indica che l'eliminazione non è consentita finché esistono canali associati.
+  - Il tenant non viene eliminato.
 - *Trigger:* la verifica dei canali associati, eseguita in UC23, ha esito negativo.
 - *Scenario principale:*
   + Il sistema interrompe l'operazione di eliminazione avviata in UC23.
-  + Il sistema predispone un messaggio che segnala la presenza di canali associati e invita a rimuoverli prima di procedere (UC14).
+  + Il sistema mostra un messaggio che segnala che il tenant non può essere eliminato.
 - *Scenari alternativi:* -
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
 
 === UC25 - Importazione batch dell'anagrafica mittenti
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È registrato almeno un tenant.
   - L'amministratore dispone di un file dell'anagrafica mittenti, esportato dal gestionale esterno.
 - *Postcondizioni:*
-  - L'anagrafica del tenant scelto è sostituita integralmente dal contenuto del file.
+  - L'anagrafica del tenant contiene esclusivamente i mittenti presenti nel file importato (creandola se assente o sostituendo integralmente quella precedente).
+  - L'operazione viene registrata nei log.
 - *Trigger:* l'amministratore seleziona il comando di importazione dell'anagrafica mittenti.
 - *Scenario principale:*
-  + L'amministratore accede alla sezione dell'anagrafica mittenti e avvia la procedura di importazione.
-  + L'amministratore seleziona il tenant di destinazione.
-  + L'amministratore seleziona il file dell'anagrafica da importare e, dopo l'avviso del sistema, tramite banner, che l'anagrafica esistente del tenant sarà sostituita, conferma l'avvio.
-  + Il sistema verifica la validità del formato del file e la validità dei dati di ogni mittente.
-  + Il sistema sostituisce integralmente l'anagrafica del tenant con i mittenti presenti nel file.
-  + l'operazione viene registrata nei log di sistema.
+  + L'amministratore seleziona il file dell'anagrafica da importare.
+  + Il sistema verifica la validità del formato del file e la conformità dei dati di ogni mittente.
+  + Il sistema salva i mittenti presenti nel file come anagrafica del tenant.
+  + l'operazione viene registrata nei log.
 - *Scenari alternativi:*
-  - Annullamento dell'operazione: se l'amministratore annulla o rifiuta la conferma, il sistema non importa alcun dato, mantiene l'anagrafica esistente.
-  - File o dati non validi: se il file non è leggibile, non rispetta il formato previsto o contiene record non conformi, il sistema non importa il nuovo file.
+  - Anagrafica già presente: se per il tenant esiste già un'anagrafica, il sistema chiede conferma della sovrascrittura integrale; se l'amministratore conferma, il file viene sovrascritto, altrimenti l'operazione viene annullata mantenendo invariata l'anagrafica esistente.
+  - Annullamento dell'operazione: se l'amministratore annulla l'importazione, il sistema non importa alcun dato, e se presente mantiene l'anagrafica esistente .
+  - File o dati non validi: se il file non rispetta il formato previsto o contiene record non conformi, il sistema non importa il nuovo file e attiva UC26.
 - *Inclusioni:*
-  - UC25.1 - Selezione tenant di destinazione.
-  - UC25.2 - Selezione file anagrafica.
+  - UC25.1 - Selezione file anagrafica.
 - *Estensioni:*
   - UC26 - Importazione anagrafica non riuscita.
 - *Specializzazioni:* -
 
-==== UC25.1 - Selezione tenant di destinazione
-- *#G("Attore") principale:* Amministratore
-- *Attori secondari:* -
-- *Precondizioni:*
-  - UC25 è stato avviato.
-  - Il sistema mostra il modulo di importazione con il campo dedicato al tenant di destinazione.
-- *Postcondizioni:*
-  - Il tenant di destinazione è stato acquisito ed è pronto per l'importazione del file (UC25).
-- *Trigger:* il flusso di UC25 raggiunge il passo 2 e richiede la scelta del tenant di destinazione.
-- *Scenario principale:*
-  + Il sistema mostra l'elenco dei tenant registrati.
-  + L'amministratore seleziona il tenant a cui appartiene l'anagrafica da importare.
-  + Il sistema acquisisce la scelta.
-- *Scenari alternativi:*
-  - Nessun tenant disponibile: se non esistono tenant registrati, il sistema impedisce l'importazione e segnala che occorre prima crearne uno (UC19).
-- *Inclusioni:* -
-- *Estensioni:* -
-- *Specializzazioni:* -
-
-==== UC25.2 - Selezione file anagrafica
-- *#G("Attore") principale:* Amministratore
+==== UC25.1 - Selezione file anagrafica
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC25 è stato avviato.
   - Il sistema mostra il modulo di importazione con il campo dedicato alla selezione del file.
 - *Postcondizioni:*
   - Il file dell'anagrafica è stato acquisito dal modulo ed è pronto per la validazione e l'importazione in UC25.
-- *Trigger:* il flusso di UC25 raggiunge il passo 3 e richiede la selezione del file da importare.
+- *Trigger:* il flusso di UC25 richiede la selezione del file da importare.
 - *Scenario principale:*
   + L'amministratore seleziona dal proprio dispositivo il file dell'anagrafica esportato dal gestionale esterno.
   + Il sistema acquisisce il file selezionato.
 - *Scenari alternativi:*
-  - Formato non supportato: il file selezionato non è in un formato valido.
+  - Formato non supportato: se il file selezionato non è in un formato valido, questo viene segnalato in fase di validazione in UC25.
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
 
 === UC26 - Importazione anagrafica non riuscita
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC25 è stato avviato e l'amministratore ha confermato l'avvio dell'importazione.
   - Il file non supera la validazione del sistema (formato non conforme, indirizzi e-mail o numeri WhatsApp in formato non valido, identificativi duplicati all'interno del file).
 - *Postcondizioni:*
-  - Nessun dato del file viene importato e l'anagrafica del tenant resta invariata.
+  - Il file non viene importato e l'eventuale anagrafica esistente resta invariata.  
   - L'amministratore visualizza l'elenco dei problemi riscontrati, con indicazione del tipo di errore e della posizione nel file.
-  - L'evento è registrato nei log di sistema.
-- *Trigger:* il flusso di UC25 raggiunge il passo 4 e la validazione del file ha esito negativo.
+  - L'evento è registrato nei log.
+- *Trigger:* il flusso di UC25 raggiunge il passo 2 e la validazione del file ha esito negativo.
 - *Scenario principale:*
   + Il sistema interrompe la procedura di importazione avviata in UC25 e scarta l'intero contenuto del file, senza modificare l'anagrafica.
   + Il sistema predispone il riepilogo degli errori riscontrati, indicando per ciascuno il tipo e la posizione nel file.
   + Il sistema mostra il riepilogo all'amministratore nell'interfaccia di importazione.
-  + Il sistema registra l'evento nei log di sistema.
+  + Il sistema registra l'evento nei log.
 - *Scenari alternativi:* -
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
 
 === UC27 - Visualizzazione lista anagrafica mittenti
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È registrato almeno un tenant con la sua rispettiva anagrafica dei mittenti.
 - *Postcondizioni:*
-  - L'amministratore visualizza l'elenco dei mittenti censiti nell'anagrafica del tenant scelto, con denominazione cliente, indirizzi e-mail e numeri WhatsApp.
+  - L'amministratore visualizza l'elenco dei mittenti censiti nell'anagrafica del tenant, con denominazione cliente, indirizzi e-mail e numeri WhatsApp.
 - *Trigger:* l'amministratore seleziona la sezione dell'anagrafica mittenti.
 - *Scenario principale:*
-  + L'amministratore seleziona la sezione dell'anagrafica mittenti nell'interfaccia amministrativa.
-  + L'amministratore seleziona il tenant da cui vuole consultare l'anagrafica.
   + Il sistema visualizza la lista mostrando, per ciascun mittente, la denominazione, gli indirizzi e-mail e i numeri WhatsApp registrati.
 - *Scenari alternativi:*
-  - Nessun mittente registrato (lista vuota): il sistema visualizza una vista vuota con un messaggio informativo che invita a importare l'anagrafica (UC25).
-  - Nessun tenant disponibile: se non esistono tenant, il sistema segnala che occorre prima crearne uno (UC19).
+  - Mancanza di anagrafica: se non è ancora stata importata alcuna anagrafica, il sistema visualizza una vista vuota con un messaggio informativo che invita a importarla (UC25).
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
