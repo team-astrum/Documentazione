@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
+    (ver: "0.6.0", data: "2026-11-25", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso  da UC28 a UC31"),
     (ver: "0.5.2", data: "2026-11-24", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Correzione Casi d'uso da UC20 a UC27 e modifica sezione attori"),
     (ver: "0.5.1", data: "2026-11-23", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Correzione del documento"),
     (ver: "0.5.0", data: "2026-11-22", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC20 a UC27"),
@@ -894,7 +895,7 @@ Quelli individuati sono:
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC25 è stato avviato e l'amministratore ha confermato l'avvio dell'importazione.
-  - Il file non supera la validazione del sistema (formato non conforme, indirizzi e-mail o numeri WhatsApp in formato non valido, identificativi duplicati all'interno del file).
+  - Il file non supera la validazione del sistema (formato non conforme, dati obbligatori mancanti quali denominazione o assenza di almeno un recapito tra e-mail e WhatsApp, indirizzi e-mail o numeri WhatsApp in formato non valido, identificativi duplicati all'interno del file).
 - *Postcondizioni:*
   - Il file non viene importato e l'eventuale anagrafica esistente resta invariata.  
   - L'amministratore visualizza l'elenco dei problemi riscontrati, con indicazione del tipo di errore e della posizione nel file.
@@ -916,7 +917,7 @@ Quelli individuati sono:
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
 - *Postcondizioni:*
-  - L'amministratore visualizza l'elenco dei mittenti censiti nell'anagrafica del tenant, con denominazione cliente, indirizzi e-mail e numeri WhatsApp.
+  - L'amministratore visualizza l'elenco dei mittenti censiti nell'anagrafica del tenant, con denominazione cliente e i relativi recapiti registrati (indirizzi e-mail e/o numeri WhatsApp).
 - *Trigger:* l'amministratore seleziona la sezione dell'anagrafica mittenti.
 - *Scenario principale:*
   + Il sistema visualizza la lista mostrando, per ciascun mittente, la denominazione, gli indirizzi e-mail e i numeri WhatsApp registrati.
@@ -926,15 +927,133 @@ Quelli individuati sono:
 - *Estensioni:* -
 - *Specializzazioni:* -
 
+=== UC28 - Aggiunta mittente in anagrafica
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - L'amministratore è autenticato nell'interfaccia amministrativa.
+  - L'amministratore ha accesso alla sezione dell'anagrafica mittenti (UC27).
+- *Postcondizioni:*
+  - Il nuovo mittente è registrato nell'anagrafica del tenant con almeno un recapito valido (e-mail e/o WhatsApp) ed è riconosciuto dal Filtro Sicurezza come cliente censito.
+  - L'operazione viene registrata nei log.
+- *Trigger:* l'amministratore seleziona il comando per registrare un nuovo mittente nell'anagrafica del tenant.
+- *Scenario principale:*
+  + L'amministratore avvia la procedura di registrazione di un nuovo mittente.
+  + Il sistema presenta il modulo di inserimento dei dati del mittente.
+  + L'amministratore inserisce la denominazione del cliente (include UC28.1).
+  + L'amministratore inserisce uno o più recapiti del mittente (include UC28.2) e conferma il salvataggio.
+  + Il sistema verifica la presenza della denominazione, la validità formale dei recapiti inseriti e l'assenza di identificativi già associati ad altri mittenti del tenant.
+  + Il sistema salva il nuovo mittente nell'anagrafica del tenant e registra l'operazione nei log.
+- *Scenari alternativi:*
+  - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema interrompe la procedura senza registrare alcun mittente.
+  - Dati mancanti o formato non valido: se la denominazione è vuota, non è stato inserito alcun recapito oppure uno o più recapiti hanno formato non valido, il sistema impedisce il salvataggio, evidenzia i campi non conformi e invita l'amministratore a correggerli.
+  - Identificativo mittente già registrato: se almeno un recapito inserito è già associato a un altro mittente del tenant, il sistema non salva il mittente e attiva UC29.
+- *Inclusioni:*
+  - UC28.1 - Inserimento denominazione cliente.
+  - UC28.2 - Inserimento recapiti mittente.
+- *Estensioni:*
+  - UC29 - Identificativo mittente già registrato.
+- *Specializzazioni:* -
 
+==== UC28.1 - Inserimento denominazione cliente
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - UC28 è stato avviato.
+  - Il sistema mostra il modulo di registrazione del mittente con il campo dedicato alla denominazione cliente.
+- *Postcondizioni:*
+  - La denominazione del cliente è stata inserita nel modulo.
+- *Trigger:* il flusso di UC28 raggiunge il passo 3 e richiede l'inserimento della denominazione del cliente.
+- *Scenario principale:*
+  + L'amministratore seleziona il campo dedicato alla denominazione e inserisce la ragione sociale o il nominativo del cliente.
+  + Il sistema acquisisce il valore inserito.
+- *Scenari alternativi:*
+  - Campo mancante: se il campo viene lasciato vuoto, questo viene segnalato in fase di validazione in UC28.
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
 
-// QUESTI 4 Casi d'USO sono da valutare perché ho previsto una sovrascittura del file quando lo importo, se modifico qui non c'è più corrispondenza con quello presente nei gestionali
-=== UC28 - Registrazione anagrafica mittente
-Per aggiungere un nuovo mittente 
-==== UC28.1 - Denominazione cliente
-==== UC28.2 - Indirizzi e-mail
-==== UC28.3 - Numeri WhatsApp
+==== UC28.2 - Inserimento recapiti mittente
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - UC28 è stato avviato.
+  - Il sistema mostra il modulo di registrazione del mittente con i campi dedicati agli indirizzi e-mail e ai numeri WhatsApp.
+- *Postcondizioni:*
+  - Almeno un recapito del mittente è stato acquisito dal modulo ed è pronto per la validazione e il controllo di unicità in UC28.
+- *Trigger:* il flusso di UC28 raggiunge il passo 4 e richiede l'inserimento dei recapiti associati al mittente.
+- *Scenario principale:*
+  + L'amministratore inserisce uno o più recapiti associati al mittente.
+  + Il sistema acquisisce i recapiti inseriti nel modulo di registrazione.
+- *Scenari alternativi:*
+  - Nessun recapito inserito: se l'amministratore non inserisce né un indirizzo e-mail né un numero WhatsApp, questo viene segnalato in fase di validazione in UC28.
+  - Formato non valido o recapiti duplicati nel modulo: se uno o più indirizzi e-mail o numeri WhatsApp non rispettano il formato previsto oppure risultano ripetuti nel modulo, questo viene segnalato in fase di validazione in UC28.
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
 === UC29 - Identificativo mittente già registrato
-=== UC30 - Modifica anagrafica mittente
-Per modificare i dati del mittente
-=== UC31 - Eliminazione anagrafica mittente
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - UC28 o UC30 è stato avviato.
+  - L'amministratore ha inserito uno o più recapiti (indirizzi e-mail o numeri WhatsApp) e ha confermato l'operazione.
+  - Almeno uno dei recapiti inseriti risulta già associato a un altro mittente presente nell'anagrafica del tenant.
+- *Postcondizioni:*
+  - L'operazione di registrazione o modifica del mittente non viene eseguita e l'anagrafica del tenant resta invariata.
+  - L'amministratore visualizza quali recapiti risultano già registrati e può correggere i dati inseriti.
+- *Trigger:* la verifica di unicità dei recapiti del mittente, eseguita in UC28 o UC30, ha esito negativo.
+- *Scenario principale:*
+  + Il sistema interrompe l'operazione di registrazione o modifica in corso, senza salvare alcuna variazione.
+  + Il sistema mostra un messaggio di errore che evidenzia gli indirizzi e-mail o i numeri WhatsApp già associati a un altro mittente nell'anagrafica del tenant.
+  + Il sistema mantiene i valori compilati nel modulo, consentendo all'amministratore di correggerli e riprovare.
+- *Scenari alternativi:* -
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC30 - Modifica dati mittente
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - L'amministratore è autenticato nell'interfaccia amministrativa.
+  - È presente almeno un mittente registrato nell'anagrafica del tenant.
+- *Postcondizioni:*
+  - I dati del mittente selezionato (denominazione cliente e/o recapiti registrati) sono aggiornati nell'anagrafica del tenant.
+  - L'operazione viene registrata nei log.
+- *Trigger:* l'amministratore seleziona un mittente dalla lista dell'anagrafica e avvia la procedura di modifica.
+- *Scenario principale:*
+  + L'amministratore seleziona un mittente dalla lista e attiva la modalità di modifica.
+  + Il sistema presenta il modulo precompilato con la denominazione e i recapiti (indirizzi e-mail e/o numeri WhatsApp) attualmente associati al mittente.
+  + L'amministratore modifica uno o più campi e conferma le modifiche.
+  + Il sistema verifica la presenza della denominazione, la presenza di almeno un recapito valido e l'assenza di recapiti già associati a un altro mittente del tenant.
+  + Il sistema salva le modifiche nell'anagrafica del tenant e registra l'operazione nei log.
+- *Scenari alternativi:*
+  - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema mantiene invariati i dati attuali del mittente.
+  - Dati mancanti o formato non valido: se vengono rimossi tutti i recapiti oppure uno o più recapiti hanno formato non valido, il sistema impedisce il salvataggio, segnala gli errori e invita l'amministratore a correggerli.
+  - Identificativo mittente già registrato: se un recapito aggiunto o modificato coincide con quello già assegnato a un altro mittente del tenant, il sistema non applica le modifiche e attiva UC29.
+- *Inclusioni:* -
+- *Estensioni:*
+  - UC29 - Identificativo mittente già registrato.
+- *Specializzazioni:* -
+
+=== UC31 - Eliminazione mittente
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - L'amministratore è autenticato nell'interfaccia amministrativa.
+  - È presente almeno un mittente registrato nell'anagrafica del tenant.
+- *Postcondizioni:*
+  - Il mittente selezionato è rimosso dall'anagrafica del tenant.
+  - L'operazione viene registrata nei log.
+- *Trigger:* l'amministratore seleziona l'azione di eliminazione su un mittente presente nella lista dell'anagrafica.
+- *Scenario principale:*
+  + L'amministratore seleziona il mittente da eliminare dalla lista e seleziona il comando di eliminazione.
+  + Il sistema chiede conferma dell'eliminazione del mittente selezionato.
+  + L'amministratore conferma l'eliminazione.
+  + Il sistema rimuove il mittente dall'anagrafica del tenant e registra l'operazione nei log.
+- *Scenari alternativi:*
+  - Annullamento: se l'amministratore non conferma l'eliminazione, l'operazione viene interrotta.
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
