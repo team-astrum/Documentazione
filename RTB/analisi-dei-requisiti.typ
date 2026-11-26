@@ -8,7 +8,8 @@
   verifica: ("Samuele Gobbi", "Matteo De Col", "Filippo De Guio"),
   approvazione: " ",
   changelog: (
-    (ver: "0.7.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Caso d'Uso da UC48 a UC54"),
+    (ver: "0.8.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC61 a UC63"),
+    (ver: "0.7.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC48 a UC54"),
     (ver: "0.6.1", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione UC30"),
     (ver: "0.6.0", data: "2026-11-25", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Stesura Casi d'Uso  da UC28 a UC31"),
     (ver: "0.5.2", data: "2026-11-24", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione Casi d'uso da UC20 a UC27 e modifica sezione attori"),
@@ -1248,6 +1249,62 @@ Quelli individuati sono:
 - *Scenari alternativi:* 
   - Formato allegato non supportato:se un allegato ha un'estensione non gestita, l'applicativo lo ignora, registra una segnalazione nei log e prosegue l'elaborazione del resto della richiesta senza bloccarla.
   - Dimensione allegato eccessiva: se un allegato supera la soglia massima configurata, l'applicativo non lo acquisisce, registra l'avviso nei log e continua a elaborare eventuali altri allegati validi o il testo.
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC61 - Interpretazione visiva di etichette e cataloghi
+- *#G("Attore") principale:* Applicativo - AIRA
+- *Attori secondari:* OCR
+- *Precondizioni:*
+  - Una richiesta non duplicata proveniente da un mittente identificato è in fase di elaborazione e contiene un allegato visivo (es. immagine o foto di etichetta o catalogo) acquisito tramite UC54.
+- *Postcondizioni:*
+  - Le informazioni visive estratte dall'etichetta o dalla foto di catalogo (es. codici, descrizioni, riferimenti prodotto) sono rese disponibili in forma testuale/strutturata per le fasi successive di classificazione ed estrazione entità.
+- *Trigger:* rilevamento di un allegato visivo (etichetta o foto di catalogo) da interpretare visivamente nell'ambito della pipeline di elaborazione.
+- *Scenario principale:*
+  + L'applicativo individua l'allegato visivo (etichetta o foto di catalogo) associato alla richiesta in elaborazione.
+  + L'applicativo invia l'allegato al servizio di OCR configurato.
+  + Il servizio OCR analizza l'immagine e interpreta elementi visivi come etichette, foto di cataloghi e riferimenti di prodotto.
+  + L'applicativo acquisisce il risultato dell'interpretazione visiva e lo rende disponibile alle fasi successive della pipeline (estrazione delle entità e mappatura sui codici articolo del catalogo).
+- *Scenari alternativi:* 
+  - Formato o dimensione non validi: se l'allegato non è supportato o eccede la dimensione consentita, l'applicativo lo ignora, registra una segnalazione nei log e prosegue l'elaborazione del resto della richiesta senza bloccarla.
+  - Interpretazione non riuscita o parziale: se l'immagine è illeggibile o il modello non riesce a interpretare il contenuto visivo, l'applicativo registra l'esito/anomalia nei log e prosegue con eventuali altri contenuti disponibili o gestisce lo stato della richiesta.
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC62 - Formato allegato non supportato
+- *#G("Attore") principale:* Applicativo - AIRA
+- *Attori secondari:* -
+- *Precondizioni:*
+  - Durante l'acquisizione o la lettura degli allegati di una richiesta, l'applicativo incontra un file allegato (UC54).
+- *Postcondizioni:*
+  - L'allegato con formato non supportato viene escluso dall'estrazione multimodale, l'anomalia è segnalata/registrata nei log e l'elaborazione del resto della richiesta prosegue senza interruzioni.
+- *Trigger:* l'applicativo rileva che un allegato ha un formato (estensione o tipo file) non compreso tra quelli supportati.
+- *Scenario principale:*
+  + L'applicativo verifica il formato dell'allegato durante la fase di acquisizione (UC54).
+  + L'applicativo rileva che il formato del file non è supportato.
+  + L'applicativo segnala l'allegato non supportato e registra l'evento nei log.
+  + L'applicativo prosegue l'elaborazione del testo e degli eventuali altri allegati validi della richiesta senza interrompere la pipeline di lavorazione.
+- *Scenari alternativi:* -
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC63 - Dimensione allegato eccessiva
+- *#G("Attore") principale:* Applicativo - AIRA
+- *Attori secondari:* -
+- *Precondizioni:*
+  - Durante l'acquisizione o la lettura degli allegati di una richiesta, l'applicativo esamina un file allegato (UC54).
+- *Postcondizioni:*
+  - L'allegato che supera la dimensione massima consentita non viene elaborato, l'anomalia viene segnalata e registrata nei log e l'elaborazione del resto della richiesta continua senza bloccarsi.
+- *Trigger:* l'applicativo rileva che la dimensione di un allegato supera la soglia massima configurata.
+- *Scenario principale:*
+  + L'applicativo controlla la dimensione dell'allegato durante la fase di acquisizione (UC54).
+  + L'applicativo rileva che la dimensione del file eccede il limite massimo consentito.
+  + L'applicativo segnala l'allegato con dimensione eccessiva e l'evento viene registrato nei log.
+  + L'applicativo prosegue l'elaborazione del resto della richiesta (testo e altri allegati validi) senza interrompere il flusso di lavoro.
+- *Scenari alternativi:* - 
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
