@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi",),
   approvazione: " ",
   changelog: (
+    (ver: "0.6.1", data: "2026-11-25", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Correzione UC30"),
     (ver: "0.6.0", data: "2026-11-25", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso  da UC28 a UC31"),
     (ver: "0.5.2", data: "2026-11-24", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Correzione Casi d'uso da UC20 a UC27 e modifica sezione attori"),
     (ver: "0.5.1", data: "2026-11-23", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Correzione del documento"),
@@ -1030,7 +1031,7 @@ Quelli individuati sono:
   + Il sistema salva le modifiche nell'anagrafica del tenant e registra l'operazione nei log.
 - *Scenari alternativi:*
   - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema mantiene invariati i dati attuali del mittente.
-  - Dati mancanti o formato non valido: se vengono rimossi tutti i recapiti oppure uno o più recapiti hanno formato non valido, il sistema impedisce il salvataggio, segnala gli errori e invita l'amministratore a correggerli.
+  - Dati mancanti o formato non valido: se vengono rimossi tutti i recapiti, la denominazione oppure uno o più recapiti hanno formato non valido, il sistema impedisce il salvataggio, segnala gli errori e invita l'amministratore a correggerli.
   - Identificativo mittente già registrato: se un recapito aggiunto o modificato coincide con quello già assegnato a un altro mittente del tenant, il sistema non applica le modifiche e attiva UC29.
 - *Inclusioni:* -
 - *Estensioni:*
