@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi", "Matteo De Col", "Filippo De Guio"),
   approvazione: " ",
   changelog: (
+    (ver: "0.9.0", data: "2026-11-26", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso da UC55 a UC60."),
     (ver: "0.8.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC61 a UC63"),
     (ver: "0.7.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC48 a UC54"),
     (ver: "0.6.1", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione UC30"),
@@ -1251,6 +1252,175 @@ Quelli individuati sono:
   - Dimensione allegato eccessiva: se un allegato supera la soglia massima configurata, l'applicativo non lo acquisisce, registra l'avviso nei log e continua a elaborare eventuali altri allegati validi o il testo.
 - *Inclusioni:* -
 - *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC55 - Mittente non riconosciuto o non autorizzato
+- *#G("Attore") principale:* Canale esterno (e-mail o WhatsApp)
+- *Attori secondari:* -
+- *Precondizioni:*
+  - Il canale di ingresso è attivo e ha consegnato un nuovo messaggio (rilevato tramite polling periodico per e-mail o notificato via webhook per WhatsApp).
+  - UC52 è stato avviato ed è stato estratto l'identificativo del mittente (indirizzo e-mail o numero WhatsApp) da una nuova richiesta rilevata.
+  - Il confronto con l'anagrafica dei mittenti registrati e con le autorizzazioni del canale ha dato esito negativo.
+- *Postcondizioni:*
+  - La richiesta viene bloccata e non prosegue le fasi successive della pipeline (estrazione multimodale, elaborazione #G("LLM (Large Language Model)"), esecuzione di azioni verso applicativi target o invio di notifiche), prevenendo accessi non autorizzati.
+  - Il contenuto e gli eventuali allegati della richiesta non vengono salvati nel sistema.
+  - L'evento di blocco e la relativa motivazione sono registrati nei log di sistema con i soli metadati essenziali (mittente, canale, data/ora e motivo del blocco).
+- *Trigger:* Il flusso di UC52 completa la verifica del mittente sull'anagrafica e sulle regole di autorizzazione con esito negativo.
+- *Scenario principale:*
+  + Il sistema interrompe l'elaborazione della richiesta corrente, impedendo l'accesso alle fasi successive della pipeline (estrazione allegati/audio, elaborazione #G("LLM (Large Language Model)") e chiamate verso applicativi target).
+  + Il sistema marca la richiesta come bloccata, senza persistere il contenuto del messaggio o gli allegati.
+  + Il sistema registra l'evento di blocco nei log applicativi riportandone i soli metadati.
+- *Scenari alternativi:*
+  - Tentativo di riconoscimento avanzato del mittente: se il mittente non è censito in anagrafica e la funzionalità opzionale di riconoscimento avanzato è attiva, il sistema attiva UC103.
+  - Invio risposta automatica di errore al mittente: solo qualora venga abilitata la funzionalità opzionale di notifica automatica al mittente, il sistema attiva l'estensione UC99 sullo stesso canale di arrivo.
+  - Errore tecnico durante la registrazione del log: se il sistema incontra un errore nella scrittura del log, il sistema segnala l'errore interno di logging sulla dashboard amministrativa senza bloccare né elaborare la richiesta.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
+- *Estensioni:*
+  - UC103 - Riconoscimento avanzato di mittente non censito.
+  - UC99 - Invio risposta di errore al mittente.
+- *Specializzazioni:* -
+
+=== UC56 - Richiesta duplicata
+- *#G("Attore") principale:* Canale esterno (e-mail o WhatsApp)
+- *Attori secondari:* -
+- *Precondizioni:*
+  - Il canale di ingresso ha reso disponibile un messaggio (rilevato dal polling periodico per e-mail o notificato via webhook per WhatsApp) nell'ambito di UC51.
+  - Il sistema ha rilevato che il messaggio corrisponde a una richiesta già acquisita in precedenza, in base allo stesso identificativo univoco oppure allo stesso contenuto inviato dal medesimo mittente a breve distanza temporale.
+- *Postcondizioni:*
+  - La richiesta duplicata viene scartata e non viene salvato come nuova richiesta né elaborata nuovamente dalla pipeline.
+  - I dati e lo stato della richiesta originale già acquisita rimangono inalterati.
+  - L'evento di scarto per duplicazione è registrato nei log di sistema (UC79).
+- *Trigger:* Durante l'acquisizione di un nuovo messaggio (UC51), la verifica di duplicazione rileva una corrispondenza con una richiesta già presente nel sistema.
+- *Scenario principale:*
+  + Il sistema confronta l'identificativo univoco del messaggio (e l'impronta del contenuto associata al mittente in una finestra temporale ravvicinata) con le richieste già acquisite, rilevando un duplicato.
+  + Il sistema interrompe immediatamente l'acquisizione del messaggio, evitando di generare una nuova richiesta nel database e di avviare le fasi successive della pipeline.
+  + Il sistema registra nei log applicativi l'evento di una richiesta duplicata scartata, includendo i metadati inerenti (UC79).
+- *Scenari alternativi:*
+  - Richiesta originale ancora in stato di elaborazione: se la richiesta corrispondente risulta attualmente in elaborazione, il sistema scarta comunque il messaggio duplicato al passo 2 per prevenire elaborazioni concorrenti.
+  - Errore tecnico durante la registrazione del log: se il sistema incontra un errore nella scrittura del log, il sistema segnala l'errore interno di logging sulla dashboard amministrativa senza avviare l'elaborazione del messaggio duplicato.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC57 - Trascrizione di nota vocale o file audio
+- *#G("Attore") principale:* Canale esterno (WhatsApp)
+- *Attori secondari:* Servizio #G("STT (Speech-to-Text)")
+- *Precondizioni:*
+  - Un messaggio contenente almeno una nota vocale derivante dall'app WhatsApp è stato acquisito (UC51 e UC54) e ha superato il filtro sicurezza e duplicazione.
+  - La richiesta si trova in stato di elaborazione.
+  - Il motore #G("STT (Speech-to-Text)") configurato è abilitato nel sistema.
+- *Postcondizioni:*
+  - Il contenuto audio è stato trascritto in formato testuale.
+  - Il testo trascritto è associato alla richiesta corrente e salvato in forma protetta, pronto per essere combinato con l'eventuale testo del messaggio ed elaborato dal servizio di #G("LLM (Large Language Model)"), nonché consultato nel dettaglio della richiesta (UC82).
+  - La richiesta rimane nello stato di elaborazione e l'avvenuta trascrizione è registrata nei log di sistema (UC79).
+- *Trigger:* Durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva che la richiesta acquisita contiene una nota vocale da convertire in testo.
+- *Scenario principale:*
+  + Il sistema individua la nota vocale associato alla richiesta in stato di elaborazione.
+  + Il sistema verifica che la dimensione dell'audio rispetti i vincoli supportati.
+  + Il sistema invia il flusso audio al motore #G("STT (Speech-to-Text)") configurato, specificando gli eventuali parametri di elaborazione previsti (e.g. lingua italiana).
+  + Il sistema ottiene il testo trascritto e lo unisce in modo strutturato all'eventuale testo già estratto dal corpo del messaggio (UC53).
+  + Il sistema salva la trascrizione associandola alla richiesta (in forma protetta) e registra il completamento della fase di trascrizione nei log applicativi (UC79).
+- *Scenari alternativi:*
+  - Dimensione messaggio audio eccessiva: se l'audio supera la dimensione massima consentita, il sistema non avvia la trascrizione e attiva rispettivamente UC63.
+  - Motore #G("STT (Speech-to-Text)") non disponibile, errore tecnico o timeout: se il servizio #G("STT (Speech-to-Text)") esterno non è raggiungibile, va in timeout o restituisce un errore tecnico, il sistema attiva l'estensione UC58.
+  - Audio corrotto, muto o incomprensibile: se l'audio è danneggiato, privo di parlato riconoscibile o produce una trascrizione vuota/non utilizzabile, il sistema attiva l'estensione UC58.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
+- *Estensioni:*
+  - UC58 - Trascrizione non riuscita.
+  - UC63 - Dimensione allegato eccessiva.
+- *Specializzazioni:* -
+
+=== UC58 - Trascrizione non riuscita
+- *#G("Attore") principale:* Canale esterno (WhatsApp)
+- *Attori secondari:* Servizio #G("STT (Speech-to-Text)")
+- *Precondizioni:*
+  - UC57 è stato avviato per una richiesta in stato di elaborazione proveniente da un mittente già riconosciuto e autorizzato (UC52).
+  - L'elaborazione #G("STT (Speech-to-Text)") non ha avuto successo a causa di un'indisponibilità/timeout/errore tecnico del motore #G("STT (Speech-to-Text)") oppure di un audio corrotto, muto o incomprensibile.
+- *Postcondizioni:*
+  - La trascrizione dell'audio non è disponibile e la richiesta non viene inoltrata ai sistemi target con i dati completi.
+  - Lo stato della richiesta è registrato in errore, conservando il riferimento al messaggio e all'audio originale per eventuale consultazione (UC82) o rielaborazione (UC83).
+  - L'evento di errore e la causa specifica sono registrati nei log di sistema (UC79) e resi visibili nella dashboard amministrativa.
+- *Trigger:* Durante UC57, il motore #G("STT (Speech-to-Text)") restituisce un errore o va in timeout, oppure l'elaborazione produce un testo vuoto/non valido per audio corrotto o incomprensibile.
+- *Scenario principale:*
+  + Il sistema interrompe la procedura di trascrizione avviata in UC57, evitando di inviare un contenuto audio mancante all'elaborazione semantica (UC64).
+  + Il sistema aggiorna lo stato della richiesta impostandolo su errore e mantiene i riferimenti al contenuto originale acquisito.
+  + Il sistema registra nei log applicativi l'evento di errore di trascrizione con i metadati necessari, rendendolo consultabile dall'interfaccia amministrativa.
+- *Scenari alternativi:*
+  - Invio risposta automatica di errore al mittente: qualora la funzionalità opzionale di risposta automatica al mittente sia abilitata e il fallimento sia dovuto a un file audio corrotto o incomprensibile, il sistema attiva UC99 sullo stesso canale di ricezione.
+  - Errore tecnico durante il salvataggio dello stato o la registrazione del log: se fallisce la persistenza su database dello stato o la scrittura del log, il sistema registra un errore critico sul log, garantendo che la richiesta non venga inoltrata in modo parziale ai sistemi target.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
+- *Estensioni:*
+  - UC99 - Invio risposta di errore al mittente.
+- *Specializzazioni:* -
+
+=== UC59 - Estrazione testo da un'immagine (#G("OCR (Optical Character Recognition)"))
+- *#G("Attore") principale:* Canale esterno (e-mail)
+- *Attori secondari:* Servizio #G("OCR (Optical Character Recognition)")
+- *Precondizioni:*
+  - Una richiesta contenente almeno un allegato immagine (e.g. JPG o PNG) oppure un'immagine di pagina estratta da un documento PDF scansionato (UC60) è stata acquisita (UC51 e UC54) e ha superato il filtro di sicurezza e duplicazione (UC52, UC55 e UC56).
+  - La richiesta si trova nello stato di elaborazione.
+  - Il motore #G("OCR (Optical Character Recognition)") configurato è abilitato nel sistema.
+- *Postcondizioni:*
+  - Il testo presente nell'immagine o scansione è stato estratto tramite tecnologia #G("OCR (Optical Character Recognition)").
+  - Il testo estratto è associato alla richiesta corrente e salvato in forma protetta, pronto per essere combinato con eventuale testo del corpo messaggio ed elaborato dal servizio #G("LLM (Large Language Model)"), nonché consultato nel dettaglio della richiesta (UC82).
+  - La richiesta rimane nello stato di elaborazione e l'avvenuta estrazione è tracciata nei log applicativi (UC79).
+- *Trigger:* Durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva un allegato immagine (oppure una pagina PDF scansionata in UC60) da sottoporre a riconoscimento ottico dei caratteri.
+- *Scenario principale:*
+  + Il sistema individua l'allegato immagine (o l'immagine di pagina estratta in UC60) associato alla richiesta in stato di elaborazione.
+  + Il sistema verifica che il formato del file (e.g. JPG o PNG) e la sua dimensione rispettino i vincoli configurati.
+  + Il sistema applica eventuali operazioni preliminari di normalizzazione dell'immagine e la elabora mediante il motore #G("OCR (Optical Character Recognition)") configurato.
+  + Il sistema riceve il testo estratto dall'#G("OCR (Optical Character Recognition)") e lo integra in modo ordinato con l'eventuale testo già acquisito dal corpo del messaggio (UC53) o da altri allegati.
+  + Il sistema salva il testo estratto associandolo alla richiesta (in forma protetta) e registra il completamento dell'estrazione OCR nei log di sistema (UC79).
+- *Scenari alternativi:*
+  - Formato immagine non supportato o dimensione eccessiva: se il file immagine presenta un formato non supportato oppure supera la dimensione massima consentita, il sistema non esegue il motore #G("OCR (Optical Character Recognition)") e attiva UC62 e UC63.
+  - Motore #G("OCR (Optical Character Recognition)") non disponibile, errore tecnico o timeout: se il servizio #G("OCR (Optical Character Recognition)") esterno non è raggiungibile, va in timeout o il modulo genera un errore tecnico, il sistema registra l'errore nei log (UC79) e aggiorna lo stato della richiesta in errore.
+  - Immagine corrotta, illeggibile o prima di testo riconoscibile: se il file immagine è danneggiato o il motore #G("OCR (Optical Character Recognition)") non estrae alcun testo leggibile:
+    - se la richiesta contiene già un corpo testuale valido (UC53) o altri allegati estratti con successo, il sistema registra nei log l'avviso sull'immagine non leggibile (UC79) e prosegue l'elaborazione sul contenuto disponibile;
+    - se l'immagine era l'unica fonte informativa utile della richiesta, il sistema imposta lo stato su errore, registra l'errore nei log (UC79) ed eventualmente attiva UC99.
+  - Presenza di più immagini o pagine scansionate: se la richiesta contiene più allegati immagine (o più pagine scansionate di un PDF), il sistema ripete i passi 2-4 per ciascuna immagine valida e concatena ordinatamente i testi estratti nella stessa richiesta.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
+- *Estensioni:*
+  - UC62 - Formato allegato non supportato.
+  - UC63 - Dimensione allegato eccessiva.
+  - UC99 - Invio risposta di errore al mittente.
+- *Specializzazioni:* -
+
+=== UC60 - Estrazione testo da documento PDF
+- *#G("Attore") principale:* Canale esterno (e-mail)
+- *Attori secondari:* -
+- *Precondizioni:*
+  - Una richiesta contenente almeno un allegato in formato PDF è stata acquisita (UC51 e UC54) e ha superato il filtro di sicurezza e duplicazione (UC52, UC55 e UC56).
+  - La richiesta si trova nello stato di elaborazione.
+- *Postcondizioni:*
+  - Il contenuto testuale del documento PDF è stato estratto, avvalendosi eventualmente di UC59 in caso di documento scansionato.
+  - Il testo estratto e il documento PDF originale sono associati alla richiesta e salvati in forma cifrata, pronti per l'elaborazione semantica tramite servizio #G("LLM (Large Language Model)") e per la consultazione nel dettaglio richiesta (UC82).
+  - La richiesta rimane nello stato di elaborazione e l'avvenuta estrazione è registrata nei log di sistema (UC79).
+- *Trigger:* Durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva un allegato PDF da cui estrarre il testo.
+- *Scenario principale:*
+  + Il sistema individua l'allegato in formato PDF associato alla richiesta in stato di elaborazione.
+  + Il sistema verifica che il file sia un documento PDF integro/valido e che la sua dimensione rispetti il limite massimo configurato.
+  + Il sistema analizza il contenuto del PDF ed estrae il testo digitale nativo presente nelle pagine del documento, rispettandone l'ordine.
+  + Il sistema verifica che il testo estratto sia significativo e lo integra in modo ordinato con l'eventuale testo già estratto dal corpo del messaggio (UC53) o da altri allegati.
+  + Il sistema salva il testo estratto e conserva l'allegato PDF originale in forma cifrata, registrando il completamento dell'estrazione nei log applicativi (UC79).
+- *Scenari alternativi:*
+  - File non valido o dimensione eccessiva: se l'allegato non è un file PDF valido (e.g. estensione incoerente o formato non supportato) oppure supera la dimensione massima consentita, il sistema non avvia l'estrazione e attiva rispettivamente UC62 o UC63.
+  - PDF scansionato o ibrido (privo di testo digitale nativo su una o più pagine): se il parser rileva che il PDF (in tutto o in parte) è composto da immagini scansionate prive di strato testuale estraibile, il sistema estrae le immagini delle pagine interessate e attiva UC59 per ricavarne il testo, proseguendo poi al passo 4.
+  - PDF corrotto, protetto da password o privo di testo estraibile: se il PDF risulta danneggiato, protetto da password o illeggibile anche tramite #G("OCR (Optical Character Recognition)"):
+    - se la richiesta contiene già un corpo testuale valido (UC53) o altri allegati estratti con successo, il sistema registra nei log l'avviso relativo al PDF non elaborabile (UC79) e prosegue l'elaborazione sul contenuto rimanente;
+    - se il PDF era l'unica fonte informativa utile della richiesta, il sistema aggiorna lo stato in errore, registra l'errore nei log (UC79) ed eventualmente attiva UC99.
+  - Presenza di più documenti PDF: se la richiesta contiene più allegati PDF, il sistema ripete i passi 2-4 per ciascun documento valido e concatena ordinatamente i testi estratti nella stessa richiesta.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
+- *Estensioni:*
+  - UC59 - Estrazione testo da immagine (#G("OCR (Optical Character Recognition)"))
+  - UC62 - Formato allegato non supportato.
+  - UC63 - Dimensione allegato eccessiva.
+  - UC99 - Invio risposta di errore al mittente.
 - *Specializzazioni:* -
 
 === UC61 - Interpretazione visiva di etichette e cataloghi
