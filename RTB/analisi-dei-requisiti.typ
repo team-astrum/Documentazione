@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi", "Matteo De Col", "Filippo De Guio"),
   approvazione: " ",
   changelog: (
+    (ver: "0.6.2", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Caso d'Uso da UC48 a UC54"),
     (ver: "0.6.1", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione UC30"),
     (ver: "0.6.0", data: "2026-11-25", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Stesura Casi d'Uso  da UC28 a UC31"),
     (ver: "0.5.2", data: "2026-11-24", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione Casi d'uso da UC20 a UC27 e modifica sezione attori"),
