@@ -5,14 +5,14 @@
   status: "Da approvare", // Oppure "Approvato"
   utilizzo: "Interno", // Oppure "Esterno"
   redazione: ("Filippo De Guio", "Matteo De Col", "Gianluca Bacco"),
-  verifica: ("Samuele Gobbi",),
+  verifica: ("Samuele Gobbi", "Matteo De Col", "Filippo De Guio"),
   approvazione: " ",
   changelog: (
-    (ver: "0.6.1", data: "2026-11-25", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Correzione UC30"),
-    (ver: "0.6.0", data: "2026-11-25", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso  da UC28 a UC31"),
-    (ver: "0.5.2", data: "2026-11-24", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Correzione Casi d'uso da UC20 a UC27 e modifica sezione attori"),
-    (ver: "0.5.1", data: "2026-11-23", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Correzione del documento"),
-    (ver: "0.5.0", data: "2026-11-22", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC20 a UC27"),
+    (ver: "0.6.1", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione UC30"),
+    (ver: "0.6.0", data: "2026-11-25", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Stesura Casi d'Uso  da UC28 a UC31"),
+    (ver: "0.5.2", data: "2026-11-24", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione Casi d'uso da UC20 a UC27 e modifica sezione attori"),
+    (ver: "0.5.1", data: "2026-11-23", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione del documento"),
+    (ver: "0.5.0", data: "2026-11-22", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Stesura Casi d'Uso da UC20 a UC27"),
     (ver: "0.4.3", data: "2026-11-21", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"Filippo De Guio, Matteo De Col", desc: "Correzione del documento"),
     (ver: "0.4.2", data: "2026-11-20", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Correzione del documento"),
     (ver: "0.4.1", data: "2026-11-20", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"Filippo De Guio", desc: "Inserimento diagrammi casi d'uso UC1 - UC9"),
