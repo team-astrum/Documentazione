@@ -8,7 +8,7 @@
   verifica: ("Samuele Gobbi", "Matteo De Col", "Filippo De Guio"),
   approvazione: " ",
   changelog: (
-    (ver: "0.9.0", data: "2026-11-26", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso da UC55 a UC60."),
+    (ver: "0.9.0", data: "2026-11-26", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso da UC55 a UC60 insieme a UC64, UC65 e UC66."),
     (ver: "0.8.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC61 a UC63"),
     (ver: "0.7.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC48 a UC54"),
     (ver: "0.6.1", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"De Col Matteo", desc: "Correzione UC30"),
@@ -1476,5 +1476,85 @@ Quelli individuati sono:
   + L'applicativo prosegue l'elaborazione del resto della richiesta (testo e altri allegati validi) senza interrompere il flusso di lavoro.
 - *Scenari alternativi:* - 
 - *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC64 - Classificazione della tipologia di richiesta
+- *#G("Attore") principale:* Canale esterno (e-mail o WhatsApp)
+- *Attori secondari:* Servizio #G("LLM (Large Language Model)")
+- *Precondizioni:*
+  - Una richiesta proveniente da un mittente riconosciuto ha completato le fasi di acquisizione ed eventuale estrazione multimodale (UC53, UC57, UC59, UC60).
+  - La richiesta dispone di un contenuto testuale utile su cui operare e si trova nello stato di elaborazione.
+  - Il servizio #G("LLM (Large Language Model)") configurato è attivo e collegato tramite interfaccia modulare.
+- *Postcondizioni:*
+  - Alla richiesta è stata assegnata una tipologia valida tra quelle supportate dal sistema (ordine d'acquisto, ticket di assistenza, prenotazione di appuntamento, opportunità commerciale, richiesta di documenti contabili ed eventuali altre tipologie configurate).
+  - In caso di più intenzioni nel testo, è mantenuta la sola intenzione principale mentre le secondarie risultano tracciate nei log.
+  - La richiesta rimane nello stato di elaborazione, pronta per l'estrazione delle entità (UC66) e la classificazione è registrata nei log (UC79).
+- *Trigger:* Al termine dell'acquisizione e dell'estrazione del testo dai contenuti multimodali, la pipeline avvia la fase di elaborazione semantica per classificare la richiesta.
+- *Scenario principale:*
+  + Il sistema assembla il testo complessivo della richiesta (corpo del messaggio ed eventuali testi estratti da audio, immagini o PDF), insieme all'elenco delle tipologie di richiesta riconosciute dal sistema.
+  + Il sistema avvia la richiesta di classificazione al servizio #G("LLM (Large Language Model)") attraverso l'interfaccia modulare.
+  + Il servizio #G("LLM (Large Language Model)") interpreta semanticamente il contenuto e restituisce la tipologia individuata tra quelle supportate (classificando come "ticket di assistenza" anche le e-mail semplici prive di altre intenzioni specifiche).
+  + Il sistema verifica che la tipologia restituita appartenga all'insieme delle tipologie valide, la associa alla richiesta corrente (mantenuta in stato di elaborazione) e registra l'evento di classificazione nei log applicativi (UC79).
+- *Scenari alternativi:*
+  - Servizio #G("LLM (Large Language Model)") non disponibile, timeout o risposta malformata: se il servizio #G("LLM (Large Language Model)") non è raggiungibile, supera il timeout configurato oppure restituisce un output tecnicamente non interpretabile, il sistema imposta lo stato della richiesta in errore, registra l'errore nei log (UC79) e non procede verso UC66.
+  - Rilevamento di più intenzioni nel medesimo documento: se il servizio #G("LLM (Large Language Model)") individua più richieste o intenzioni distinte all'interno dello stesso testo, il sistema attiva UC72 per selezionare l'intenzione principale e registrare le secondarie nei log, proseguendo poi al passo 4 con la tipologia dell'intenzione principale.
+  - Tipologia non determinabile: se il servizio #G("LLM (Large Language Model)") non riesce a ricondurre il contenuto ad alcuna tipologia supportata (o la classificazione risulta ambigua/non valida), il sistema attiva UC65.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
+- *Estensioni:*
+  - UC65 - Tipologia non determinabile.
+  - UC72 - Richiesta con più intenzioni.
+- *Specializzazioni:* -
+
+=== UC65 - Tipologia non determinabile
+- *#G("Attore") principale:* Canale esterno (e-mail o WhatsApp)
+- *Attori secondari:* -
+- *Precondizioni:*
+  - UC64 è stato avviato per una richiesta in stato di elaborazione proveniente da un mittente riconosciuto (UC52).
+  - Il servizio #G("LLM (Large Language Model)") ha completato l'analisi senza errori tecnici di comunicazione, ma non è riuscito a ricondurre il contenuto ad alcuna delle tipologie previste (o ha prodotto una classificazione ambigua/non valida).
+- *Postcondizioni:*
+  - La richiesta non viene inoltrata automaticamente verso alcun applicativo target con una tipologia incerta o errata.
+  - Lo studio della richiesta è registrato in stato di errore (marcata come tipologia non elaborata per tipologia non determinabile), conservando il contenuto originale protetto per eventuale consultazione (UC82) o rielaborazione (UC83) (salvo ripiego su "ticket di assistenza").
+  - L'evento e la motivazione sono registrati nei log di sistema (UC79) e resi visibili nella dashboard amministrativa.
+- *Trigger:* Durante UC64 il sistema rileva che la classificazione restituita dal servizio #G("LLM (Large Language Model)") non individua alcuna tipologia valida tra quelle configurate.
+- *Scenario principale:*
+  + Il sistema interrompe la procedura di elaborazione semantica avviata in UC64, impedendo il proseguimento verso l'estrazione delle entità (UC66) e l'esecuzione delle azioni automatiche.
+  + Il sistema conserva il riferimento e il contenuto originale della richiesta in forma protetta e ne aggiorna lo stato in errore (non elaborata per tipologia non determinabile).
+  + Il sistema registra l'evento nei log applicativi specificando i metadati necessari con motivazione (tipologia non determinabile) (UC79), rendendolo consultabile dall'amministratore.
+- *Scenari alternativi:*
+  - Applicazione della tipologia di ripiego su "ticket di assistenza": qualora la configurazione applicativa preveda il ticket di assistenza come tipologia di ripiego per richieste non classificabili, il sistema assegna alla richiesta la tipologia "ticket di assistenza", registra nei log il ricorso alla tipologia di ripiego (UC79) e prosegue verso UC66 per verificare la presenza dei dati minimi (passando comunque allo stato di errore solo qualora manchino i dati minimi del ticket).
+  - Invio alla coda di validazione manuale: qualora la funzionalità opzionale di validazione umana sia abilitata, anziché impostare lo stato in errore, il sistema lo stato da validare e accoda la richiesta affinché l'operatore possa assegnare manualmente la tipologia o scartarla.
+  - Invio risposta automatica di errore al mittente: qualora la funzionalità opzionale di notifica automatica al mittente sia abilitata e la richiesta non venga recuperata all'interno degli scenari alternativi precedenti, il sistema attiva UC99 sullo stesso canale di arrivo.
+  - Errore tecnico durante il salvataggio dello stato o del log: se fallisce la persistenza su database dello stato o la scrittura del log, il sistema emette un errore critico sul canale diagnostico di sistema, garantendo che la richiesta non venga inoltrata a sistemi target.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
+- *Estensioni:*
+  - UC99 - Invio risposta di errore al mittente
+- *Specializzazioni:* -
+
+=== UC66 - Estrazione delle entità
+- *#G("Attore") principale:* Canale esterno (e-mail o WhatsApp)
+- *Attori secondari:* Servizio #G("LLM (Large Language Model)")
+- *Precondizioni:*
+  - La richiesta in stato di elaborazione proviene da un mittente riconosciuto e ha completato l'acquisizione e l'eventuale estrazione dei contenuti multimodali (UC53, UC57, UC59, UC60).
+  - UC64 ha assegnato alla richiesta una tipologia valida (riferita all'eventuale intenzione principale individuata in UC72).
+  - Il servizio #G("LLM (Large Language Model)") configurato e la definizione dei campi/entità attesi per la tipologia riconosciuta sono disponibili nel sistema.
+- *Postcondizioni:*
+  - Le entità rilevanti per la tipologia riconosciuta (relative alla sola intenzione principale) sono state estratte dal contenuto testuale tramite il servizio #G("LLM (Large Language Model)").
+  - I valori estratti sono associati alla richiesta corrente (che permane in stato di elaborazione), pronti per l'eventuale mappatura su catalogo (UC67), la strutturazione secondo template #G("JSON (JavaScript Object Notation)") (UC69) e la validazione rispetto allo schema (UC70).
+  - L'avvenuta estrazione delle entità è registrata nei log applicativi (UC79).
+- *Trigger:* Al termine della classificazione della tipologia (UC64), la pipeline avvia l'estrazione delle entità rilevanti dal testo della richiesta.
+- *Scenario principale:*
+  + Il sistema recupera la tipologia assegnata in UC64, l'elenco delle entità attese per tale tipologia e il testo completo della richiesta.
+  + Il sistema invia il contenuto testuale e la specifica delle entità da individuare al servizio #G("LLM (Large Language Model)") mediante l'interfaccia modulare.
+  + Il servizio #G("LLM (Large Language Model)") analizza il testo non strutturato (gestendo linguaggio informale, abbreviazioni e codici parziali) ed estrae i valori delle entità pertinenti alla tipologia riconosciuta (e.g. articoli e quantità per gli ordini, descrizione del problema per i ticket, data/ora per gli appuntamenti, prodotto/servizio per le opportunità e tipo di documento per i documenti contabili).
+  + Il sistema acquisisce le entità estratte restituite dal servizio #G("LLM (Large Language Model)"), le associa alla richiesta corrente (in stato di elaborazione) e registra il completamento dell'estrazione nei log applicativi (UC79).
+- *Scenari alternativi:*
+  - Servizio #G("LLM (Large Language Model)") non disponibile, timeout o output non interpretabile: se il servizio #G("LLM (Large Language Model)") non è raggiungibile, supera il timeout configurato oppure restituisce un risultato tecnicamente malformato o non utilizzabile, il sistema aggiorna lo stato della richiesta in errore, registra l'errore nei log (UC79) e non prosegue verso UC69 e UC70.
+  - Estrazione parziale o mancata individuazione di alcune entità: se il servizio #G("LLM (Large Language Model)") completa l'elaborazione ma non individua dal testo uno o più campi attesi (o restituisce valori incerti), il sistema acquisisce comunque le entità rilevate e prosegue verso la strutturazione e validazione (UC69 e UC70), demandando a UC70 e UC71 la rilevazione formale di eventuali dati incompleti e all'eventuale coda da validare (se attiva la validazione umana).
+  - Errore tecnico durante il salvataggio delle entità o del log: se fallisce la persistenza su database dei dati estratti o la scrittura nel log, il sistema imposta lo stato in errore ed emette un errore critico nel sistema di diagnostica, impedendo l'inoltro della richiesta ai sistemi target.
+- *Inclusioni:*
+  - UC79 - Registrazione evento nei log.
 - *Estensioni:* -
 - *Specializzazioni:* -
