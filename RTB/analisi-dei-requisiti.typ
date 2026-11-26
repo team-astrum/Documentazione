@@ -1058,3 +1058,195 @@ Quelli individuati sono:
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
+
+=== UC48 - Invio richiesta via mail
+- *#G("Attore") principale:* Mittente
+- *Attori secondari:* Canale Mail
+- *Precondizioni:*
+  - Esiste almeno un canale mail configurato e attivo nell'applicativo.
+  - Il mittente dispone di un indirizzo di posta elettronica.
+- *Postcondizioni:*
+  - Il messaggio di posta elettronica (con eventuale corpo testuale e/o allegati) è recapitato sulla casella monitorata e risulta pronto per essere rilevato e acquisito dall'applicativo.
+- *Trigger:* il mittente ha necessità di inoltrare una richiesta aziendale (es. ordine, ticket di assistenza, appuntamento, documento contabile) tramite posta elettronica.
+- *Scenario principale:*
+  + Il mittente redige un nuovo messaggio mail indirizzato alla casella aziendale configurata nell'applicativo.
+  + Il mittente inserisce il testo della richiesta nel corpo della mail.
+  + Il mittente allega eventuali file di supporto alla richiesta, come documenti PDF o immagini.
+  + Il mittente invia la mail tramite il proprio client/server di posta.
+  + Il canale mail riceve e rende disponibile il messaggio.
+- *Scenari alternativi:*
+  - E-mail con soli allegati: Il mittente lascia vuoto il corpo del messaggio e invia esclusivamente uno o più allegati (UC48.2).
+  - E-mail senza allegati: Il mittente invia esclusivamente il testo del messaggio (UC48.1) senza allegare file.
+- *Inclusioni:* UC48.1
+- *Estensioni:* UC48.2
+- *Specializzazioni:* -
+
+=== UC48.1 - Invio richiesta testuale via mail
+- *#G("Attore") principale:* Mittente
+- *Attori secondari:* Canale Mail
+- *Precondizioni:*
+  - Esiste almeno un canale mail configurato e attivo nell'applicativo. 
+  - Il mittente dispone di un indirizzo mail e sta componendo un messaggio verso la casella monitorata.
+- *Postcondizioni:*
+  - Il corpo testuale della richiesta è recapitato sulla casella mail monitorata, pronto per essere rilevato e acquisito dall'applicativo.
+- *Trigger:* il mittente redige il testo della richiesta nel corpo della mail prima dell'invio.
+- *Scenario principale:*
+  + Il mittente apre il proprio client di posta elettronica e seleziona l'indirizzo della casella mail aziendale configurata.
+  + Il mittente inserisce l'oggetto e il corpo testuale contenente i dettagli della richiesta (es. ordine, ticket di assistenza, appuntamento, documento contabile).
+  + Il mittente invia la mail.
+  + Il canale mail riceve il messaggio e lo rende disponibile nell'applicativo.
+- *Scenari alternativi:* 
+  - Corpo testuale vuoto: Il mittente omette il testo nel corpo del messaggio e procede all'invio con uno o più allegati (UC48.2).
+- *Inclusioni:* -
+- *Estensioni:* UC48.2
+- *Specializzazioni:* -
+
+=== UC48.2 - Invio allegati alla richiesta via mail
+- *#G("Attore") principale:* Mittente
+- *Attori secondari:* Canale Mail
+- *Precondizioni:*
+  - Esiste almeno un canale e-mail configurato e attivo nel sistema.
+  - Il mittente ha predisposto uno o più file da allegare alla mail (es. PDF, immagini, documenti).
+- *Postcondizioni:*
+  - I file allegati sono recapitatati insieme al messaggio mail sulla casella monitorata, pronti per l'acquisizione e l'estrazione da parte dell'applicativo.
+- *Trigger:* il mittente associa uno o più file allegati alla mail di richiesta prima dell'invio.
+- *Scenario principale:*
+  + Durante la composizione della mail verso la casella monitorata, il mittente seleziona uno o più file dal proprio dispositivo e li allega al messaggio.
+  + Il mittente invia la mail (con o senza testo nel corpo del messaggio).
+  + Il canale mail riceve il messaggio completo di allegati e lo rende disponibile nell'applicativo.
+- *Scenari alternativi:* 
+  - Nessun allegato presente: Il mittente invia la mail contenente esclusivamente il testo (UC48.1).
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC49 - Invio richiesta via WhatsApp
+- *#G("Attore") principale:* Mittente
+- *Attori secondari:* Canale WhatsApp
+- *Precondizioni:*
+  - Esiste almeno un canale WhatsApp configurato e attivo con un numero aziendale monitorato.
+- *Postcondizioni:*
+  - Il messaggio WhatsApp (testuale o nota vocale) è ricevuto dal servizio di messaggistica aziendale ed è pronto per l'acquisizione da parte dell'applicativo.
+- *Trigger:* il mittente avvia o prosegue una conversazione verso il numero WhatsApp aziendale per inoltrare una richiesta.
+- *Scenario principale:*
+  + Il mittente apre l'applicazione di messaggistica verso il numero aziendale configurato.
+  + Il mittente compone e invia un messaggio testuale (UC49.1) oppure registra e invia una nota vocale (UC49.2) contenente i dettagli della richiesta.
+  + Il canale WhatsApp inoltra il messaggio all'applicativo tramite API.
+- *Scenari alternativi:* 
+  - Invio di allegati: il mittente invia un allegato nella chat (UC49.3)
+- *Inclusioni:* UC49.1, UC49.2, UC49.3
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC49.1 - Invio richiesta testuale via WhatsApp
+- *#G("Attore") principale:* Mittente
+- *Attori secondari:* Canale WhatsApp
+- *Precondizioni:*
+  - Esiste almeno un canale WhatsApp configurato e attivo con un numero aziendale monitorato.
+  - Il mittente dispone di un account WhatsApp attivo.
+- *Postcondizioni:*
+  - Il messaggio testuale è recapitato al servizio di messaggistica aziendale ed è inoltrato all'applicativo per l'acquisizione.
+- *Trigger:* il mittente digita e invia un messaggio di testo verso il numero WhatsApp aziendale.
+- *Scenario principale:*
+  + Il mittente apre la chat associata al numero WhatsApp aziendale configurato.
+  + Il mittente digita il testo della richiesta (es. descrizione di un problema, richiesta di ordine) e preme il comando di invio.
+  + Il canale WhatsApp riceve il messaggio e lo notifica/inoltra all'applicativo.
+- *Scenari alternativi:* -
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC49.2 - Invio richiesta vocale via WhatsApp
+- *#G("Attore") principale:* Mittente
+- *Attori secondari:* Canale WhatsApp
+- *Precondizioni:*
+  - Esiste almeno un canale WhatsApp configurato e attivo con un numero aziendale monitorato.
+  - Il mittente dispone di un account WhatsApp e di un microfono abilitato.
+- *Postcondizioni:*
+  - La nota vocale è recapitatata al canale WhatsApp e resa disponibile al sistema per l'acquisizione e la trascrizione.
+- *Trigger:* il mittente registra e invia una nota vocale verso il numero WhatsApp aziendale.
+- *Scenario principale:*
+  + Il mittente apre la chat associata al numero WhatsApp aziendale configurato.
+  + Il mittente registra vocalmente la propria richiesta tramite la funzione di nota vocale e la invia.
+  + Il canale WhatsApp riceve il file audio della nota vocale e lo inoltra al sistema.
+- *Scenari alternativi:* -
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC49.3 - Invio allegati alla richiesta via WhatsApp
+- *#G("Attore") principale:* Mittente
+- *Attori secondari:* Canale WhatsApp
+- *Precondizioni:*
+  - Esiste almeno un canale WhatsApp configurato e attivo con un numero aziendale monitorato.
+  - Il mittente dispone di un account WhatsApp e ha selezionato o acquisito un file multimediale/allegato da inviare nella chat.
+- *Postcondizioni:*
+  - L'allegato viene recapitato al canale WhatsApp ed è gestito in base al perimetro di rilascio definito.
+- *Trigger:* il mittente seleziona e invia un allegato nella chat WhatsApp associata al numero aziendale.
+- *Scenario principale:*
+  + Il mittente apre la chat associata al numero WhatsApp aziendale configurato
+  + Il mittente allega il file multimediale/immagine e invia il messaggio.
+  + Il canale WhatsApp riceve l'allegato e lo notifica/inoltra all'applicativo.
+- *Scenari alternativi:* -
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+
+=== UC52 - Acquisizione del mittente
+- *#G("Attore") principale:* Applicativo - AIRA
+- *Attori secondari:* Canale Mail, Canale WhatsApp
+- *Precondizioni:*
+  - L'applicativo ha rilevato una nuova richiesta in ingresso su un canale attivo e la richiesta non è già stata acquisita in precedenza.
+- *Postcondizioni:*
+  - Il mittente è estratto e associato alla corrispondente anagrafica cliente e al relativo tenant. 
+  - La richiesta prosegue l'elaborazione isolata nel contesto del tenant identificato.
+- *Trigger:* rilevamento di una nuova richiesta non duplicata nella pipeline di elaborazione.
+- *Scenario principale:*
+  + L'applicativo estrae dai metadati della richiesta l'identificativo del mittente (indirizzo mail o numero di telefono WhatsApp).
+  + L'applicativo ricerca l'identificativo estratto nell'anagrafica clienti interna.
+  + L'applicativo individua l'anagrafica corrispondente e recupera il tenant di appartenenza del cliente.
+  + L'applicativo associa la richiesta all'anagrafica e al tenant identificati, garantendo l'isolamento logico dei dati per le fasi successive.
+- *Scenari alternativi:* 
+  - Mittente non riconosciuto o non autorizzato: se l'indirizzo mail o il numero WhatsApp non corrisponde ad alcuna anagrafica censita, l'applicativo interrompe l'elaborazione, scarta la richiesta e registra l'evento nei log (UC55).
+- *Inclusioni:* -
+- *Estensioni:* UC55
+- *Specializzazioni:* -
+
+=== UC53 - Acquisizione del testo del messaggio
+- *#G("Attore") principale:* Applicativo - AIRA
+- *Attori secondari:* Canale Mail, Canale WhatsApp
+- *Precondizioni:*
+  - Una nuova richiesta è stata rilevata (UC51), non è duplicata (UC56) e il mittente è stato identificato e associato a un tenant (UC52).
+- *Postcondizioni:*
+  - Il contenuto testuale del messaggio è estratto, normalizzato e salvato nel database associato alla richiesta.
+- *Trigger:* completamento dell'identificazione del mittente e del tenant (UC52).
+- *Scenario principale:*
+  + L'applicativo legge il corpo testuale della richiesta dal canale di provenienza (corpo della mail o testo del messaggio WhatsApp).
+  + L'applicativo ripulisce ed estrae il testo in chiaro.
+  + L'applicativo memorizza il contenuto testuale originale e il testo estratto nel database relazionale.
+- *Scenari alternativi:* 
+  - Messaggio privo di testo: se la richiesta è costituita esclusivamente da una nota vocale o da file allegati senza corpo testuale, l'applicativo registra l'assenza di testo diretto e passa all'acquisizione ed elaborazione degli allegati. (UC54, UC57).
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC54 - Acquisizione degli allegati 
+- *#G("Attore") principale:* Applicativo - AIRA
+- *Attori secondari:* Canale Mail, Canale WhatsApp
+- *Precondizioni:*
+  - La richiesta rilevata proviene da un mittente autorizzato e contiene uno o più allegati.
+- *Postcondizioni:*
+  - Gli allegati validi sono scaricati, cifrati e salvati con riferimento alla richiesta, pronti per i moduli di estrazione.
+- *Trigger:* rilevamento di file allegati o contenuti multimediali all'interno della richiesta acquisita.
+- *Scenario principale:*
+  + L'applicativo individua gli allegati associati alla richiesta.
+  + Per ciascun allegato, l'applicativo verifica che il formato del file rientri tra quelli supportati e che la dimensione non superi il limite massimo consentito.
+  + L'applicativo scarica i file dal canale e li salva in forma cifrata, collegandoli al record della richiesta nel database.
+  + L'applicativo instrada ciascun allegato verso lo specifico caso d'uso di estrazione del contenuto.
+- *Scenari alternativi:* 
+  - Formato allegato non supportato:se un allegato ha un'estensione non gestita, l'applicativo lo ignora, registra una segnalazione nei log e prosegue l'elaborazione del resto della richiesta senza bloccarla.
+  - Dimensione allegato eccessiva: se un allegato supera la soglia massima configurata, l'applicativo non lo acquisisce, registra l'avviso nei log e continua a elaborare eventuali altri allegati validi o il testo.
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
