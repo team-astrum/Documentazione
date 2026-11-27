@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi", "Matteo De Col", "Filippo De Guio"),
   approvazione: " ",
   changelog: (
+    (ver: "0.10.0", data: "2026-11-27", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC39 a UC41"),
     (ver: "0.9.0", data: "2026-11-26", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso da UC55 a UC60."),
     (ver: "0.8.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC61 a UC63"),
     (ver: "0.7.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC48 a UC54"),
@@ -1060,7 +1061,144 @@ Quelli individuati sono:
   - Annullamento: se l'amministratore non conferma l'eliminazione, l'operazione viene interrotta.
 - *Inclusioni:* -
 - *Estensioni:* -
+- *Specializzazioni:* - 
+
+=== UC39 - Visualizzazione lista regole d'azione
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - L'amministratore è autenticato nell'interfaccia amministrativa.
+- *Postcondizioni:*
+  - L'amministratore visualizza l'elenco delle regole d'azione configurate per il proprio tenant, con nome identificativo, condizione di attivazione, azioni di destinazione configurate e stato (attiva/disattiva).
+- *Trigger:* l'amministratore seleziona la sezione dedicata alle regole d'azione dal menu dell'interfaccia amministrativa.
+- *Scenario principale:*
+  + Il sistema visualizza la lista delle regole d'azione del tenant mostrando, per ciascuna, il nome identificativo, la condizione di attivazione, le azioni di destinazione configurate e lo stato corrente (attiva/disattiva).
+- *Scenari alternativi:*
+  - Nessuna regola configurata (lista vuota): se per il tenant non è ancora stata definita alcuna regola d'azione, il sistema visualizza una vista vuota con un messaggio informativo che invita a crearne una (UC40).
+- *Inclusioni:* -
+- *Estensioni:* -
 - *Specializzazioni:* -
+
+=== UC40 - Creazione regola d'azione
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - L'amministratore è autenticato nell'interfaccia amministrativa.
+- *Postcondizioni:*
+  - La nuova regola d'azione è registrata nel sistema per il tenant corrente in stato iniziale "disattiva".
+  - L'operazione viene registrata nei log.
+- *Trigger:* l'amministratore seleziona il comando per creare una nuova regola d'azione.
+- *Scenario principale:*
+  + L'amministratore avvia la procedura di creazione di una nuova regola d'azione.
+  + Il sistema presenta il modulo di configurazione della regola (nome identificativo, condizione di attivazione e azioni di destinazione).
+  + L'amministratore inserisce il nome identificativo della regola.
+  + L'amministratore definisce la condizione di attivazione della regola (include UC40.1).
+  + L'amministratore configura una o più azioni di destinazione da eseguire al verificarsi della condizione (include UC40.2).
+  + Il sistema verifica che il nome identificativo non sia già utilizzato da un'altra regola del tenant.
+  + Il sistema salva la nuova regola d'azione in stato "disattiva" e registra l'operazione nei log.
+- *Scenari alternativi:*
+  - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema interrompe la procedura senza salvare alcuna regola.
+  - Configurazione non valida: se mancano campi obbligatori il sistema impedisce il salvataggio e attiva UC45.
+  - Nome regola già utilizzato: se il nome identificativo coincide con quello di un'altra regola già registrata nel tenant, il sistema non salva la regola e attiva UC46.
+- *Inclusioni:*
+  - UC40.1 - Definizione condizione di attivazione.
+  - UC40.2 - Configurazione azioni di destinazione.
+- *Estensioni:*
+  - UC45 - Configurazione regola d'azione non valida.
+  - UC46 - Conflitto tra regole d'azione.
+- *Specializzazioni:* -
+
+==== UC40.1 - Definizione condizione di attivazione
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - UC40 è stato avviato.
+  - Il sistema mostra il modulo di creazione della regola con la sezione dedicata alla condizione di attivazione.
+- *Postcondizioni:*
+  - La condizione di attivazione (tipologia di richiesta) è stata acquisita dal modulo.
+- *Trigger:* il flusso di UC40 raggiunge il passo 4 e richiede la definizione della condizione di attivazione della regola.
+- *Scenario principale:*
+  + L'amministratore seleziona la tipologia di richiesta che attiva la regola (es. ordine, ticket di assistenza, reclamo).
+  + Il sistema acquisisce la condizione di attivazione nel modulo di configurazione.
+- *Scenari alternativi:*
+  - Condizione mancante: se l'amministratore non seleziona alcuna tipologia di richiesta, questo viene segnalato in fase di validazione in UC40 (attivando UC45).
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+==== UC40.2 - Configurazione azioni di destinazione
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - UC40 è stato avviato.
+  - Il sistema mostra il modulo di creazione della regola con la sezione dedicata alle azioni di destinazione.
+- *Postcondizioni:*
+  - Almeno un'azione di destinazione (inoltro tramite API REST verso un sistema gestionale, invio di notifica e-mail oppure entrambi) con i relativi parametri è stata acquisita dal modulo.
+- *Trigger:* il flusso di UC40 raggiunge il passo 5 e richiede la configurazione delle azioni di destinazione associate alla regola.
+- *Scenario principale:*
+  + L'amministratore seleziona una o più azioni di destinazione tra quelle previste (inoltro tramite API REST verso un sistema gestionale di destinazione, invio di notifica e-mail, oppure entrambi).
+  + Per ciascuna azione selezionata, l'amministratore compila i relativi parametri di configurazione.
+  + Il sistema acquisisce le azioni e i relativi parametri nel modulo di configurazione.
+- *Scenari alternativi:*
+  - Nessuna azione selezionata: se l'amministratore non seleziona alcuna azione di destinazione, questo viene segnalato in fase di validazione in UC40 (attivando UC45).
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC41 - Modifica regola d'azione
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - L'amministratore è autenticato nell'interfaccia amministrativa.
+  - È presente almeno una regola d'azione configurata per il tenant.
+- *Postcondizioni:*
+  - I parametri della regola d'azione selezionata (nome identificativo, condizione di attivazione e/o azioni di destinazione) sono aggiornati.
+  - L'operazione viene registrata nei log.
+- *Trigger:* l'amministratore seleziona una regola d'azione dalla lista e avvia la procedura di modifica.
+- *Scenario principale:*
+  + L'amministratore seleziona una regola d'azione dalla lista (UC39) e attiva la modalità di modifica.
+  + Il sistema presenta il modulo precompilato con il nome identificativo, la condizione di attivazione e le azioni di destinazione attualmente configurate.
+  + L'amministratore modifica uno o più campi e conferma le modifiche.
+  + Il sistema verifica che il nome identificativo non sia già utilizzato da un'altra regola del tenant (nel caso in cui venga modificato), e che non manchino dati obbligatori.
+  + Il sistema salva le modifiche e registra l'operazione nei log.
+- *Scenari alternativi:*
+  - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema mantiene invariata la regola.
+  - Configurazione non valida: se vengono rimossi dati obbligatori il sistema impedisce il salvataggio e attiva UC45.
+  - Conflitto tra regole d'azione: se il nuovo nome coincide con quello di un'altra regola del tenant il sistema non applica le modifiche e attiva UC46.
+- *Inclusioni:* -
+- *Estensioni:*
+  - UC45 - Configurazione regola d'azione non valida.
+  - UC46 - Conflitto tra regole d'azione.
+- *Specializzazioni:* -
+
+=== UC42 - Attivazione regola d'azione
+
+=== UC43 - Disattivazione regola d'azione
+
+=== UC44 - Eliminazione regola d'azione
+- *#G("Attore") principale:* Amministratore aziendale
+- *Attori secondari:* -
+- *Precondizioni:*
+  - L'amministratore è autenticato nell'interfaccia amministrativa.
+  - È presente almeno una regola d'azione configurata per il tenant.
+- *Postcondizioni:*
+  - La regola d'azione selezionata viene rimossa.
+  - L'operazione viene registrata nei log.
+- *Trigger:* l'amministratore seleziona l'azione di eliminazione su una regola d'azione presente nella lista.
+- *Scenario principale:*
+  + L'amministratore seleziona la regola d'azione da eliminare dalla lista (UC39) e attiva il comando di eliminazione.
+  + Il sistema chiede conferma dell'eliminazione della regola selezionata.   
+  + L'amministratore conferma l'eliminazione.
+  + Il sistema rimuove definitivamente la regola d'azione dal tenant e registra l'operazione nei log.
+- *Scenari alternativi:*
+  - Annullamento: se l'amministratore non conferma l'eliminazione, l'operazione viene interrotta e la regola rimane configurata.
+- *Inclusioni:* -
+- *Estensioni:* -
+- *Specializzazioni:* -
+
+=== UC45 - Configurazione regola d'azione non valida
+
+=== UC46 - Conflitto tra regole d'azione
 
 === UC48 - Invio richiesta via mail
 - *#G("Attore") principale:* Mittente
