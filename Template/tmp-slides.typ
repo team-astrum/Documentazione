@@ -7,6 +7,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 #let font = "Inter"
 
 #let logo = "./Assets/logo.svg"
+#let logo-natale = "./Assets/logo-natale.svg"
 
 #let deco-line = rgb("#E5E9ED")
 #let txt-color = rgb("#1F2937")
@@ -105,7 +106,7 @@ Le variabili vengono istanziate all'inizio di ciascuna presentazione.
 
       image("./Assets/logo-unipd.svg", height: 3cm),
       line(angle: 90deg, length: 3cm, stroke: 0.5pt + txt-gray),
-      image(logo, height: 1.5cm)
+      image(logo-natale, height: 1.75cm)
     )
     #v(1.6em) // Spazio dal logo ridotto
     
