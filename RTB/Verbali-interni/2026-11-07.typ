@@ -13,6 +13,7 @@
   redattore: "Thomas Morettin",
   verificatore: "Gianluca Brotto, Samuele Gobbi",
   changelog: (
+    (ver: "1.0.0", data: "2026-11-27", autore: "Gianluca Bacco", ruolo: "Responsabile", desc: "Approvazione Documento."),
     (ver: "0.1.0", data: "2026-11-07", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore: "Gianluca Brotto, Samuele Gobbi", desc: "Redazione del documento post meeting."),
     (ver: "0.0.1", data: "2026-11-05", autore: "Thomas Morettin", ruolo: "Amministratore", verificatore: "Gianluca Brotto, Samuele Gobbi", desc: "Impostazione iniziale documento."),
   )

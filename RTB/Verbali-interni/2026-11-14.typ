@@ -13,7 +13,8 @@
   redattore: "Samuele Gobbi",
   verificatore: "Filippo De Guio, Matteo De Col",
   changelog: (
-    (ver: "0.0.1", data: "2026-11-16", autore: "Samuele Gobbi", ruolo: "Amministratore", verificatore: "", desc: "Stesura Iniziale Documento."),
+    (ver: "1.0.0", data: "2026-11-27", autore: "Gianluca Bacco", ruolo: "Responsabile", desc: "Approvazione Documento."),
+    (ver: "0.0.1", data: "2026-11-16", autore: "Samuele Gobbi", ruolo: "Amministratore", verificatore: "Filippo De Guio", desc: "Stesura Iniziale Documento."),
   )
 )
 
