@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi", "Matteo De Col", "Filippo De Guio"),
   approvazione: " ",
   changelog: (
+    (ver: "0.9.1", data: "2026-11-27", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Modifiche post verbale esterno con Sanmarco Informatica a UC1, UC2, UC6, UC7, UC8 (e sottocasi), UC9 (e sottocasi), UC10, UC55, UC56, UC64, UC65 e UC66."),
     (ver: "0.9.0", data: "2026-11-26", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso da UC55 a UC60 insieme a UC64, UC65 e UC66."),
     (ver: "0.8.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC61 a UC63"),
     (ver: "0.7.0", data: "2026-11-26", autore: "Corrado Bacco", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso da UC48 a UC54"),
@@ -63,7 +64,7 @@ La piattaforma acquisisce ed elabora automaticamente flussi informativi non stru
 
 Attraverso una pipeline modulare basata su modelli di visione artificiale, #G("OCR (Optical Character Recognition)", def: "Tecnologia di riconoscimento ottico dei caratteri che trasforma immagini, scansioni di documenti cartacei o file PDF in testo digitale codificato."), #G("Speech-to-Text", def: "Tecnologia di conversione del parlato in testo scritto."), e modelli linguistici (#G("LLM (Large Language Model)", def: "Modello Linguistico di grandi dimensioni che può generare testo coerente e contestualmente rilevante.")), AIRA riconosce l'intenzione del messaggio ed estrae le entità rilevanti, convertendole in payload strutturati (#G("JSON (JavaScript Object Notation)") o  #G("record", def: "Singola riga di una tabella di un database relazionale che raggruppa un insieme di dati correlati relativi a una specifica entità.") di #G("database", def: "Struttura dati utilizzata per organizzare e memorizzare informazioni in modo sistematico e accessibile.")).
 
-L'architettura garantisce sicurezza multi-tenant e include un'interfaccia di amministrazione in Angular per la gestione dei canali e il monitoraggio dei log.
+L'architettura garantisce sicurezza multi-#G("tenant", def: "Spazio di lavoro creato dall'amministratore dell'azienda proprietaria dell'applicativo per organizzare i dati della singola azienda. Idealmente il tenant viene creato all'interno dei servizi di AWS e permette a ciascun amministratore aziendale di lavorare in ambiente isolato.") e include un'interfaccia di amministrazione in Angular per la gestione dei canali e il monitoraggio dei log.
 
 L'obiettivo primario è l'abbattimento dell'operatività manuale a basso valore aggiunto, la minimizzazione dei tempi di evasione e l'azzeramento degli errori di trascrizione nei processi aziendali.
 
@@ -134,9 +135,9 @@ Quelli individuati sono:
 
 - *Utente non autenticato:* soggetto che tenta di accedere all'interfaccia amministrativa prima di aver effettuato l'autenticazione.
 - *Utente autenticato:* soggetto che si è autenticato al sistema. Per garantire un accesso differenziato si specializza nei seguenti profili:
-  - *Amministratore di piattaforma:* utente con privilegi globali a livello di sistema (cross-tenant). Gestisce il ciclo di vita dei tenant (creazione, modifica ed eliminazione) e la configurazione globale dell'infrastruttura.
-  - *Amministratore aziendale:* utente associato a uno specifico tenant. Configura i canali attivi, importa e consulta l'anagrafica dei mittenti, definisce le regole operative, consulta le richieste e lo storico dei log e gestisce la persistenza locale dei dati relativi al proprio tenant.
-  - *Operatore:* utente associato a uno specifico tenant che si occupa della consultazione delle richieste e dell'eventuale validazione manuale delle stesse.
+  - *Amministratore di piattaforma:* utente con privilegi globali a livello di sistema (cross-#G("tenant")). Gestisce il ciclo di vita dei #G("tenant") (creazione, modifica ed eliminazione) e la configurazione globale dell'infrastruttura.
+  - *Amministratore aziendale:* utente associato a uno specifico #G("tenant"). Configura i canali attivi, importa e consulta l'anagrafica dei mittenti, definisce le regole operative, consulta le richieste e lo storico dei log e gestisce la persistenza locale dei dati relativi al proprio #G("tenant").
+  - *Operatore:* utente associato a uno specifico #G("tenant") che si occupa della consultazione delle richieste e dell'eventuale validazione manuale delle stesse.
   
 - *Canale e-mail:* casella di posta elettronica esterna monitorata dal sistema per l'acquisizione delle richieste (testo e allegati). Può essere utilizzata anche per l'invio delle risposte automatiche al mittente.
 - *Canale WhatsApp:* servizio di messaggistica esterno, monitorato dal sistema per l'acquisizione delle richieste (testuali e vocali). Può essere utilizzato anche per l'invio delle risposte automatiche al mittente.
@@ -161,19 +162,20 @@ Quelli individuati sono:
   - L'utente non ha attualmente una #G("sessione", def: "Intervallo di tempo in cui un utente interagisce con un sito web o un'applicazione, dall'accesso fino all'uscita o alla scadenza.") autenticata attiva.
 - *Postcondizioni:*
   - L'utente è autenticato nel sistema (#G("sessione") attiva associata a un #G("token", def: "Una stringa di dati crittografata che viene rilasciata da un server dopo il login dell'utente; permette all'utente di navigare tra diverse pagine o servizi senza dover reinserire ogni volta le proprie credenziali.") valido).
-  - Il sistema ha caricato i permessi necessari associati alla figura di amministratore; l'utente viene quindi reindirizzato all'interfaccia amministrativa con le proprie funzionalità attive.
+  - Il sistema ha caricato i permessi necessari associati alla figura di che ha effettuato il login (amministratore azienda o di piattaforma); l'utente viene quindi reindirizzato all'interfaccia amministrativa con le proprie funzionalità attive.
 - *Trigger:* L'utente non autenticato effettua l'accesso all'interfaccia web-based AIRA inserendo e-mail e password.
 - *Scenario principale:*
   + Il sistema mostra all'utente la pagina di autenticazione dove è possibile inserire e-mail e password.
   + L'utente non autenticato inserisce la propria e-mail (include UC1.1).
   + L'utente non autenticato inserisce la propria password (include UC1.2) e invia il modulo di accesso.
-  + Il sistema verifica che lo e-mail esista, l'account associato sia attivo e che la password corrisponda alle credenziali memorizzate.
-  + Il sistema associa la #G("sessione") al ruolo di amministratore, genera il relativo #G("token") di accesso a scadenza e concede l'accesso all'interfaccia secondo i permessi previsti.
+  + Il sistema verifica che l'e-mail esista, l'account associato sia attivo e che la password corrisponda alle credenziali memorizzate.
+  + Il sistema associa alla #G("sessione") sessione il ruolo dell'utente (amministratore aziendale o di piattaforma) e, per i ruoli aziendali, il contesto del relativo #G("tenant") di appartenenza, abilitando le sole funzionalità e i soli dati consentiti (isolamento multi-#G("tenant")).
   + L'operazione appena eseguita dall'utente genera una riga inerente all'operazione di accesso andato a buon fine all'interno del file di log dedicato (non esiste salvataggio in chiaro dei campi e-mail e password).
 - *Scenari alternativi:*
   - Campi obbligatori mancanti: prima dell'invio dei dati e-mail e password, se mancanti, il sistema segnala i campi mancanti all'utente non autenticato e lo invita a completarli, tornando al passo 2.
   - Credenziali errate o account non riconosciuto: il sistema non autentica l'utente ed estende UC2 (mostrando un messaggio di errore generico rispettando il principio di "secure by default & by design"); il sistema riprende dal passo 1.
-  - Utente già autenticato (accesso diretto): se l'utente possiede già una #G("sessione") aperta per il ruolo di amministratore, il sistema aggira il form di accesso e mostra direttamente l'interfaccia dedicata.
+  - Utente già autenticato (accesso diretto): se l'utente possiede già una #G("sessione") aperta per il proprio ruolo, il sistema aggira il form di accesso e mostra direttamente l'interfaccia dedicata.
+  - Account o origine temporaneamente bloccati: Se al momento del tentativo di accesso risulta attivo un blocco temporaneo dovuto a precedenti tentativi falliti (UC2), il Sistema rifiuta l'autenticazione anche in presenza di credenziali corrette, mantiene l'utente non autenticato e segnala che l'accesso è temporaneamente sospeso fino allo scadere dell'intervallo previsto.
 - *Inclusioni:*
   - UC1.1 - Inserimento e-mail.
   - UC1.2 - Inserimento password.
@@ -226,7 +228,7 @@ Quelli individuati sono:
   - L'utente non autenticato ha compilato e inviato i dati di accesso (UC1.1 e UC1.2).
   - Le credenziali fornite non superano la verifica del sistema (identificativo inesistente, password errata o account non abilitato).
 - *Postcondizioni:*
-  - L'accesso all'interfaccia amministrativa è negato e nessuna #G("sessione") o #G("token") di autenticazione viene generato.
+  - L'accesso all'interfaccia amministrativa, associata al #G("tenant") aziendale, è negato e nessuna #G("sessione") o #G("token") di autenticazione viene generato.
   - L'utente non autenticato visualizza un messaggio di errore informativo e resta nella schermata di autenticazione, pronto per un nuovo tentativo tramite UC1.
 - *Trigger:* Il flusso di UC1 raggiunge il passo 4 e la validazione ha esito negativo.
 - *Scenario principale:*
@@ -235,7 +237,9 @@ Quelli individuati sono:
   + Il sistema mostra il messaggio di errore nell'interfaccia di autenticazione.
   + L'operazione appena eseguita dall'utente genera una riga inerente all'operazione di accesso negato del file di log dedicato (non esiste salvataggio in chiaro dei campi e-mail e password).
   + Il sistema, dopo l'accettazione dell'errore da parte dell'utente non autenticato, resetta i campi e mantiene l'#G("attore") principale nella schermata di accesso per consentire ulteriori tentativi.
-- *Scenari alternativi:* -
+  + Qualora sia stata raggiunta la soglia massima di tentativi consecutivi errati, ulteriori tentativi di accesso risultano temporaneamente bloccati per l'intervallo di tempo configurato.
+- *Scenari alternativi:* 
+  - Superamento della soglia massima di tentativi falliti: Se il tentativo corrente comporta il raggiungimento del numero massimo configurato di tentativi consecutivi non riusciti (es. 3-4 tentativi nell'intervallo monitorato), il Sistema attiva un blocco temporaneo dell'accesso per la durata prestabilita (minuti/ore configurati) e mostra un messaggio che informa l'utente della sospensione temporanea, impedendo nuovi tentativi di accesso fino al termine del blocco.
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
@@ -356,45 +360,45 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 === UC6 - Visualizzazione lista canali
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
-  - L'amministratore è autenticato nell'interfaccia amministrativa web-based AIRA con una #G("sessione") attiva e dispone dei permessi relativi al proprio ruolo.
+  - L'amministratore aziendale è autenticato nell'interfaccia amministrativa web-based AIRA con una #G("sessione") attiva e dispone dei permessi relativi al proprio ruolo (all'interno del #G("tenant") associato alla propria azienda).
 - *Postcondizioni:*
-  - L'amministratore visualizza l'elenco aggiornato di tutti i canali di ingresso configurati nel sistema, completo di tipologia, nome e stato (attivo/disattivo) per ciascun canale.
+  - L'amministratore aziendale visualizza l'elenco aggiornato di tutti i canali di ingresso configurati nel sistema, completo di tipologia, nome e stato (attivo/disattivo) per ciascun canale.
   - Lo stato dei dati e delle configurazioni nel sistema rimane invariato (operazione di sola lettura).
-- *Trigger:* l'amministratore seleziona la sezione dedicata alla gestione dei canali dal menu dell'interfaccia amministrativa.
+- *Trigger:* l'amministratore aziendale seleziona la sezione dedicata alla gestione dei canali dal menu dell'interfaccia amministrativa, legata al proprio #G("tenant").
 - *Scenario principale:*
-  + L'amministratore seleziona la sezione di gestione dei canali nell'interfaccia amministrativa web-based AIRA.
-  + Il sistema verifica la validità della #G("sessione") e i permessi del ruolo amministratore, quindi recupera l'elenco dei canali in ingresso configurati.
-  + Il sistema visualizza la lista dei canali mostrando, per ciascuno di essi, la tipologia (e.g. e-mail, WhatsApp), il nome identificativo, lo stato corrente (attivo/disattivo) e il tenant associato, rendendo disponibili le azioni di consultazione e gestione previste.
+  + L'amministratore aziendale seleziona la sezione di gestione dei canali nell'interfaccia amministrativa web-based AIRA.
+  + Il sistema verifica la validità della #G("sessione") e i permessi del ruolo amministratore aziendale, quindi recupera l'elenco dei canali in ingresso configurati.
+  + Il sistema visualizza la lista dei canali (relativi al #G("tenant") di appartenenza aziendale) mostrando, per ciascuno di essi, la tipologia (e-mail, WhatsApp), il nome identificativo, lo stato corrente (attivo/disattivo) e il #G("tenant") associato, rendendo disponibili le azioni di consultazione e gestione previste.
 - *Scenari alternativi:*
   - Nessun canale configurato (lista vuota): se nel sistema non risulta ancora configurato alcun canale in ingresso, il sistema visualizza una vista vuota con un messaggio informativo che segnala l'assenza dei canali configurati.
-  - Errore nel caricamento della lista: se si verifica un errore interno durante il recupero dei canali configurati, il sistema mostra un messaggio di errore informativo all'amministratore e registra l'evento nei log di sistema.
-  - #G("Sessione") scaduta o permessi insufficienti: se al momento della richiesta la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore, il sistema nega l'accesso ai dati (reindirizzando l'utente a UC1 in caso di #G("sessione") scaduta).
+  - Errore nel caricamento della lista: se si verifica un errore interno durante il recupero dei canali configurati, il sistema mostra un messaggio di errore informativo all'amministratore aziendale e registra l'evento nei log di sistema.
+  - #G("Sessione") scaduta o permessi insufficienti: se al momento della richiesta la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore aziendale, il sistema nega l'accesso ai dati (reindirizzando l'utente a UC1 in caso di #G("sessione") scaduta).
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
 
 === UC7 - Visualizzazione dettaglio canale
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
-  - L'amministratore è autenticato nell'interfaccia amministrativa web-based AIRA con una #G("sessione") attiva e dispone dei permessi relativi al proprio ruolo.
-  - L'amministratore ha accesso alla vista di gestione dei canali ed è presente almeno un canale configurato nel sistema.
+  - L'amministratore aziendale è autenticato nell'interfaccia amministrativa web-based AIRA con una #G("sessione") attiva e dispone dei permessi relativi al proprio ruolo.
+  - L'amministratore aziendale ha accesso alla vista di gestione dei canali ed è presente almeno un canale configurato nel sistema (all'interno del proprio #G("tenant") aziendale).
 - *Postcondizioni:*
-  - L'amministratore visualizza tutte le informazioni e i parametri di configurazione del canale selezionato, con eventuali credenziali o #G("token") opportunamente mascherati.
+  - L'amministratore aziendale visualizza tutte le informazioni e i parametri di configurazione del canale selezionato, con eventuali credenziali o #G("token") opportunamente mascherati.
   - Lo stato dei dati e delle configurazioni nel sistema rimane invariato (operazione di sola lettura).
-- *Trigger:* l'amministratore seleziona un canale specifico dalla lista dei canali per aprirne la scheda di dettaglio.
+- *Trigger:* l'amministratore aziendale seleziona un canale specifico dalla lista dei canali per aprirne la scheda di dettaglio.
 - *Scenario principale:*
-  + L'amministratore seleziona un canale dalla lista dei canali per aprirne la scheda di dettaglio.
-  + Il sistema verifica la validità della #G("sessione"), i permessi del ruolo amministratore e recupera dal repository delle configurazioni tutti i dati del canale selezionato.
-  + Il sistema visualizza le informazioni generali del canale (nome identificativo, tipologia, stato attivo/disattivo, frequenza di controllo, tenant associato, data/ora dell'ultimo controllo eseguito dallo scheduler ed esito) e i parametri specifici della relativa tipologia (e.g. per e-mail #G("host", def: "Dispositivo o un sistema connesso a una rete che invia, riceve o ospita dati e servizi, identificato in genere da un indirizzo IP."), porta e cartella monitorata; per WhatsApp il numero aziendale), mantenendo mascherate eventuali credenziali o #G("token") di accesso.
+  + L'amministratore aziendale seleziona un canale dalla lista dei canali (interna al #G("tenant") aziendale) per aprirne la scheda di dettaglio.
+  + Il sistema verifica la validità della #G("sessione"), i permessi del ruolo amministratore aziendale e recupera dal repository delle configurazioni tutti i dati del canale selezionato.
+  + Il sistema visualizza le informazioni generali del canale (nome identificativo, tipologia, stato attivo/disattivo, frequenza di controllo, #G("tenant") associato, data/ora dell'ultimo controllo eseguito dallo scheduler ed esito) e i parametri specifici della relativa tipologia (e.g. per e-mail #G("host", def: "Dispositivo o un sistema connesso a una rete che invia, riceve o ospita dati e servizi, identificato in genere da un indirizzo IP."), porta e cartella monitorata; per WhatsApp il numero aziendale), mantenendo mascherate eventuali credenziali o #G("token") di accesso.
   - Il sistema rende disponibili nella schermata i comandi per le eventuali operazioni di gestione sul canale (modifica, attivazione/disattivazione, test di connessione ed eliminazione).
 - *Scenari alternativi:*
   - Canale non trovato: se il canale selezionato non risulta presente nel sistema (e.g. perché eliminato in precedenza o richiamato tramite riferimento non valido), il sistema mostra un messaggio di errore informativo e consente di tornare alla lista dei canali.
-  - Errore nel recupero del dettaglio: se si verifica un errore interno durante la lettura della configurazione del canale, il sistema mostra un messaggio di errore informativo all'amministratore e registra l'anomalia nei log di sistema.
-  - #G("Sessione") scaduta o permessi insufficienti: se al momento della richiesta il #G("token") di #G("sessione") è scaduto o l'utente non possiede i permessi di amministratore, il sistema blocca la visualizzazione dei dati (reindirizzando a UC1 in caso di #G("sessione") scaduta).
+  - Errore nel recupero del dettaglio: se si verifica un errore interno durante la lettura della configurazione del canale, il sistema mostra un messaggio di errore informativo all'amministratore aziendale e registra l'anomalia nei log di sistema.
+  - #G("Sessione") scaduta o permessi insufficienti: se al momento della richiesta il #G("token") di #G("sessione") è scaduto o l'utente non possiede i permessi di amministratore aziendale, il sistema blocca la visualizzazione dei dati (reindirizzando a UC1 in caso di #G("sessione") scaduta).
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
@@ -406,29 +410,29 @@ Quelli individuati sono:
     Diagramma per UC8, UC8.1, UC8.2, UC8.3 e UC17.
   ],
 )
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
-  - L'amministratore è autenticato nell'interfaccia amministrativa web-based AIRA con una #G("sessione") attiva e dispone dei permessi relativi al proprio ruolo.
+  - L'amministratore aziendale è autenticato nell'interfaccia amministrativa web-based AIRA con una #G("sessione") attiva e dispone dei permessi relativi al proprio ruolo.
   - Il connettore per la gestione del canale e-mail è predisposto nel sistema; l'amministratore si trova nella sezione di configurazione dei canali (UC6).
 - *Postcondizioni:*
   - La nuova configurazione di canale e-mail è registrata nel sistema in stato iniziale disattivo, con le relative credenziali memorizzate in forma protetta (rispettando il principio di "secure by default & by design").
-  - Il nuovo canale compare nella lista dei canali, pronto per l'associazione a un tenant (UC18), l'eventuale test di connessione (UC15) e l'attivazione (UC12).
-- *Trigger:* l'amministratore seleziona il comando per aggiungere una nuova configurazione di canale e-mail dall'interfaccia amministrativa.
+  - Il nuovo canale compare nella lista dei canali (associata al #G("tenant") aziendale dell'amministratore), rendendo disponibile l'eventuale test di connessione (UC15) e l'attivazione (UC12).
+- *Trigger:* l'amministratore aziendale seleziona il comando per aggiungere una nuova configurazione di canale e-mail dall'interfaccia amministrativa.
 - *Scenario principale:*
-  + L'amministratore avvia la procedura di aggiunta di un nuovo canale e seleziona la tipologia e-mail.
+  + L'amministratore aziendale avvia la procedura di aggiunta di un nuovo canale e seleziona la tipologia e-mail.
   + Il sistema presenta il modulo di configurazione del canale e-mail richiedendo il nome identificativo, i parametri di connessione al server di posta, le credenziali della casella e la cartella da monitorare.
-  + L'amministratore inserisce il nome identificativo del canale.
-  + L'amministratore inserisce #G("host") e porta del server di posta (include UC8.1).
-  + L'amministratore inserisce le credenziali di accesso alla casella (include UC8.2).
-  + L'amministratore indica la cartella della casella da monitorare (include UC8.3, confermando eventualmente il valore predefinito e.g. _inbox_) e invia il modulo per il salvataggio.
+  + L'amministratore aziendale inserisce il nome identificativo del canale.
+  + L'amministratore aziendale inserisce #G("host") e porta del server di posta (include UC8.1).
+  + L'amministratore aziendale inserisce le credenziali di accesso alla casella (include UC8.2).
+  + L'amministratore aziendale indica la cartella della casella da monitorare (include UC8.3, confermando eventualmente il valore predefinito e.g. _inbox_) e invia il modulo per il salvataggio.
   + Il sistema verifica la validità della #G("sessione") e i permessi del ruolo, controlla la completezza e la validità formale dei parametri inseriti, memorizza le credenziali in forma protetta e salva la nuova configurazione, in stato disattivo, del canale e-mail.
   + Il sistema mostra un messaggio di conferma dell'avvenuta aggiunta e aggiorna la lista dei canali.
 - *Scenari alternativi:*
-  - Annullamento dell'operazione: se l'amministratore annulla l'operazione prima dell'invio, il sistema interrompe la procedura senza salvare alcuna configurazione e torna alla vista precedente.
-  - Configurazione incompleta o non valida: se mancano campi obbligatori oppure uno o più parametri risultano formalmente non validi (e.g. porta fuori intervallo o #G("host") malformato), il sistema impedisce il salvataggio e attiva UC17, permettendo all'amministratore di correggere i dati dal passo 3.
-  - Canale già configurato: se il nome identificativo o la stessa casella/cartella risulta già registrata nel sistema, quest'ultimo segnala il conflitto e invita l'amministratore a modificare i parametri inseriti.
-  - #G("Sessione") scaduta o permessi insufficienti: se al momento del salvataggio la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore, il sistema nega l'operazione senza salvare dati (reindirizzando a UC1 se la #G("sessione") è scaduta).
+  - Annullamento dell'operazione: se l'amministratore aziendale annulla l'operazione prima dell'invio, il sistema interrompe la procedura senza salvare alcuna configurazione e torna alla vista precedente.
+  - Configurazione incompleta o non valida: se mancano campi obbligatori oppure uno o più parametri risultano formalmente non validi (e.g. porta fuori intervallo o #G("host") malformato), il sistema impedisce il salvataggio e attiva UC17, permettendo all'amministratore aziendale di correggere i dati dal passo 3.
+  - Canale già configurato: se il nome identificativo o la stessa casella/cartella risulta già registrata nel sistema, quest'ultimo segnala il conflitto e invita l'amministratore aziendale a modificare i parametri inseriti.
+  - #G("Sessione") scaduta o permessi insufficienti: se al momento del salvataggio la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore aziendale, il sistema nega l'operazione senza salvare dati (reindirizzando a UC1 se la #G("sessione") è scaduta).
 - *Inclusioni:*
   - UC8.1 - #G("Host") e porta.
   - UC8.2 - Credenziali casella.
@@ -438,7 +442,7 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 ==== UC8.1 - #G("Host") e porta
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC8 è stato avviato.
@@ -447,8 +451,8 @@ Quelli individuati sono:
   - L'indirizzo #G("host") e il numero di porta del server di posta sono stati acquisiti dal modulo di configurazione e sono pronti per la validazione e il salvataggio in UC8.
 - *Trigger:* il flusso di UC8 raggiunge il passo 4 e richiede l'inserimento di #G("host") e porta del server di posta.
 - *Scenario principale:*
-  + L'amministratore inserisce l'indirizzo #G("host") del server di posta (e.g. nome di dominio o indirizzo IP del server #G("IMAP (Internet Message Access Protocol)", def: "Standard di comunicazione utilizzato per ricevere e gestire la posta elettronica; esso lascia i messaggi memorizzati sul server del provider e li sincronizza in tempo reale con tutti i dispositivi collegati (computer, smartphone, tablet e webmail).")).
-  + L'amministratore inserisce il numero di porta del server di posta (confermando eventualmente la porta predefinita per connessioni cifrate, e.g. 993).
+  + L'amministratore aziendale inserisce l'indirizzo #G("host") del server di posta (e.g. nome di dominio o indirizzo IP del server #G("IMAP (Internet Message Access Protocol)", def: "Standard di comunicazione utilizzato per ricevere e gestire la posta elettronica; esso lascia i messaggi memorizzati sul server del provider e li sincronizza in tempo reale con tutti i dispositivi collegati (computer, smartphone, tablet e webmail).")).
+  + L'amministratore aziendale inserisce il numero di porta del server di posta (confermando eventualmente la porta predefinita per connessioni cifrate, e.g. 993).
   + Il sistema acquisisce entrambi i valori nel modulo di configurazione.
 - *Scenari alternativi:*
   - #G("Host") mancante o sintatticamente non valido: se il campo #G("host") viene lasciato vuoto o contiene caratteri non validi, l'anomalia viene segnalata in fase di validazione in UC8 (attivando UC17).
@@ -458,7 +462,7 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 ==== UC8.2 - Credenziali casella
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC8 è stato avviato.
@@ -467,31 +471,31 @@ Quelli individuati sono:
   - Le credenziali di accesso alla casella e-mail sono state acquisite dal modulo di configurazione e sono pronte per la validazione e la memorizzazione protetta in UC8.
 - *Trigger:* il flusso di UC8 raggiunge il passo 5 e richiede l'inserimento delle credenziali di accesso alla casella di posta.
 - *Scenario principale:*
-  + L'amministratore inserisce l'identificativo dell'account di posta (e.g. indirizzo e-mail o username della casella).
-  + L'amministratore inserisce la password associata alla casella.
+  + L'amministratore aziendale inserisce l'identificativo dell'account di posta (e.g. indirizzo e-mail o username della casella).
+  + L'amministratore aziendale inserisce la password associata alla casella.
   + Il sistema acquisisce le credenziali inserite (mascherando i caratteri, rispettando il principio di "secure by default & by design").
 - *Scenari alternativi:*
   - Campi obbligatori mancanti: se l'identificativo o la password della casella vengono lasciati vuoti, i dati risultano incompleti e l'anomalia viene segnalata in fase di validazione in UC8 (attivando UC17).
-  - Visualizzazione temporanea della password: durante o dopo la digitazione, l'amministratore attiva l'apposito comando per mostrare la password della casella; il sistema rende temporaneamente leggibili in chiaro i caratteri fino alla disattivazione del comando o all'invio/abbandono del modulo, momento in cui ripristina il mascheramento.
+  - Visualizzazione temporanea della password: durante o dopo la digitazione, l'amministratore aziendale attiva l'apposito comando per mostrare la password della casella; il sistema rende temporaneamente leggibili in chiaro i caratteri fino alla disattivazione del comando o all'invio/abbandono del modulo, momento in cui ripristina il mascheramento.
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
 
 ==== UC8.3 - Cartella da monitorare
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC8 è stato avviato.
   - Il sistema sta mostrando il modulo di configurazione del canale e-mail con il campo dedicato alla cartella della casella da monitorare.
 - *Postcondizioni:*
-  - Il nome o il percorso della cartella da monitorare (specificato dall'amministratore oppure mantenuto sul valore predefinito) è stato acquisito dal modulo ed è pronto per il salvataggio in UC8.
+  - Il nome o il percorso della cartella da monitorare (specificato dall'amministratore aziendale oppure mantenuto sul valore predefinito _inbox_) è stato acquisito dal modulo ed è pronto per il salvataggio in UC8.
 - *Trigger:* il flusso di UC8 raggiunge il passo 6 e richiede l'indicazione della cartella della casella e-mail da monitorare.
 - *Scenario principale:*
   + Il sistema presenta il campo relativo alla cartella da monitorare (preimpostato sul valore predefinito _inbox_).
-  + L'amministratore inserisce o modifica il nome/percorso della cartella della casella di posta da monitorare.
-  + Il sistema acquisisce il valore indicato dall'amministratore.
+  + L'amministratore aziendale inserisce o modifica il nome/percorso della cartella della casella di posta da monitorare.
+  + Il sistema acquisisce il valore indicato dall'amministratore aziendale.
 - *Scenari alternativi:*
-  - Conferma del valore predefinito: se l'amministratore lascia invariato il valore proposto, il sistema utilizza la cartella predefinita _inbox_.
+  - Conferma del valore predefinito: se l'amministratore aziendale lascia invariato il valore proposto, il sistema utilizza la cartella predefinita _inbox_.
   - Nome o percorso cartella non valido: se il valore inserito contiene caratteri o sintassi non ammessi, l'anomalia viene segnalata in fase di validazione in UC8 (attivando UC17).
 - *Inclusioni:* -
 - *Estensioni:* -
@@ -504,28 +508,28 @@ Quelli individuati sono:
     Diagramma per UC9, UC9.1, UC9.2, UC9.3 e UC17.
   ],
 )
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
-  - L'amministratore è autenticato nell'interfaccia amministrativa web-based AIRA con una #G("sessione") attiva e dispone dei permessi relativi al proprio ruolo.
-  - Il connettore per la gestione del servizio di messaggistica WhatsApp è predisposto nel sistema; l'amministratore si trova nella sezione di configurazione dei canali (UC6).
+  - L'amministratore aziendale è autenticato nell'interfaccia amministrativa web-based AIRA con una #G("sessione") attiva e dispone dei permessi relativi al proprio ruolo.
+  - Il connettore per la gestione del servizio di messaggistica WhatsApp è predisposto nel sistema; l'amministratore aziendale si trova nella sezione di configurazione dei canali (UC6).
 - *Postcondizioni:*
   - La nuova configurazione di canale WhatsApp è registrata nel sistema in stato iniziale disattivo, con le relative credenziali o il #G("token") API memorizzati in forma protetta (rispettando il principio di "secure by default & by design").
-  - Il nuovo canale compare nella lista dei canali, pronto per l'associazione a un tenant (UC18), l'eventuale test di connessione (UC15) e l'attivazione (UC12).
-- *Trigger:* l'amministratore seleziona il comando per aggiungere una nuova configurazione di canale WhatsApp dall'interfaccia amministrativa.
+  - Il nuovo canale compare nella lista dei canali (associata al #G("tenant") aziendale dell'amministratore), rendendo disponibile l'eventuale test di connessione (UC15) e l'attivazione (UC12).
+- *Trigger:* l'amministratore aziendale seleziona il comando per aggiungere una nuova configurazione di canale WhatsApp dall'interfaccia amministrativa.
 - *Scenario principale:*
-  + L'amministratore avvia la procedura di aggiunta di un nuovo canale e seleziona la tipologia WhatsApp.
+  + L'amministratore aziendale avvia la procedura di aggiunta di un nuovo canale e seleziona la tipologia WhatsApp.
   + Il sistema presenta il modulo di configurazione del canale WhatsApp richiedendo il nome identificativo, le credenziali o il #G("token") di accesso API e il numero aziendale da monitorare.
-  + L'amministratore inserisce il nome identificativo del canale.
-  + L'amministratore inserisce le credenziali o il #G("token") di accesso al servizio di messaggistica (include UC9.1).
-  + L'amministratore inserisce il numero aziendale da monitorare (include UC9.2) e invia il modulo per il salvataggio.
+  + L'amministratore aziendale inserisce il nome identificativo del canale.
+  + L'amministratore aziendale inserisce le credenziali o il #G("token") di accesso al servizio di messaggistica (include UC9.1).
+  + L'amministratore aziendale inserisce il numero aziendale da monitorare (include UC9.2) e invia il modulo per il salvataggio.
   + Il sistema verifica la validità della #G("sessione") e i permessi del ruolo, controlla la completezza e la validità formale dei parametri inseriti, memorizza le credenziali o #G("token") in forma protetta e salva la nuova configurazione, in stato disattivo, del canale WhatsApp.
   + Il sistema mostra un messaggio di conferma dell'avvenuta aggiunta e aggiorna la lista dei canali.
 - *Scenari alternativi:*
-  - Annullamento dell'operazione: se l'amministratore annulla l'operazione prima dell'invio, il sistema interrompe la procedura senza salvare alcuna configurazione e torna alla vista precedente.
-  - Configurazione incompleta o non valida: se mancano campi obbligatori oppure uno o più parametri risultano formalmente non validi (e.g. formato del numero telefonico non valido o #G("token") mancante/malformato), il sistema impedisce il salvataggio e attiva UC17, permettendo all'amministratore di correggere i dati dal passo 3.
-  - Canale o numero aziendale già configurato: se il nome identificativo o lo stesso numero aziendale risulta già registrato nel sistema, quest'ultimo segnala il conflitto e invita l'amministratore a modificare i parametri inseriti.
-  - #G("Sessione") scaduta o permessi insufficienti: se al momento del salvataggio la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore, il sistema nega l'operazione senza salvare dati (reindirizzando a UC1 se la #G("sessione") è scaduta).
+  - Annullamento dell'operazione: se l'amministratore aziendale annulla l'operazione prima dell'invio, il sistema interrompe la procedura senza salvare alcuna configurazione e torna alla vista precedente.
+  - Configurazione incompleta o non valida: se mancano campi obbligatori oppure uno o più parametri risultano formalmente non validi (e.g. formato del numero telefonico non valido o #G("token") mancante/malformato), il sistema impedisce il salvataggio e attiva UC17, permettendo all'amministratore aziendale di correggere i dati dal passo 3.
+  - Canale o numero aziendale già configurato: se il nome identificativo o lo stesso numero aziendale risulta già registrato nel sistema, quest'ultimo segnala il conflitto e invita l'amministratore aziendale a modificare i parametri inseriti.
+  - #G("Sessione") scaduta o permessi insufficienti: se al momento del salvataggio la #G("sessione") è scaduta o l'utente non dispone dei permessi di amministratore aziendale, il sistema nega l'operazione senza salvare dati (reindirizzando a UC1 se la #G("sessione") è scaduta).
 - *Inclusioni:*
   - UC9.1 - Credenziali o #G("token") API.
   - UC9.2 - Numero aziendale.
@@ -534,7 +538,7 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 
 ==== UC9.1 - Credenziali o #G("token") API
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC9 è stato avviato.
@@ -543,17 +547,17 @@ Quelli individuati sono:
   - Le credenziali o il #G("token") di accesso API verso il servizio di messaggistica WhatsApp sono stati acquisiti dal modulo di configurazione e sono pronti per la validazione e la memorizzazione protetta in UC9.
 - *Trigger:* il flusso di UC9 raggiunge il passo 4 e richiede l'inserimento delle credenziali o del #G("token") API per il servizio WhatsApp.
 - *Scenario principale:*
-  + L'amministratore inserisce il #G("token") di accesso API (o l'identificativo applicativo e relativa chiave d'accesso) previsto per il servizio di messaggistica WhatsApp.
+  + L'amministratore aziendale inserisce il #G("token") di accesso API (o l'identificativo applicativo e relativa chiave d'accesso) previsto per il servizio di messaggistica WhatsApp.
   + Il sistema acquisisce i valori inseriti e, per impostazione predefinita, maschera a schermo (rispettando il principio di "secure by default & by design") i caratteri del #G("token") o della chiave per impedirne la lettura visiva.
 - *Scenari alternativi:*
   - Campi obbligatori mancanti o formalmente non validi: se il #G("token") API o le credenziali richieste vengono lasciati vuoti oppure presentano caratteri/formato non ammessi, l'anomalia viene segnalata in fase di validazione in UC9 (attivando UC17).
-  - Visualizzazione temporanea del #G("token") o chiave: durante o dopo la digitazione, l'amministratore attiva l'apposito comando per mostrare il valore inserito; il sistema rende temporaneamente leggibili in chiaro i caratteri fino alla disattivazione del comando o all'invio/abbandono del modulo, ripristinando poi il mascheramento.
+  - Visualizzazione temporanea del #G("token") o chiave: durante o dopo la digitazione, l'amministratore aziendale attiva l'apposito comando per mostrare il valore inserito; il sistema rende temporaneamente leggibili in chiaro i caratteri fino alla disattivazione del comando o all'invio/abbandono del modulo, ripristinando poi il mascheramento.
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
 
 ==== UC9.2 - Numero aziendale
-- *#G("Attore") principale:* Amministratore
+- *#G("Attore") principale:* Amministratore aziendale
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC9 è stato avviato.
@@ -562,7 +566,7 @@ Quelli individuati sono:
   - Il numero telefonico aziendale (in formato valido e normalizzato) è stato acquisito dal modulo di configurazione ed è pronto per la validazione, il controllo di unicità e il salvataggio in UC9.
 - *Trigger:* il flusso di UC9 raggiunge il passo 5 e richiede l'indicazione del numero di telefono aziendale da monitorare.
 - *Scenario principale:*
-  + L'amministratore inserisce il numero di telefono aziendale associato al canale WhatsApp da monitorare, comprensivo di prefisso internazionale (e.g. +39 ...).
+  + L'amministratore aziendale inserisce il numero di telefono aziendale associato al canale WhatsApp da monitorare, comprensivo di prefisso internazionale (e.g. +39 ...).
   + Il sistema acquisisce il numero inserito nel modulo di configurazione, normalizzandone eventualmente gli spazi o i caratteri separatori superflui.
 - *Scenari alternativi:*
   - Numero mancante o formato non valido: se il campo è vuoto, contiene caratteri alfabetici o non rispetta il formato telefonico internazionale valido, l'anomalia viene segnalata in fase di validazione in UC9 (attivando UC17).
@@ -1260,12 +1264,12 @@ Quelli individuati sono:
 - *Precondizioni:*
   - Il canale di ingresso è attivo e ha consegnato un nuovo messaggio (rilevato tramite polling periodico per e-mail o notificato via webhook per WhatsApp).
   - UC52 è stato avviato ed è stato estratto l'identificativo del mittente (indirizzo e-mail o numero WhatsApp) da una nuova richiesta rilevata.
-  - Il confronto con l'anagrafica dei mittenti registrati e con le autorizzazioni del canale ha dato esito negativo.
+  - Il confronto con l'anagrafica dei mittenti registrati (interna al #G("tenant") aziendale proprietario del canale di ingresso) e con le autorizzazioni del canale ha dato esito negativo.
 - *Postcondizioni:*
   - La richiesta viene bloccata e non prosegue le fasi successive della pipeline (estrazione multimodale, elaborazione #G("LLM (Large Language Model)"), esecuzione di azioni verso applicativi target o invio di notifiche), prevenendo accessi non autorizzati.
   - Il contenuto e gli eventuali allegati della richiesta non vengono salvati nel sistema.
   - L'evento di blocco e la relativa motivazione sono registrati nei log di sistema con i soli metadati essenziali (mittente, canale, data/ora e motivo del blocco).
-- *Trigger:* Il flusso di UC52 completa la verifica del mittente sull'anagrafica e sulle regole di autorizzazione con esito negativo.
+- *Trigger:* il flusso di UC52 completa la verifica del mittente sull'anagrafica e sulle regole di autorizzazione con esito negativo.
 - *Scenario principale:*
   + Il sistema interrompe l'elaborazione della richiesta corrente, impedendo l'accesso alle fasi successive della pipeline (estrazione allegati/audio, elaborazione #G("LLM (Large Language Model)") e chiamate verso applicativi target).
   + Il sistema marca la richiesta come bloccata, senza persistere il contenuto del messaggio o gli allegati.
@@ -1291,7 +1295,7 @@ Quelli individuati sono:
   - La richiesta duplicata viene scartata e non viene salvato come nuova richiesta né elaborata nuovamente dalla pipeline.
   - I dati e lo stato della richiesta originale già acquisita rimangono inalterati.
   - L'evento di scarto per duplicazione è registrato nei log di sistema (UC79).
-- *Trigger:* Durante l'acquisizione di un nuovo messaggio (UC51), la verifica di duplicazione rileva una corrispondenza con una richiesta già presente nel sistema.
+- *Trigger:* durante l'acquisizione di un nuovo messaggio (UC51), la verifica di duplicazione rileva una corrispondenza con una richiesta già presente nel sistema.
 - *Scenario principale:*
   + Il sistema confronta l'identificativo univoco del messaggio (e l'impronta del contenuto associata al mittente in una finestra temporale ravvicinata) con le richieste già acquisite, rilevando un duplicato.
   + Il sistema interrompe immediatamente l'acquisizione del messaggio, evitando di generare una nuova richiesta nel database e di avviare le fasi successive della pipeline.
@@ -1315,7 +1319,7 @@ Quelli individuati sono:
   - Il contenuto audio è stato trascritto in formato testuale.
   - Il testo trascritto è associato alla richiesta corrente e salvato in forma protetta, pronto per essere combinato con l'eventuale testo del messaggio ed elaborato dal servizio di #G("LLM (Large Language Model)"), nonché consultato nel dettaglio della richiesta (UC82).
   - La richiesta rimane nello stato di elaborazione e l'avvenuta trascrizione è registrata nei log di sistema (UC79).
-- *Trigger:* Durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva che la richiesta acquisita contiene una nota vocale da convertire in testo.
+- *Trigger:* durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva che la richiesta acquisita contiene una nota vocale da convertire in testo.
 - *Scenario principale:*
   + Il sistema individua la nota vocale associato alla richiesta in stato di elaborazione.
   + Il sistema verifica che la dimensione dell'audio rispetti i vincoli supportati.
@@ -1343,7 +1347,7 @@ Quelli individuati sono:
   - La trascrizione dell'audio non è disponibile e la richiesta non viene inoltrata ai sistemi target con i dati completi.
   - Lo stato della richiesta è registrato in errore, conservando il riferimento al messaggio e all'audio originale per eventuale consultazione (UC82) o rielaborazione (UC83).
   - L'evento di errore e la causa specifica sono registrati nei log di sistema (UC79) e resi visibili nella dashboard amministrativa.
-- *Trigger:* Durante UC57, il motore #G("STT (Speech-to-Text)") restituisce un errore o va in timeout, oppure l'elaborazione produce un testo vuoto/non valido per audio corrotto o incomprensibile.
+- *Trigger:* durante UC57, il motore #G("STT (Speech-to-Text)") restituisce un errore o va in timeout, oppure l'elaborazione produce un testo vuoto/non valido per audio corrotto o incomprensibile.
 - *Scenario principale:*
   + Il sistema interrompe la procedura di trascrizione avviata in UC57, evitando di inviare un contenuto audio mancante all'elaborazione semantica (UC64).
   + Il sistema aggiorna lo stato della richiesta impostandolo su errore e mantiene i riferimenti al contenuto originale acquisito.
@@ -1368,7 +1372,7 @@ Quelli individuati sono:
   - Il testo presente nell'immagine o scansione è stato estratto tramite tecnologia #G("OCR (Optical Character Recognition)").
   - Il testo estratto è associato alla richiesta corrente e salvato in forma protetta, pronto per essere combinato con eventuale testo del corpo messaggio ed elaborato dal servizio #G("LLM (Large Language Model)"), nonché consultato nel dettaglio della richiesta (UC82).
   - La richiesta rimane nello stato di elaborazione e l'avvenuta estrazione è tracciata nei log applicativi (UC79).
-- *Trigger:* Durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva un allegato immagine (oppure una pagina PDF scansionata in UC60) da sottoporre a riconoscimento ottico dei caratteri.
+- *Trigger:* durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva un allegato immagine (oppure una pagina PDF scansionata in UC60) da sottoporre a riconoscimento ottico dei caratteri.
 - *Scenario principale:*
   + Il sistema individua l'allegato immagine (o l'immagine di pagina estratta in UC60) associato alla richiesta in stato di elaborazione.
   + Il sistema verifica che il formato del file (e.g. JPG o PNG) e la sua dimensione rispettino i vincoli configurati.
@@ -1400,7 +1404,7 @@ Quelli individuati sono:
   - Il contenuto testuale del documento PDF è stato estratto, avvalendosi eventualmente di UC59 in caso di documento scansionato.
   - Il testo estratto e il documento PDF originale sono associati alla richiesta e salvati in forma cifrata, pronti per l'elaborazione semantica tramite servizio #G("LLM (Large Language Model)") e per la consultazione nel dettaglio richiesta (UC82).
   - La richiesta rimane nello stato di elaborazione e l'avvenuta estrazione è registrata nei log di sistema (UC79).
-- *Trigger:* Durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva un allegato PDF da cui estrarre il testo.
+- *Trigger:* durante la fase di estrazione dei contenuti multimodali della pipeline, il sistema rileva un allegato PDF da cui estrarre il testo.
 - *Scenario principale:*
   + Il sistema individua l'allegato in formato PDF associato alla richiesta in stato di elaborazione.
   + Il sistema verifica che il file sia un documento PDF integro/valido e che la sua dimensione rispetti il limite massimo configurato.
@@ -1494,8 +1498,8 @@ Quelli individuati sono:
 - *Scenario principale:*
   + Il sistema assembla il testo complessivo della richiesta (corpo del messaggio ed eventuali testi estratti da audio, immagini o PDF), insieme all'elenco delle tipologie di richiesta riconosciute dal sistema.
   + Il sistema avvia la richiesta di classificazione al servizio #G("LLM (Large Language Model)") attraverso l'interfaccia modulare.
-  + Il servizio #G("LLM (Large Language Model)") interpreta semanticamente il contenuto e restituisce la tipologia individuata tra quelle supportate (classificando come "ticket di assistenza" anche le e-mail semplici prive di altre intenzioni specifiche).
-  + Il sistema verifica che la tipologia restituita appartenga all'insieme delle tipologie valide, la associa alla richiesta corrente (mantenuta in stato di elaborazione) e registra l'evento di classificazione nei log applicativi (UC79).
+  + Il servizio #G("LLM (Large Language Model)") interpreta semanticamente il contenuto e restituisce la tipologia individuata tra quelle supportate (classificando come "ticket di assistenza" anche le e-mail semplici prive di altre intenzioni specifiche) insieme al relativo livello di confidenza del modello.
+  + Il sistema verifica che la tipologia restituita appartenga all'insieme delle tipologie valide, la associa alla richiesta corrente (mantenuta in stato di elaborazione) unitamente al livello di confidenza e registra l'evento di classificazione nei log applicativi (UC79).
 - *Scenari alternativi:*
   - Servizio #G("LLM (Large Language Model)") non disponibile, timeout o risposta malformata: se il servizio #G("LLM (Large Language Model)") non è raggiungibile, supera il timeout configurato oppure restituisce un output tecnicamente non interpretabile, il sistema imposta lo stato della richiesta in errore, registra l'errore nei log (UC79) e non procede verso UC66.
   - Rilevamento di più intenzioni nel medesimo documento: se il servizio #G("LLM (Large Language Model)") individua più richieste o intenzioni distinte all'interno dello stesso testo, il sistema attiva UC72 per selezionare l'intenzione principale e registrare le secondarie nei log, proseguendo poi al passo 4 con la tipologia dell'intenzione principale.
@@ -1512,16 +1516,16 @@ Quelli individuati sono:
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC64 è stato avviato per una richiesta in stato di elaborazione proveniente da un mittente riconosciuto (UC52).
-  - Il servizio #G("LLM (Large Language Model)") ha completato l'analisi senza errori tecnici di comunicazione, ma non è riuscito a ricondurre il contenuto ad alcuna delle tipologie previste (o ha prodotto una classificazione ambigua/non valida).
+  - Il servizio #G("LLM (Large Language Model)") ha completato l'analisi senza errori tecnici di comunicazione, ma non è riuscito a ricondurre il contenuto ad alcuna delle tipologie previste (o ha prodotto una classificazione ambigua/non valida) oppure restituisce una classificazione con livello di confidenza inferiore alla soglia minima accettabile (qualora configurata).
 - *Postcondizioni:*
   - La richiesta non viene inoltrata automaticamente verso alcun applicativo target con una tipologia incerta o errata.
   - Lo studio della richiesta è registrato in stato di errore (marcata come tipologia non elaborata per tipologia non determinabile), conservando il contenuto originale protetto per eventuale consultazione (UC82) o rielaborazione (UC83) (salvo ripiego su "ticket di assistenza").
   - L'evento e la motivazione sono registrati nei log di sistema (UC79) e resi visibili nella dashboard amministrativa.
-- *Trigger:* Durante UC64 il sistema rileva che la classificazione restituita dal servizio #G("LLM (Large Language Model)") non individua alcuna tipologia valida tra quelle configurate.
+- *Trigger:* Durante UC64 il sistema rileva che la classificazione restituita dal servizio #G("LLM (Large Language Model)") non individua alcuna tipologia valida tra quelle configurate oppure restituisce una classificazione con livello di confidenza inferiore alla soglia minima accettabile (qualora configurata).
 - *Scenario principale:*
   + Il sistema interrompe la procedura di elaborazione semantica avviata in UC64, impedendo il proseguimento verso l'estrazione delle entità (UC66) e l'esecuzione delle azioni automatiche.
   + Il sistema conserva il riferimento e il contenuto originale della richiesta in forma protetta e ne aggiorna lo stato in errore (non elaborata per tipologia non determinabile).
-  + Il sistema registra l'evento nei log applicativi specificando i metadati necessari con motivazione (tipologia non determinabile) (UC79), rendendolo consultabile dall'amministratore.
+  + Il sistema registra l'evento nei log applicativi specificando i metadati necessari con motivazione (tipologia non determinabile) (UC79), rendendolo consultabile dall'amministratore aziendale.
 - *Scenari alternativi:*
   - Applicazione della tipologia di ripiego su "ticket di assistenza": qualora la configurazione applicativa preveda il ticket di assistenza come tipologia di ripiego per richieste non classificabili, il sistema assegna alla richiesta la tipologia "ticket di assistenza", registra nei log il ricorso alla tipologia di ripiego (UC79) e prosegue verso UC66 per verificare la presenza dei dati minimi (passando comunque allo stato di errore solo qualora manchino i dati minimi del ticket).
   - Invio alla coda di validazione manuale: qualora la funzionalità opzionale di validazione umana sia abilitata, anziché impostare lo stato in errore, il sistema lo stato da validare e accoda la richiesta affinché l'operatore possa assegnare manualmente la tipologia o scartarla.
@@ -1548,8 +1552,8 @@ Quelli individuati sono:
 - *Scenario principale:*
   + Il sistema recupera la tipologia assegnata in UC64, l'elenco delle entità attese per tale tipologia e il testo completo della richiesta.
   + Il sistema invia il contenuto testuale e la specifica delle entità da individuare al servizio #G("LLM (Large Language Model)") mediante l'interfaccia modulare.
-  + Il servizio #G("LLM (Large Language Model)") analizza il testo non strutturato (gestendo linguaggio informale, abbreviazioni e codici parziali) ed estrae i valori delle entità pertinenti alla tipologia riconosciuta (e.g. articoli e quantità per gli ordini, descrizione del problema per i ticket, data/ora per gli appuntamenti, prodotto/servizio per le opportunità e tipo di documento per i documenti contabili).
-  + Il sistema acquisisce le entità estratte restituite dal servizio #G("LLM (Large Language Model)"), le associa alla richiesta corrente (in stato di elaborazione) e registra il completamento dell'estrazione nei log applicativi (UC79).
+  + Il servizio #G("LLM (Large Language Model)") analizza il testo non strutturato (gestendo linguaggio informale, abbreviazioni e codici parziali) ed estrae i valori delle entità pertinenti alla tipologia riconosciuta (e.g. articoli e quantità per gli ordini, descrizione del problema per i ticket, data/ora per gli appuntamenti, prodotto/servizio per le opportunità e tipo di documento per i documenti contabili), fornendo per ciascuna elaborazione il livello di confidenza associato.
+  + Il sistema acquisisce le entità estratte e il relativo livello di confidenza restituiti dal servizio #G("LLM (Large Language Model)"), le associa alla richiesta corrente (in stato di elaborazione) e registra il completamento dell'estrazione nei log applicativi (UC79).
 - *Scenari alternativi:*
   - Servizio #G("LLM (Large Language Model)") non disponibile, timeout o output non interpretabile: se il servizio #G("LLM (Large Language Model)") non è raggiungibile, supera il timeout configurato oppure restituisce un risultato tecnicamente malformato o non utilizzabile, il sistema aggiorna lo stato della richiesta in errore, registra l'errore nei log (UC79) e non prosegue verso UC69 e UC70.
   - Estrazione parziale o mancata individuazione di alcune entità: se il servizio #G("LLM (Large Language Model)") completa l'elaborazione ma non individua dal testo uno o più campi attesi (o restituisce valori incerti), il sistema acquisisce comunque le entità rilevate e prosegue verso la strutturazione e validazione (UC69 e UC70), demandando a UC70 e UC71 la rilevazione formale di eventuali dati incompleti e all'eventuale coda da validare (se attiva la validazione umana).
