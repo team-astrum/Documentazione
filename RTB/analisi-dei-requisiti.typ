@@ -8,6 +8,7 @@
   verifica: ("Samuele Gobbi", "Matteo De Col", "Filippo De Guio"),
   approvazione: " ",
   changelog: (
+    (ver: "0.10.1", data: "2026-11-27", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Modifiche post verbale esterno con Sanmarco Informatica: rimozione casi d'uso relativi alle modifiche dell'anagrafica mittenti (da UC28 a UC31"),
     (ver: "0.10.0", data: "2026-11-27", autore: "Gianluca Brotto", ruolo: "Analista", verificatore:"", desc: "Stesura Casi d'Uso relativi alle regole d'azione da UC39 a UC45"),
     (ver: "0.9.1", data: "2026-11-27", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Modifiche post verbale esterno con Sanmarco Informatica a UC1, UC2, UC6, UC7, UC8 (e sottocasi), UC9 (e sottocasi), UC10, UC55, UC56, UC64, UC65 e UC66."),
     (ver: "0.9.0", data: "2026-11-26", autore: "Thomas Morettin", ruolo: "Analista", verificatore:"", desc: "Stesura casi d'uso da UC55 a UC60 insieme a UC64, UC65 e UC66."),
@@ -758,39 +759,39 @@ Quelli individuati sono:
 - *Specializzazioni:* -
 - *Estensioni:* UC21
 
-=== UC20 - Modifica tenant
+=== UC20 - Modifica #G("tenant")
 - *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È registrato almeno un tenant e l'amministratore ha accesso alla lista dei tenant (UC22).
+  - È registrato almeno un #G("tenant") e l'amministratore ha accesso alla lista dei #G("tenant") (UC22).
 - *Postcondizioni:*
-  - Il nome identificativo del tenant è aggiornato.
-- *Trigger:* l'amministratore seleziona un tenant dalla lista e avvia la procedura di modifica.
+  - Il nome identificativo del #G("tenant") è aggiornato.
+- *Trigger:* l'amministratore seleziona un #G("tenant") dalla lista e avvia la procedura di modifica.
 - *Scenario principale:*
-  + L'amministratore seleziona un tenant dalla lista (UC22) e attiva la modalità di modifica.
+  + L'amministratore seleziona un #G("tenant") dalla lista (UC22) e attiva la modalità di modifica.
   + Il sistema presenta il modulo di modifica con il nome identificativo attuale.
   + L'amministratore modifica il nome identificativo e conferma le modifiche.
-  + Il sistema controlla che il nome non sia vuoto e non sia già utilizzato da un altro tenant, quindi salva la modifica.
+  + Il sistema controlla che il nome non sia vuoto e non sia già utilizzato da un altro #G("tenant"), quindi salva la modifica.
 - *Scenari alternativi:*
   - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema mantiene invariato il nome attuale.
   - Nome mancante: se il campo è vuoto, il sistema impedisce il salvataggio, segnala il campo e invita l'amministratore a correggerlo.
-  - Nome già utilizzato: se il nome coincide con quello di un altro tenant, il sistema non applica la modifica (estende UC21).
+  - Nome già utilizzato: se il nome coincide con quello di un altro #G("tenant"), il sistema non applica la modifica (estende UC21).
 - *Inclusioni:* -
 - *Estensioni:*
   - UC21 - Nome tenant già utilizzato.
 - *Specializzazioni:* -
 
-=== UC21 - Nome tenant già utilizzato
+=== UC21 - Nome #G("tenant") già utilizzato
 - *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC19 o UC20 è stato avviato.
   - L'amministratore ha inserito un nome identificativo e ha confermato l'operazione.
-  - Il nome che è stato inserito coincide con quello di un tenant già registrato.
+  - Il nome che è stato inserito coincide con quello di un #G("tenant") già registrato.
 - *Postcondizioni:*
-  - L'operazione di creazione o modifica del tenant non viene eseguita e l'amministratore viene invitato a inserire un nome diverso.
-- *Trigger:* la verifica di unicità del nome del tenant, eseguita in UC19 o UC20, ha esito negativo.
+  - L'operazione di creazione o modifica del #G("tenant") non viene eseguita e l'amministratore viene invitato a inserire un nome diverso.
+- *Trigger:* la verifica di unicità del nome del #G("tenant"), eseguita in UC19 o UC20, ha esito negativo.
 - *Scenario principale:*
   + Il sistema interrompe l'operazione in corso, senza salvare alcuna modifica.
   + Il sistema mostra un messaggio che segnala che il nome inserito è già utilizzato e invita l'amministratore a inserirne uno diverso.
@@ -800,57 +801,57 @@ Quelli individuati sono:
 - *Estensioni:* -
 - *Specializzazioni:* -
 
-=== UC22 - Visualizzazione lista tenant
+=== UC22 - Visualizzazione lista #G("tenant")
 - *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
 - *Postcondizioni:*
-  - L'amministratore visualizza l'elenco aggiornato dei tenant registrati, con nome identificativo e numero di canali associati.
-- *Trigger:* l'amministratore seleziona la voce visualizzazione dei tenant dal menu dell'interfaccia amministrativa.
+  - L'amministratore visualizza l'elenco aggiornato dei #G("tenant") registrati, con nome identificativo e numero di canali associati.
+- *Trigger:* l'amministratore seleziona la voce visualizzazione dei #G("tenant") dal menu dell'interfaccia amministrativa.
 - *Scenario principale:*
-  + Il sistema visualizza la lista mostrando, per ciascun tenant, il nome identificativo e il numero di canali associati.
+  + Il sistema visualizza la lista mostrando, per ciascun #G("tenant"), il nome identificativo e il numero di canali associati.
 - *Scenari alternativi:*
-  - Nessun tenant registrato (lista vuota): il sistema visualizza una vista vuota con un messaggio informativo.
+  - Nessun #G("tenant") registrato (lista vuota): il sistema visualizza una vista vuota con un messaggio informativo.
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
 
-=== UC23 - Eliminazione tenant
+=== UC23 - Eliminazione #G("tenant")
 - *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È registrato almeno un tenant e l'amministratore ha accesso alla lista dei tenant (UC22).
+  - È registrato almeno un #G("tenant") e l'amministratore ha accesso alla lista dei #G("tenant") (UC22).
 - *Postcondizioni:*
-  - Il tenant selezionato viene rimosso dal sistema.
-- *Trigger:* l'amministratore seleziona l'azione di eliminazione di un tenant.
+  - Il #G("tenant") selezionato viene rimosso dal sistema.
+- *Trigger:* l'amministratore seleziona l'azione di eliminazione di un #G("tenant").
 - *Scenario principale:*
-  + L'amministratore seleziona il tenant da eliminare.
-  + Il sistema verifica che al tenant non sia associato alcun canale.
-  + Il sistema chiede la conferma dell'eliminazione del tenant scelto.
+  + L'amministratore seleziona il #G("tenant") da eliminare.
+  + Il sistema verifica che al #G("tenant") non sia associato alcun canale.
+  + Il sistema chiede la conferma dell'eliminazione del #G("tenant") scelto.
   + L'amministratore conferma l'eliminazione.
-  + Il sistema rimuove il tenant e aggiorna la lista dei tenant.
+  + Il sistema rimuove il #G("tenant") e aggiorna la lista dei tenant.
 - *Scenari alternativi:*
-  - Annullamento: se l'amministratore non conferma l'eliminazione, l'operazione viene interrotta e il tenant non viene eliminato.
-  - Tenant con canali associati: se al tenant è associato almeno un canale, il sistema non procede con l'eliminazione e attiva UC24.
+  - Annullamento: se l'amministratore non conferma l'eliminazione, l'operazione viene interrotta e il #G("tenant") non viene eliminato.
+  - #G("Tenant") con canali associati: se al #G("tenant") è associato almeno un canale, il sistema non procede con l'eliminazione e attiva UC24.
 - *Inclusioni:* -
 - *Estensioni:*
-  - UC24 - Eliminazione tenant non consentita.
+  - UC24 - Eliminazione #G("tenant") non consentita.
 - *Specializzazioni:* -
 
-=== UC24 - Eliminazione tenant non consentita
+=== UC24 - Eliminazione #G("tenant") non consentita
 - *#G("Attore") principale:* Amministratore di piattaforma
 - *Attori secondari:* -
 - *Precondizioni:*
-  - UC23 è stato avviato e l'amministratore ha selezionato un tenant da eliminare.
-  - Al tenant è associato almeno un canale.
+  - UC23 è stato avviato e l'amministratore ha selezionato un #G("tenant") da eliminare.
+  - Al #G("tenant") è associato almeno un canale.
 - *Postcondizioni:*
-  - Il tenant non viene eliminato.
+  - Il #G("tenant") non viene eliminato.
 - *Trigger:* la verifica dei canali associati, eseguita in UC23, ha esito negativo.
 - *Scenario principale:*
   + Il sistema interrompe l'operazione di eliminazione avviata in UC23.
-  + Il sistema mostra un messaggio che segnala che il tenant non può essere eliminato.
+  + Il sistema mostra un messaggio che segnala che il #G("tenant") non può essere eliminato.
 - *Scenari alternativi:* -
 - *Inclusioni:* -
 - *Estensioni:* -
@@ -863,16 +864,16 @@ Quelli individuati sono:
   - L'amministratore è autenticato nell'interfaccia amministrativa.
   - L'amministratore dispone di un file dell'anagrafica mittenti, esportato dal gestionale esterno.
 - *Postcondizioni:*
-  - L'anagrafica del tenant contiene esclusivamente i mittenti presenti nel file importato (creandola se assente o sostituendo integralmente quella precedente).
+  - L'anagrafica del #G("tenant") contiene esclusivamente i mittenti presenti nel file importato (creandola se assente o sostituendo integralmente quella precedente).
   - L'operazione viene registrata nei log.
 - *Trigger:* l'amministratore seleziona il comando di importazione dell'anagrafica mittenti.
 - *Scenario principale:*
   + L'amministratore seleziona il file dell'anagrafica da importare.
   + Il sistema verifica la validità del formato del file e la conformità dei dati di ogni mittente.
-  + Il sistema salva i mittenti presenti nel file come anagrafica del tenant.
+  + Il sistema salva i mittenti presenti nel file come anagrafica del #G("tenant").
   + l'operazione viene registrata nei log.
 - *Scenari alternativi:*
-  - Anagrafica già presente: se per il tenant esiste già un'anagrafica, il sistema chiede conferma della sovrascrittura integrale; se l'amministratore conferma, il file viene sovrascritto, altrimenti l'operazione viene annullata mantenendo invariata l'anagrafica esistente.
+  - Anagrafica già presente: se per il #G("tenant") esiste già un'anagrafica, il sistema chiede conferma della sovrascrittura integrale; se l'amministratore conferma, il file viene sovrascritto, altrimenti l'operazione viene annullata mantenendo invariata l'anagrafica esistente.
   - Annullamento dell'operazione: se l'amministratore annulla l'importazione, il sistema non importa alcun dato, e se presente mantiene l'anagrafica esistente .
   - File o dati non validi: se il file non rispetta il formato previsto o contiene record non conformi, il sistema non importa il nuovo file e attiva UC26.
 - *Inclusioni:*
@@ -926,7 +927,7 @@ Quelli individuati sono:
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
 - *Postcondizioni:*
-  - L'amministratore visualizza l'elenco dei mittenti censiti nell'anagrafica del tenant, con denominazione cliente e i relativi recapiti registrati (indirizzi e-mail e/o numeri WhatsApp).
+  - L'amministratore visualizza l'elenco dei mittenti censiti nell'anagrafica del #G("tenant"), con denominazione cliente e i relativi recapiti registrati (indirizzi e-mail e/o numeri WhatsApp).
 - *Trigger:* l'amministratore seleziona la sezione dell'anagrafica mittenti.
 - *Scenario principale:*
   + Il sistema visualizza la lista mostrando, per ciascun mittente, la denominazione, gli indirizzi e-mail e i numeri WhatsApp registrati.
@@ -936,136 +937,6 @@ Quelli individuati sono:
 - *Estensioni:* -
 - *Specializzazioni:* -
 
-=== UC28 - Aggiunta mittente in anagrafica
-- *#G("Attore") principale:* Amministratore aziendale
-- *Attori secondari:* -
-- *Precondizioni:*
-  - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - L'amministratore ha accesso alla sezione dell'anagrafica mittenti (UC27).
-- *Postcondizioni:*
-  - Il nuovo mittente è registrato nell'anagrafica del tenant con almeno un recapito valido (e-mail e/o WhatsApp) ed è riconosciuto dal Filtro Sicurezza come cliente censito.
-  - L'operazione viene registrata nei log.
-- *Trigger:* l'amministratore seleziona il comando per registrare un nuovo mittente nell'anagrafica del tenant.
-- *Scenario principale:*
-  + L'amministratore avvia la procedura di registrazione di un nuovo mittente.
-  + Il sistema presenta il modulo di inserimento dei dati del mittente.
-  + L'amministratore inserisce la denominazione del cliente (include UC28.1).
-  + L'amministratore inserisce uno o più recapiti del mittente (include UC28.2) e conferma il salvataggio.
-  + Il sistema verifica la presenza della denominazione, la validità formale dei recapiti inseriti e l'assenza di identificativi già associati ad altri mittenti del tenant.
-  + Il sistema salva il nuovo mittente nell'anagrafica del tenant e registra l'operazione nei log.
-- *Scenari alternativi:*
-  - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema interrompe la procedura senza registrare alcun mittente.
-  - Dati mancanti o formato non valido: se la denominazione è vuota, non è stato inserito alcun recapito oppure uno o più recapiti hanno formato non valido, il sistema impedisce il salvataggio, evidenzia i campi non conformi e invita l'amministratore a correggerli.
-  - Identificativo mittente già registrato: se almeno un recapito inserito è già associato a un altro mittente del tenant, il sistema non salva il mittente e attiva UC29.
-- *Inclusioni:*
-  - UC28.1 - Inserimento denominazione cliente.
-  - UC28.2 - Inserimento recapiti mittente.
-- *Estensioni:*
-  - UC29 - Identificativo mittente già registrato.
-- *Specializzazioni:* -
-
-==== UC28.1 - Inserimento denominazione cliente
-- *#G("Attore") principale:* Amministratore aziendale
-- *Attori secondari:* -
-- *Precondizioni:*
-  - UC28 è stato avviato.
-  - Il sistema mostra il modulo di registrazione del mittente con il campo dedicato alla denominazione cliente.
-- *Postcondizioni:*
-  - La denominazione del cliente è stata inserita nel modulo.
-- *Trigger:* il flusso di UC28 raggiunge il passo 3 e richiede l'inserimento della denominazione del cliente.
-- *Scenario principale:*
-  + L'amministratore seleziona il campo dedicato alla denominazione e inserisce la ragione sociale o il nominativo del cliente.
-  + Il sistema acquisisce il valore inserito.
-- *Scenari alternativi:*
-  - Campo mancante: se il campo viene lasciato vuoto, questo viene segnalato in fase di validazione in UC28.
-- *Inclusioni:* -
-- *Estensioni:* -
-- *Specializzazioni:* -
-
-==== UC28.2 - Inserimento recapiti mittente
-- *#G("Attore") principale:* Amministratore aziendale
-- *Attori secondari:* -
-- *Precondizioni:*
-  - UC28 è stato avviato.
-  - Il sistema mostra il modulo di registrazione del mittente con i campi dedicati agli indirizzi e-mail e ai numeri WhatsApp.
-- *Postcondizioni:*
-  - Almeno un recapito del mittente è stato acquisito dal modulo ed è pronto per la validazione e il controllo di unicità in UC28.
-- *Trigger:* il flusso di UC28 raggiunge il passo 4 e richiede l'inserimento dei recapiti associati al mittente.
-- *Scenario principale:*
-  + L'amministratore inserisce uno o più recapiti associati al mittente.
-  + Il sistema acquisisce i recapiti inseriti nel modulo di registrazione.
-- *Scenari alternativi:*
-  - Nessun recapito inserito: se l'amministratore non inserisce né un indirizzo e-mail né un numero WhatsApp, questo viene segnalato in fase di validazione in UC28.
-  - Formato non valido o recapiti duplicati nel modulo: se uno o più indirizzi e-mail o numeri WhatsApp non rispettano il formato previsto oppure risultano ripetuti nel modulo, questo viene segnalato in fase di validazione in UC28.
-- *Inclusioni:* -
-- *Estensioni:* -
-- *Specializzazioni:* -
-
-=== UC29 - Identificativo mittente già registrato
-- *#G("Attore") principale:* Amministratore aziendale
-- *Attori secondari:* -
-- *Precondizioni:*
-  - UC28 o UC30 è stato avviato.
-  - L'amministratore ha inserito uno o più recapiti (indirizzi e-mail o numeri WhatsApp) e ha confermato l'operazione.
-  - Almeno uno dei recapiti inseriti risulta già associato a un altro mittente presente nell'anagrafica del tenant.
-- *Postcondizioni:*
-  - L'operazione di registrazione o modifica del mittente non viene eseguita e l'anagrafica del tenant resta invariata.
-  - L'amministratore visualizza quali recapiti risultano già registrati e può correggere i dati inseriti.
-- *Trigger:* la verifica di unicità dei recapiti del mittente, eseguita in UC28 o UC30, ha esito negativo.
-- *Scenario principale:*
-  + Il sistema interrompe l'operazione di registrazione o modifica in corso, senza salvare alcuna variazione.
-  + Il sistema mostra un messaggio di errore che evidenzia gli indirizzi e-mail o i numeri WhatsApp già associati a un altro mittente nell'anagrafica del tenant.
-  + Il sistema mantiene i valori compilati nel modulo, consentendo all'amministratore di correggerli e riprovare.
-- *Scenari alternativi:* -
-- *Inclusioni:* -
-- *Estensioni:* -
-- *Specializzazioni:* -
-
-=== UC30 - Modifica dati mittente
-- *#G("Attore") principale:* Amministratore aziendale
-- *Attori secondari:* -
-- *Precondizioni:*
-  - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È presente almeno un mittente registrato nell'anagrafica del tenant.
-- *Postcondizioni:*
-  - I dati del mittente selezionato (denominazione cliente e/o recapiti registrati) sono aggiornati nell'anagrafica del tenant.
-  - L'operazione viene registrata nei log.
-- *Trigger:* l'amministratore seleziona un mittente dalla lista dell'anagrafica e avvia la procedura di modifica.
-- *Scenario principale:*
-  + L'amministratore seleziona un mittente dalla lista e attiva la modalità di modifica.
-  + Il sistema presenta il modulo precompilato con la denominazione e i recapiti (indirizzi e-mail e/o numeri WhatsApp) attualmente associati al mittente.
-  + L'amministratore modifica uno o più campi e conferma le modifiche.
-  + Il sistema verifica la presenza della denominazione, la presenza di almeno un recapito valido e l'assenza di recapiti già associati a un altro mittente del tenant.
-  + Il sistema salva le modifiche nell'anagrafica del tenant e registra l'operazione nei log.
-- *Scenari alternativi:*
-  - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema mantiene invariati i dati attuali del mittente.
-  - Dati mancanti o formato non valido: se vengono rimossi tutti i recapiti, la denominazione oppure uno o più recapiti hanno formato non valido, il sistema impedisce il salvataggio, segnala gli errori e invita l'amministratore a correggerli.
-  - Identificativo mittente già registrato: se un recapito aggiunto o modificato coincide con quello già assegnato a un altro mittente del tenant, il sistema non applica le modifiche e attiva UC29.
-- *Inclusioni:* -
-- *Estensioni:*
-  - UC29 - Identificativo mittente già registrato.
-- *Specializzazioni:* -
-
-=== UC31 - Eliminazione mittente
-- *#G("Attore") principale:* Amministratore aziendale
-- *Attori secondari:* -
-- *Precondizioni:*
-  - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È presente almeno un mittente registrato nell'anagrafica del tenant.
-- *Postcondizioni:*
-  - Il mittente selezionato è rimosso dall'anagrafica del tenant.
-  - L'operazione viene registrata nei log.
-- *Trigger:* l'amministratore seleziona l'azione di eliminazione su un mittente presente nella lista dell'anagrafica.
-- *Scenario principale:*
-  + L'amministratore seleziona il mittente da eliminare dalla lista e seleziona il comando di eliminazione.
-  + Il sistema chiede conferma dell'eliminazione del mittente selezionato.
-  + L'amministratore conferma l'eliminazione.
-  + Il sistema rimuove il mittente dall'anagrafica del tenant e registra l'operazione nei log.
-- *Scenari alternativi:*
-  - Annullamento: se l'amministratore non conferma l'eliminazione, l'operazione viene interrotta.
-- *Inclusioni:* -
-- *Estensioni:* -
-- *Specializzazioni:* - 
 
 === UC39 - Visualizzazione lista regole d'azione
 - *#G("Attore") principale:* Amministratore aziendale
@@ -1073,12 +944,12 @@ Quelli individuati sono:
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
 - *Postcondizioni:*
-  - L'amministratore visualizza l'elenco delle regole d'azione configurate per il proprio tenant, con nome identificativo, condizione di attivazione, azioni di destinazione configurate e stato (attiva/disattiva).
+  - L'amministratore visualizza l'elenco delle regole d'azione configurate per il proprio #G("tenant"), con nome identificativo, condizione di attivazione, azioni di destinazione configurate e stato (attiva/disattiva).
 - *Trigger:* l'amministratore seleziona la sezione dedicata alle regole d'azione dal menu dell'interfaccia amministrativa.
 - *Scenario principale:*
-  + Il sistema visualizza la lista delle regole d'azione del tenant mostrando, per ciascuna, il nome identificativo, la condizione di attivazione, le azioni di destinazione configurate e lo stato corrente (attiva/disattiva).
+  + Il sistema visualizza la lista delle regole d'azione del #G("tenant") mostrando, per ciascuna, il nome identificativo, la condizione di attivazione, le azioni di destinazione configurate e lo stato corrente (attiva/disattiva).
 - *Scenari alternativi:*
-  - Nessuna regola configurata (lista vuota): se per il tenant non è ancora stata definita alcuna regola d'azione, il sistema visualizza una vista vuota con un messaggio informativo che invita a crearne una (UC40).
+  - Nessuna regola configurata (lista vuota): se per il #G("tenant") non è ancora stata definita alcuna regola d'azione, il sistema visualizza una vista vuota con un messaggio informativo che invita a crearne una (UC40).
 - *Inclusioni:* -
 - *Estensioni:* -
 - *Specializzazioni:* -
@@ -1089,7 +960,7 @@ Quelli individuati sono:
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
 - *Postcondizioni:*
-  - La nuova regola d'azione è registrata nel sistema per il tenant corrente in stato iniziale "disattiva".
+  - La nuova regola d'azione è registrata nel sistema per il #G("tenant") corrente in stato iniziale "disattiva".
   - L'operazione viene registrata nei log.
 - *Trigger:* l'amministratore seleziona il comando per creare una nuova regola d'azione.
 - *Scenario principale:*
@@ -1098,12 +969,12 @@ Quelli individuati sono:
   + L'amministratore inserisce il nome identificativo della regola.
   + L'amministratore definisce la condizione di attivazione della regola (include UC40.1).
   + L'amministratore configura una o più azioni di destinazione da eseguire al verificarsi della condizione (include UC40.2) e conferma il salvataggio.
-  + Il sistema verifica che i campi obbligatori siano compilati e che il nome identificativo non sia già utilizzato da un'altra regola del tenant.
+  + Il sistema verifica che i campi obbligatori siano compilati e che il nome identificativo non sia già utilizzato da un'altra regola del #G("tenant").
   + Il sistema salva la nuova regola d'azione in stato "disattiva" e registra l'operazione nei log.
 - *Scenari alternativi:*
   - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema interrompe la procedura senza salvare alcuna regola.
   - Configurazione incompleta: se mancano campi obbligatori il sistema impedisce il salvataggio e attiva UC44.
-  - Nome regola già utilizzato: se il nome identificativo coincide con quello di un'altra regola già registrata nel tenant, il sistema non salva la regola e attiva UC45.
+  - Nome regola già utilizzato: se il nome identificativo coincide con quello di un'altra regola già registrata nel #G("tenant"), il sistema non salva la regola e attiva UC45.
 - *Inclusioni:*
   - UC40.1 - Definizione condizione di attivazione.
   - UC40.2 - Configurazione azioni di destinazione.
@@ -1154,7 +1025,7 @@ Quelli individuati sono:
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È presente almeno una regola d'azione configurata per il tenant.
+  - È presente almeno una regola d'azione configurata per il #G("tenant").
 - *Postcondizioni:*
   - I parametri della regola d'azione selezionata (nome identificativo, condizione di attivazione e/o azioni di destinazione) sono aggiornati.
   - L'operazione viene registrata nei log.
@@ -1163,12 +1034,12 @@ Quelli individuati sono:
   + L'amministratore seleziona una regola d'azione dalla lista e attiva la modalità di modifica.
   + Il sistema presenta il modulo precompilato con il nome identificativo, la condizione di attivazione e le azioni di destinazione attualmente configurate.
   + L'amministratore modifica uno o più campi e conferma le modifiche.
-  + Il sistema verifica che il nome identificativo non sia già utilizzato da un'altra regola del tenant (nel caso in cui venga modificato) e che non manchino dati obbligatori.
+  + Il sistema verifica che il nome identificativo non sia già utilizzato da un'altra regola del #G("tenant") (nel caso in cui venga modificato) e che non manchino dati obbligatori.
   + Il sistema salva le modifiche e registra l'operazione nei log.
 - *Scenari alternativi:*
   - Annullamento dell'operazione: se l'amministratore annulla prima di confermare, il sistema mantiene invariata la regola.
   - Configurazione incompleta: se vengono rimossi dati obbligatori il sistema impedisce il salvataggio e attiva UC44.
-  - Nome regola già utilizzato: se il nuovo nome coincide con quello di un'altra regola del tenant il sistema non applica le modifiche e attiva UC45.
+  - Nome regola già utilizzato: se il nuovo nome coincide con quello di un'altra regola del #G("tenant") il sistema non applica le modifiche e attiva UC45.
 - *Inclusioni:* -
 - *Estensioni:*
   - UC44 - Configurazione regola d'azione incompleta.
@@ -1180,9 +1051,9 @@ Quelli individuati sono:
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È presente almeno una regola d'azione configurata per il tenant.
+  - È presente almeno una regola d'azione configurata per il #G("tenant").
 - *Postcondizioni:*
-  - Lo stato della regola selezionata viene invertito (da "disattiva" ad "attiva", oppure da "attiva" a "disattiva"), abilitando o sospendendo di conseguenza l'applicazione automatica della regola sulle nuove richieste del tenant.
+  - Lo stato della regola selezionata viene invertito (da "disattiva" ad "attiva", oppure da "attiva" a "disattiva"), abilitando o sospendendo di conseguenza l'applicazione automatica della regola sulle nuove richieste del #G("tenant").
   - L'operazione viene registrata nei log.
 - *Trigger:* l'amministratore seleziona il comando di cambio stato (attivazione o disattivazione) su una regola d'azione presente nella lista.
 - *Scenario principale:*
@@ -1198,7 +1069,7 @@ Quelli individuati sono:
 - *Attori secondari:* -
 - *Precondizioni:*
   - L'amministratore è autenticato nell'interfaccia amministrativa.
-  - È presente almeno una regola d'azione configurata per il tenant.
+  - È presente almeno una regola d'azione configurata per il #G("tenant").
 - *Postcondizioni:*
   - La regola d'azione selezionata viene rimossa.
   - L'operazione viene registrata nei log.
@@ -1207,7 +1078,7 @@ Quelli individuati sono:
   + L'amministratore seleziona la regola d'azione da eliminare dalla lista e attiva il comando di eliminazione.
   + Il sistema chiede conferma dell'eliminazione della regola selezionata.   
   + L'amministratore conferma l'eliminazione.
-  + Il sistema rimuove definitivamente la regola d'azione dal tenant e registra l'operazione nei log.
+  + Il sistema rimuove definitivamente la regola d'azione dal #G("tenant") e registra l'operazione nei log.
 - *Scenari alternativi:*
   - Annullamento: se l'amministratore non conferma l'eliminazione, l'operazione viene interrotta e la regola rimane configurata.
 - *Inclusioni:* -
@@ -1221,7 +1092,7 @@ Quelli individuati sono:
   - UC40 o UC41 è stato avviato.
   - Mancano uno o più campi obbligatori della regola d'azione (nome identificativo, condizione di attivazione o almeno un'azione di destinazione).
 - *Postcondizioni:*
-  - L'operazione di creazione o modifica non viene eseguita e le regole del tenant restano invariate.
+  - L'operazione di creazione o modifica non viene eseguita e le regole del #G("tenant") restano invariate.
   - L'amministratore visualizza l'indicazione dei campi obbligatori mancanti.
 - *Trigger:* la verifica di completezza dei campi obbligatori della regola d'azione, eseguita in UC40 o UC41, ha esito negativo.
 - *Scenario principale:*
@@ -1238,14 +1109,14 @@ Quelli individuati sono:
 - *Attori secondari:* -
 - *Precondizioni:*
   - UC40 o UC41 è stato avviato.
-  - Il nome identificativo inserito coincide con quello di un'altra regola d'azione già registrata nel tenant.
+  - Il nome identificativo inserito coincide con quello di un'altra regola d'azione già registrata nel #G("tenant").
 - *Postcondizioni:*
-  - L'operazione di creazione o modifica non viene eseguita e le regole del tenant restano invariate.
+  - L'operazione di creazione o modifica non viene eseguita e le regole del #G("tenant") restano invariate.
   - L'amministratore viene informato che il nome inserito è già in uso e può inserirne uno diverso.
 - *Trigger:* la verifica di unicità del nome della regola d'azione, eseguita in UC40 o UC41, ha esito negativo.
 - *Scenario principale:*
   + Il sistema interrompe l'operazione avviata in UC40 o UC41 senza salvare alcuna modifica.
-  + Il sistema mostra un messaggio di errore che segnala che il nome identificativo è già utilizzato da un'altra regola del tenant.
+  + Il sistema mostra un messaggio di errore che segnala che il nome identificativo è già utilizzato da un'altra regola del #G("tenant").
   + Il sistema mantiene i dati compilati nel modulo, consentendo all'amministratore di modificare il nome e riprovare.
 - *Scenari alternativi:* -
 - *Inclusioni:* -
